@@ -10,6 +10,10 @@ import {
   BarChart3,
   Settings,
   ChevronRight,
+  ShieldAlert,
+  Gauge,
+  GitCompare,
+  CalendarCheck,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -21,19 +25,29 @@ const navigation = [
     path: "/",
   },
   {
-    title: "AI Block Planner",
-    icon: Sparkles,
-    path: "/ai-planner",
-  },
-  {
-    title: "Block Requests",
+    title: "Block Schedule",
     icon: ClipboardList,
-    path: "/block-requests",
+    path: "/block-schedule",
   },
   {
-    title: "Defects & Maintenance",
-    icon: TriangleAlert,
-    path: "/defects",
+    title: "Schedule Confirmation",
+    icon: CalendarCheck,
+    path: "/schedule-confirmation",
+  },
+  {
+    title: "Asset Risk Prediction",
+    icon: ShieldAlert,
+    path: "/risk-prediction",
+  },
+  {
+    title: "Maintenance Priority",
+    icon: Gauge,
+    path: "/maintenance-priority",
+  },
+  {
+    title: "Task Compatibility",
+    icon: GitCompare,
+    path: "/task-compatibility",
   },
   {
     title: "Train Operations",
@@ -44,11 +58,6 @@ const navigation = [
     title: "Corridor Network",
     icon: Route,
     path: "/corridor-network",
-  },
-  {
-    title: "Block Schedule",
-    icon: CalendarDays,
-    path: "/block-schedule",
   },
 ];
 
@@ -103,18 +112,24 @@ export default function Sidebar() {
     <aside
       className="
         fixed inset-y-0 left-0 z-40 hidden w-72
-        flex-col bg-slate-950 px-4 py-6 text-white
+        flex-col bg-slate-950 text-white
         lg:flex
       "
     >
-      {/* LOGO */}
+      {/* ================================
+          LOGO
+      ================================= */}
 
-      <div className="mb-10 px-3">
+      <div className="shrink-0 px-4 py-6">
         <div className="flex items-center gap-3">
           <div
             className="
-              flex h-11 w-11 items-center justify-center
-              rounded-xl bg-blue-600 text-xl shadow-lg
+              flex h-11 w-11 shrink-0
+              items-center justify-center
+              rounded-xl
+              bg-blue-600
+              text-xl
+              shadow-lg
             "
           >
             🚆
@@ -128,40 +143,74 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* MAIN NAVIGATION */}
+      {/* ================================
+          SCROLLABLE CONTENT
+      ================================= */}
 
-      <nav className="space-y-2">
-        {navigation.map((item) => (
-          <SidebarLink key={item.path} item={item} />
-        ))}
-      </nav>
-
-      {/* SECONDARY */}
-
-      <div className="mt-8">
-        <p className="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-600">
-          System
-        </p>
+      <div className="sidebar-scroll flex-1 overflow-y-auto px-4 pb-4">
+        {/* MAIN NAVIGATION */}
 
         <nav className="space-y-2">
-          {secondaryNavigation.map((item) => (
+          {navigation.map((item) => (
             <SidebarLink key={item.path} item={item} />
           ))}
         </nav>
+
+        {/* ================================
+            SECONDARY NAVIGATION
+        ================================= */}
+
+        <div className="mt-8">
+          <p
+            className="
+              mb-3 px-3
+              text-[11px]
+              font-bold
+              uppercase
+              tracking-[0.18em]
+              text-slate-600
+            "
+          >
+            System
+          </p>
+
+          <nav className="space-y-2">
+            {secondaryNavigation.map((item) => (
+              <SidebarLink key={item.path} item={item} />
+            ))}
+          </nav>
+        </div>
       </div>
 
-      {/* SYSTEM STATUS */}
+      {/* ================================
+          SYSTEM STATUS
+      ================================= */}
 
-      <div className="mt-auto rounded-2xl border border-slate-800 bg-slate-900 p-4">
-        <div className="mb-2 flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+      <div className="shrink-0 border-t border-slate-800 p-4">
+        <div
+          className="
+            rounded-2xl
+            border border-slate-800
+            bg-slate-900
+            p-4
+          "
+        >
+          <div className="mb-2 flex items-center gap-2">
+            <span
+              className="
+                h-2.5 w-2.5
+                rounded-full
+                bg-emerald-400
+              "
+            />
 
-          <span className="text-sm font-semibold">System Online</span>
+            <span className="text-sm font-semibold">System Online</span>
+          </div>
+
+          <p className="text-xs leading-5 text-slate-500">
+            AI planning engine ready. Railway data sources connected.
+          </p>
         </div>
-
-        <p className="text-xs leading-5 text-slate-500">
-          AI planning engine ready. Railway data sources connected.
-        </p>
       </div>
     </aside>
   );
