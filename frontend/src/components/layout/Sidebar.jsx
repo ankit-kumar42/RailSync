@@ -14,13 +14,16 @@ import {
   Gauge,
   GitCompare,
   CalendarCheck,
+  CircleHelp,
+  Headphones,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
+import logo from "./logo/logo.png";
 
 const navigation = [
   {
-    title: "Dashboard",
+    title: "Home",
     icon: LayoutDashboard,
     path: "/",
   },
@@ -33,6 +36,16 @@ const navigation = [
     title: "Schedule Confirmation",
     icon: CalendarCheck,
     path: "/schedule-confirmation",
+  },
+  {
+    title: "Confirmed Schedule",
+    icon: CalendarCheck,
+    path: "/confirmed-schedule",
+  },
+  {
+    title: "Maintenance Tasks",
+    icon: ClipboardList,
+    path: "/tasks",
   },
   {
     title: "Asset Risk Prediction",
@@ -49,33 +62,18 @@ const navigation = [
     icon: GitCompare,
     path: "/task-compatibility",
   },
-  {
-    title: "Train Operations",
-    icon: Train,
-    path: "/train-operations",
-  },
-  {
-    title: "Corridor Network",
-    icon: Route,
-    path: "/corridor-network",
-  },
 ];
 
 const secondaryNavigation = [
   {
-    title: "Data Center",
-    icon: Database,
-    path: "/data-center",
+    title: "FAQs",
+    icon: CircleHelp,
+    path: "/faqs",
   },
   {
-    title: "Analytics",
-    icon: BarChart3,
-    path: "/analytics",
-  },
-  {
-    title: "Settings",
-    icon: Settings,
-    path: "/settings",
+    title: "Support",
+    icon: Headphones,
+    path: "/support",
   },
 ];
 
@@ -131,12 +129,13 @@ export default function Sidebar() {
               text-xl
               shadow-lg
             "
+            
           >
-            🚆
+            <img src={logo} alt="RailSync"/>
           </div>
 
           <div>
-            <h1 className="text-lg font-bold tracking-tight">OptimTrack</h1>
+            <h1 className="text-lg font-bold tracking-tight">RailSync</h1>
 
             <p className="text-xs text-slate-500">Intelligent Block Planning</p>
           </div>
@@ -182,36 +181,6 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* ================================
-          SYSTEM STATUS
-      ================================= */}
-
-      <div className="shrink-0 border-t border-slate-800 p-4">
-        <div
-          className="
-            rounded-2xl
-            border border-slate-800
-            bg-slate-900
-            p-4
-          "
-        >
-          <div className="mb-2 flex items-center gap-2">
-            <span
-              className="
-                h-2.5 w-2.5
-                rounded-full
-                bg-emerald-400
-              "
-            />
-
-            <span className="text-sm font-semibold">System Online</span>
-          </div>
-
-          <p className="text-xs leading-5 text-slate-500">
-            AI planning engine ready. Railway data sources connected.
-          </p>
-        </div>
-      </div>
     </aside>
   );
 }

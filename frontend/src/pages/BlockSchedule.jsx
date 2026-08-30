@@ -61,42 +61,6 @@ export default function BlockSchedule() {
     <div className="min-h-screen bg-slate-100 p-6">
       <div className="mx-auto max-w-[1600px]">
         {/* ================================================= */}
-        {/* HEADER */}
-        {/* ================================================= */}
-
-        <div className="mb-6 overflow-hidden rounded-2xl bg-slate-950 text-white shadow-lg">
-          <div className="bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900 p-7">
-            <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
-              <div>
-                <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-400">
-                  <BrainCircuit size={16} />
-                  AI Maintenance Planning
-                </div>
-
-                <h1 className="text-3xl font-bold">Block Schedule</h1>
-
-                <p className="mt-2 max-w-2xl text-sm text-slate-400">
-                  AI-powered coordination of railway maintenance blocks across
-                  Engineering, S&T and Traction Distribution departments.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3">
-                <span className="h-3 w-3 animate-pulse rounded-full bg-emerald-400" />
-
-                <div>
-                  <p className="text-xs font-bold text-emerald-400">
-                    AI ENGINE ONLINE
-                  </p>
-
-                  <p className="text-xs text-slate-400">Ready for scheduling</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ================================================= */}
         {/* PLANNING CONTROLS */}
         {/* ================================================= */}
 

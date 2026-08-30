@@ -21,34 +21,6 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-3">
-        <button
-          className="
-            hidden items-center gap-2 rounded-xl border
-            border-slate-200 bg-slate-50 px-4 py-2.5
-            text-sm text-slate-500 md:flex
-          "
-        >
-          <Search size={17} />
-          Search system...
-        </button>
-
-        <button
-          className="
-            relative flex h-10 w-10 items-center
-            justify-center rounded-xl border border-slate-200
-            text-slate-500 hover:bg-slate-50
-          "
-        >
-          <Bell size={18} />
-
-          <span
-            className="
-              absolute right-2 top-2 h-2 w-2
-              rounded-full bg-red-500
-            "
-          />
-        </button>
-
         <div
           className="
             flex items-center gap-2 rounded-xl

@@ -1,219 +1,49 @@
 import { useEffect, useMemo, useState } from "react";
+
 import {
   CalendarCheck,
   CheckCircle2,
   Clock3,
   AlertTriangle,
-  Save,
   RefreshCw,
   Search,
-  Filter,
-  RotateCcw,
+  Database,
   Train,
-  Wrench,
-  Zap,
-  Radio,
+  Route,
+  ShieldAlert,
+  Filter,
+  X,
+  CircleDot,
+  ChevronDown,
 } from "lucide-react";
 
-const API_URL = "http://localhost:8000";
+import {
+  getConfirmedSchedule,
+  confirmSchedule,
+  updateScheduledStatus,
+  updateUnscheduledStatus,
+} from "../services/scheduleService";
 
 /* ============================================================
-   MOCK SCHEDULED DATA
+   CONSTANTS
 ============================================================ */
 
-const MOCK_SCHEDULED = [
+const STATUS_OPTIONS = [
   {
-    task_id: "ENG-001",
-    department: "Engineering",
-    asset_id: "TRK-4521",
-    corridor_id: "COR-101",
-    block_window_id: "BW-001",
-    date: "2026-09-02",
-    start_time: "01:00",
-    end_time: "03:00",
-    estimated_duration_hrs: 2,
-    priority_score: 87,
-    failure_risk: 0.72,
-    status: "PENDING",
+    value: "PENDING",
+    label: "Pending",
   },
   {
-    task_id: "ENG-002",
-    department: "Engineering",
-    asset_id: "TRK-4530",
-    corridor_id: "COR-102",
-    block_window_id: "BW-004",
-    date: "2026-09-02",
-    start_time: "03:30",
-    end_time: "05:30",
-    estimated_duration_hrs: 2,
-    priority_score: 91,
-    failure_risk: 0.81,
-    status: "IN_PROGRESS",
+    value: "IN_PROGRESS",
+    label: "In Progress",
   },
   {
-    task_id: "ENG-003",
-    department: "Engineering",
-    asset_id: "BRG-120",
-    corridor_id: "COR-105",
-    block_window_id: "BW-008",
-    date: "2026-09-03",
-    start_time: "00:30",
-    end_time: "02:30",
-    estimated_duration_hrs: 2,
-    priority_score: 76,
-    failure_risk: 0.46,
-    status: "DONE",
+    value: "DONE",
+    label: "Completed",
   },
   {
-    task_id: "SNT-001",
-    department: "S&T",
-    asset_id: "SIG-220",
-    corridor_id: "COR-101",
-    block_window_id: "BW-002",
-    date: "2026-09-03",
-    start_time: "02:00",
-    end_time: "04:00",
-    estimated_duration_hrs: 2,
-    priority_score: 94,
-    failure_risk: 0.89,
-    status: "PENDING",
-  },
-  {
-    task_id: "SNT-002",
-    department: "S&T",
-    asset_id: "SIG-315",
-    corridor_id: "COR-104",
-    block_window_id: "BW-006",
-    date: "2026-09-04",
-    start_time: "01:30",
-    end_time: "03:00",
-    estimated_duration_hrs: 1.5,
-    priority_score: 82,
-    failure_risk: 0.64,
-    status: "PENDING",
-  },
-  {
-    task_id: "SNT-003",
-    department: "S&T",
-    asset_id: "TC-550",
-    corridor_id: "COR-108",
-    block_window_id: "BW-010",
-    date: "2026-09-05",
-    start_time: "02:00",
-    end_time: "04:30",
-    estimated_duration_hrs: 2.5,
-    priority_score: 73,
-    failure_risk: 0.39,
-    status: "DONE",
-  },
-  {
-    task_id: "TD-001",
-    department: "Traction Distribution",
-    asset_id: "OHE-778",
-    corridor_id: "COR-103",
-    block_window_id: "BW-003",
-    date: "2026-09-02",
-    start_time: "23:00",
-    end_time: "01:00",
-    estimated_duration_hrs: 2,
-    priority_score: 96,
-    failure_risk: 0.91,
-    status: "PENDING",
-  },
-  {
-    task_id: "TD-002",
-    department: "Traction Distribution",
-    asset_id: "TSS-221",
-    corridor_id: "COR-107",
-    block_window_id: "BW-009",
-    date: "2026-09-04",
-    start_time: "23:30",
-    end_time: "02:00",
-    estimated_duration_hrs: 2.5,
-    priority_score: 88,
-    failure_risk: 0.78,
-    status: "IN_PROGRESS",
-  },
-  {
-    task_id: "TD-003",
-    department: "Traction Distribution",
-    asset_id: "OHE-810",
-    corridor_id: "COR-109",
-    block_window_id: "BW-012",
-    date: "2026-09-06",
-    start_time: "00:00",
-    end_time: "02:00",
-    estimated_duration_hrs: 2,
-    priority_score: 69,
-    failure_risk: 0.31,
-    status: "NOT_DONE",
-  },
-];
-
-/* ============================================================
-   MOCK UNSCHEDULED DATA
-============================================================ */
-
-const MOCK_UNSCHEDULED = [
-  {
-    task_id: "ENG-004",
-    department: "Engineering",
-    asset_id: "TRK-4590",
-    corridor_id: "COR-101",
-    compatibility_group: "CG-ENG-01",
-    reason_code: "NO_BLOCK",
-    reason: "No suitable engineering block window available.",
-    status: "PENDING",
-  },
-  {
-    task_id: "ENG-005",
-    department: "Engineering",
-    asset_id: "BRG-145",
-    corridor_id: "COR-110",
-    compatibility_group: "CG-ENG-02",
-    reason_code: "TRAIN_CONFLICT",
-    reason: "Heavy passenger train movement conflicts with requested block.",
-    status: "PENDING",
-  },
-  {
-    task_id: "SNT-004",
-    department: "S&T",
-    asset_id: "SIG-220",
-    corridor_id: "COR-101",
-    compatibility_group: "CG-SNT-01",
-    reason_code: "NO_BLOCK",
-    reason: "No suitable signalling block window available.",
-    status: "PENDING",
-  },
-  {
-    task_id: "SNT-005",
-    department: "S&T",
-    asset_id: "AXLE-091",
-    corridor_id: "COR-104",
-    compatibility_group: "CG-SNT-02",
-    reason_code: "COMPATIBILITY",
-    reason: "Task is incompatible with other maintenance activities.",
-    status: "IN_PROGRESS",
-  },
-  {
-    task_id: "TD-004",
-    department: "Traction Distribution",
-    asset_id: "OHE-811",
-    corridor_id: "COR-103",
-    compatibility_group: "CG-TD-01",
-    reason_code: "TRAFFIC_LOAD",
-    reason: "Traffic load is too high during the requested maintenance window.",
-    status: "PENDING",
-  },
-  {
-    task_id: "TD-005",
-    department: "Traction Distribution",
-    asset_id: "TSS-230",
-    corridor_id: "COR-107",
-    compatibility_group: "CG-TD-02",
-    reason_code: "BLOCK_LIMIT",
-    reason: "Required maintenance duration exceeds available block duration.",
-    status: "NOT_DONE",
+    value: "NOT_DONE",
+    label: "Not Done",
   },
 ];
 
@@ -222,209 +52,285 @@ const MOCK_UNSCHEDULED = [
 ============================================================ */
 
 export default function ScheduleConfirmation() {
-  const [scheduled, setScheduled] = useState(MOCK_SCHEDULED);
-  const [unscheduled, setUnscheduled] = useState(MOCK_UNSCHEDULED);
+  const [scheduled, setScheduled] = useState([]);
+  const [unscheduled, setUnscheduled] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  const [search, setSearch] = useState("");
   const [department, setDepartment] = useState("ALL");
   const [statusFilter, setStatusFilter] = useState("ALL");
-  const [search, setSearch] = useState("");
 
-  const [saving, setSaving] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   /* ==========================================================
-     LOAD BACKEND DATA
+     DEPARTMENT
   ========================================================== */
 
-  const loadConfirmedSchedule = async () => {
+  const getDepartment = (taskId = "") => {
+    const prefix = taskId.split("-")[0]?.toUpperCase();
+
+    if (prefix === "ENG") {
+      return "Engineering";
+    }
+
+    if (prefix === "TRD") {
+      return "Traction";
+    }
+
+    if (prefix === "SNT") {
+      return "S&T";
+    }
+
+    return "Other";
+  };
+
+  /* ==========================================================
+     LOAD SCHEDULE
+  ========================================================== */
+
+  const loadSchedule = async () => {
     setLoading(true);
+    setError("");
+    setMessage("");
 
     try {
-      const response = await fetch(`${API_URL}/schedule/confirmed`);
+      const response = await getConfirmedSchedule();
 
-      if (!response.ok) {
-        throw new Error("Backend unavailable");
-      }
+      const data = response?.data || {};
 
-      const result = await response.json();
-
-      if (
-        result.success &&
-        result.data &&
-        (result.data.scheduled?.length > 0 ||
-          result.data.unscheduled?.length > 0)
-      ) {
-        setScheduled(result.data.scheduled || []);
-        setUnscheduled(result.data.unscheduled || []);
-
-        setMessage("Live schedule data loaded from backend.");
-      } else {
-        setScheduled(MOCK_SCHEDULED);
-        setUnscheduled(MOCK_UNSCHEDULED);
-
-        setMessage("Showing demo schedule data.");
-      }
-    } catch (error) {
-      console.log("Using mock data:", error.message);
-
-      setScheduled(MOCK_SCHEDULED);
-      setUnscheduled(MOCK_UNSCHEDULED);
-
-      setMessage(
-        "Backend data unavailable. Showing realistic demo schedule data.",
-      );
+      setScheduled(data.scheduled || []);
+      setUnscheduled(data.unscheduled || []);
+    } catch (err) {
+      setError(err.message || "Failed to load confirmed schedule.");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadConfirmedSchedule();
+    loadSchedule();
   }, []);
 
   /* ==========================================================
-     FILTER FUNCTION
+     SEARCH
   ========================================================== */
 
-  const filterTask = (task) => {
-    const matchesDepartment =
-      department === "ALL" || task.department === department;
+  const matchesSearch = (task) => {
+    const query = search.trim().toLowerCase();
 
-    const matchesStatus =
-      statusFilter === "ALL" || task.status === statusFilter;
+    if (!query) {
+      return true;
+    }
 
-    const searchText = search.toLowerCase();
-
-    const matchesSearch =
-      !search ||
-      task.task_id?.toLowerCase().includes(searchText) ||
-      task.asset_id?.toLowerCase().includes(searchText) ||
-      task.corridor_id?.toLowerCase().includes(searchText);
-
-    return matchesDepartment && matchesStatus && matchesSearch;
+    return (
+      task.task_id?.toLowerCase().includes(query) ||
+      task.asset_id?.toLowerCase().includes(query) ||
+      task.corridor_id?.toLowerCase().includes(query) ||
+      task.block_window_id?.toLowerCase().includes(query) ||
+      task.reason_code?.toLowerCase().includes(query) ||
+      task.reason?.toLowerCase().includes(query)
+    );
   };
 
+  /* ==========================================================
+     FILTER SCHEDULED
+  ========================================================== */
+
   const filteredScheduled = useMemo(() => {
-    return scheduled.filter(filterTask);
-  }, [scheduled, department, statusFilter, search]);
+    return scheduled.filter((task) => {
+      const matchesDepartment =
+        department === "ALL" || getDepartment(task.task_id) === department;
+
+      const matchesStatus =
+        statusFilter === "ALL" || task.status === statusFilter;
+
+      return matchesSearch(task) && matchesDepartment && matchesStatus;
+    });
+  }, [scheduled, search, department, statusFilter]);
+
+  /* ==========================================================
+     FILTER UNSCHEDULED
+  ========================================================== */
 
   const filteredUnscheduled = useMemo(() => {
-    return unscheduled.filter(filterTask);
-  }, [unscheduled, department, statusFilter, search]);
+    return unscheduled.filter((task) => {
+      const matchesDepartment =
+        department === "ALL" || getDepartment(task.task_id) === department;
+
+      const matchesStatus =
+        statusFilter === "ALL" || task.status === statusFilter;
+
+      return matchesSearch(task) && matchesDepartment && matchesStatus;
+    });
+  }, [unscheduled, search, department, statusFilter]);
 
   /* ==========================================================
      KPI
   ========================================================== */
 
-  const pending = scheduled.filter((x) => x.status === "PENDING").length;
+  const pending = scheduled.filter((task) => task.status === "PENDING").length;
 
-  const inProgress = scheduled.filter((x) => x.status === "IN_PROGRESS").length;
+  const inProgress = scheduled.filter(
+    (task) => task.status === "IN_PROGRESS",
+  ).length;
 
-  const completed = scheduled.filter((x) => x.status === "DONE").length;
+  const completed = scheduled.filter((task) => task.status === "DONE").length;
 
-  const notDone = scheduled.filter((x) => x.status === "NOT_DONE").length;
+  const notDone = scheduled.filter((task) => task.status === "NOT_DONE").length;
+
+  const unscheduledCount = unscheduled.length;
+
+  /* ==========================================================
+     DEPARTMENT COUNTS
+  ========================================================== */
+
+  const departmentCounts = useMemo(() => {
+    return {
+      Engineering: scheduled.filter(
+        (task) => getDepartment(task.task_id) === "Engineering",
+      ).length,
+
+      Traction: scheduled.filter(
+        (task) => getDepartment(task.task_id) === "Traction",
+      ).length,
+
+      "S&T": scheduled.filter((task) => getDepartment(task.task_id) === "S&T")
+        .length,
+    };
+  }, [scheduled]);
+
+  /* ==========================================================
+     CLEAR FILTERS
+  ========================================================== */
+
+  const clearFilters = () => {
+    setSearch("");
+    setDepartment("ALL");
+    setStatusFilter("ALL");
+  };
+
+  const filtersActive =
+    search !== "" || department !== "ALL" || statusFilter !== "ALL";
 
   /* ==========================================================
      CONFIRM SCHEDULE
   ========================================================== */
 
-  const confirmSchedule = async () => {
+  const handleConfirm = async () => {
+    if (scheduled.length === 0 && unscheduled.length === 0) {
+      setError("There are no schedule records to confirm.");
+      return;
+    }
+
     setSaving(true);
     setMessage("");
+    setError("");
 
     try {
-      const response = await fetch(`${API_URL}/schedule/confirm`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          scheduled,
-          unscheduled,
-        }),
-      });
+      const result = await confirmSchedule(scheduled, unscheduled);
 
-      const data = await response.json();
+      setMessage(result?.message || "Schedule confirmed successfully.");
 
-      if (!response.ok) {
-        throw new Error(
-          data.detail?.error || data.detail || "Unable to confirm schedule",
-        );
-      }
-
-      setMessage(
-        `Schedule confirmed successfully. ${data.data.scheduled_count} scheduled and ${data.data.unscheduled_count} unscheduled tasks saved.`,
-      );
-    } catch (error) {
-      setMessage(`Error: ${error.message}`);
+      await loadSchedule();
+    } catch (err) {
+      setError(err.message || "Failed to confirm schedule.");
     } finally {
       setSaving(false);
     }
   };
 
   /* ==========================================================
-     UPDATE STATUS
+     SCHEDULED STATUS
   ========================================================== */
 
-  const updateStatus = async (taskId, status, type) => {
+  const handleScheduledStatus = async (taskId, newStatus) => {
+    const previous = [...scheduled];
+
+    setMessage("");
+    setError("");
+
+    setScheduled((current) =>
+      current.map((task) =>
+        task.task_id === taskId
+          ? {
+              ...task,
+              status: newStatus,
+            }
+          : task,
+      ),
+    );
+
     try {
-      const endpoint =
-        type === "scheduled"
-          ? `/schedule/scheduled/${taskId}/status?status=${status}`
-          : `/schedule/unscheduled/${taskId}/status?status=${status}`;
+      await updateScheduledStatus(taskId, newStatus);
+    } catch (err) {
+      setScheduled(previous);
 
-      const response = await fetch(`${API_URL}${endpoint}`, {
-        method: "PATCH",
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.detail?.error || data.detail || "Status update failed",
-        );
-      }
-
-      if (type === "scheduled") {
-        setScheduled((prev) =>
-          prev.map((task) =>
-            task.task_id === taskId ? { ...task, status } : task,
-          ),
-        );
-      } else {
-        setUnscheduled((prev) =>
-          prev.map((task) =>
-            task.task_id === taskId ? { ...task, status } : task,
-          ),
-        );
-      }
-
-      setMessage(`Task ${taskId} status updated to ${status}.`);
-    } catch (error) {
-      setMessage(`Error: ${error.message}`);
+      setError(err.message || "Unable to update task status.");
     }
   };
 
   /* ==========================================================
-     RESET FILTERS
+     UNSCHEDULED STATUS
   ========================================================== */
 
-  const resetFilters = () => {
-    setDepartment("ALL");
-    setStatusFilter("ALL");
-    setSearch("");
+  const handleUnscheduledStatus = async (taskId, newStatus) => {
+    const previous = [...unscheduled];
+
+    setMessage("");
+    setError("");
+
+    setUnscheduled((current) =>
+      current.map((task) =>
+        task.task_id === taskId
+          ? {
+              ...task,
+              status: newStatus,
+            }
+          : task,
+      ),
+    );
+
+    try {
+      await updateUnscheduledStatus(taskId, newStatus);
+    } catch (err) {
+      setUnscheduled(previous);
+
+      setError(err.message || "Unable to update task status.");
+    }
   };
 
+  /* ==========================================================
+     LOADING
+  ========================================================== */
+
+  if (loading) {
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+        <div className="flex items-center gap-3 text-slate-600">
+          <RefreshCw size={22} className="animate-spin" />
+
+          <span className="font-medium">Loading schedule...</span>
+        </div>
+      </div>
+    );
+  }
+
+  /* ==========================================================
+     RENDER
+  ========================================================== */
+
   return (
-    <div className="space-y-6">
-      {/* =====================================================
+    <div className="space-y-6 pb-8">
+      {/* ======================================================
           HEADER
-      ===================================================== */}
+      ====================================================== */}
 
       <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
         <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg">
             <CalendarCheck size={25} />
           </div>
 
@@ -433,26 +339,27 @@ export default function ScheduleConfirmation() {
               Schedule Confirmation
             </h1>
 
-            <p className="text-sm text-slate-500">
-              Review, confirm and monitor AI-generated maintenance schedules.
+            <p className="mt-1 text-sm text-slate-500">
+              Review, confirm and monitor AI-generated railway maintenance
+              schedules.
             </p>
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <button
-            onClick={loadConfirmedSchedule}
+            onClick={loadSchedule}
             disabled={loading}
-            className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50"
+            className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <RefreshCw size={17} className={loading ? "animate-spin" : ""} />
             Refresh
           </button>
 
           <button
-            onClick={confirmSchedule}
+            onClick={handleConfirm}
             disabled={saving}
-            className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg hover:bg-blue-700 disabled:opacity-50"
+            className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {saving ? (
               <>
@@ -461,7 +368,7 @@ export default function ScheduleConfirmation() {
               </>
             ) : (
               <>
-                <Save size={17} />
+                <CheckCircle2 size={17} />
                 Confirm Schedule
               </>
             )}
@@ -469,162 +376,235 @@ export default function ScheduleConfirmation() {
         </div>
       </div>
 
-      {/* =====================================================
-          MESSAGE
-      ===================================================== */}
+      {/* ======================================================
+          SUCCESS
+      ====================================================== */}
 
       {message && (
-        <div className="rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700 shadow-sm">
+        <div className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">
+          <CheckCircle2 size={18} className="shrink-0" />
+
           {message}
         </div>
       )}
 
-      {/* =====================================================
-          KPI CARDS
-      ===================================================== */}
+      {/* ======================================================
+          ERROR
+      ====================================================== */}
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard title="Pending" value={pending} icon={Clock3} />
+      {error && (
+        <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          <AlertTriangle size={18} className="mt-0.5 shrink-0" />
 
-        <StatCard title="In Progress" value={inProgress} icon={RefreshCw} />
-
-        <StatCard title="Completed" value={completed} icon={CheckCircle2} />
-
-        <StatCard title="Not Done" value={notDone} icon={AlertTriangle} />
-      </div>
-
-      {/* =====================================================
-          DEPARTMENT SUMMARY
-      ===================================================== */}
-
-      <div className="grid gap-4 md:grid-cols-3">
-        <DepartmentCard
-          icon={Wrench}
-          title="Engineering"
-          value={scheduled.filter((x) => x.department === "Engineering").length}
-          active={department === "Engineering"}
-          onClick={() => setDepartment("Engineering")}
-        />
-
-        <DepartmentCard
-          icon={Radio}
-          title="S&T"
-          value={scheduled.filter((x) => x.department === "S&T").length}
-          active={department === "S&T"}
-          onClick={() => setDepartment("S&T")}
-        />
-
-        <DepartmentCard
-          icon={Zap}
-          title="Traction Distribution"
-          value={
-            scheduled.filter((x) => x.department === "Traction Distribution")
-              .length
-          }
-          active={department === "Traction Distribution"}
-          onClick={() => setDepartment("Traction Distribution")}
-        />
-      </div>
-
-      {/* =====================================================
-          FILTERS
-      ===================================================== */}
-
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <div className="mb-4 flex items-center gap-2">
-          <Filter size={18} className="text-blue-600" />
-
-          <h2 className="font-bold text-slate-900">Schedule Filters</h2>
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-4">
-          {/* SEARCH */}
-
-          <div className="relative">
-            <Search
-              size={18}
-              className="absolute left-3 top-3 text-slate-400"
-            />
-
-            <input
-              type="text"
-              placeholder="Search task, asset, corridor..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 py-2.5 pl-10 pr-3 text-sm outline-none focus:border-blue-500"
-            />
-          </div>
-
-          {/* DEPARTMENT */}
-
-          <select
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
-            className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium outline-none focus:border-blue-500"
-          >
-            <option value="ALL">All Departments</option>
-
-            <option value="Engineering">Engineering</option>
-
-            <option value="S&T">S&T</option>
-
-            <option value="Traction Distribution">Traction Distribution</option>
-          </select>
-
-          {/* STATUS */}
-
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium outline-none focus:border-blue-500"
-          >
-            <option value="ALL">All Statuses</option>
-            <option value="PENDING">Pending</option>
-            <option value="IN_PROGRESS">In Progress</option>
-            <option value="DONE">Done</option>
-            <option value="NOT_DONE">Not Done</option>
-          </select>
-
-          {/* RESET */}
+          <div className="flex-1">{error}</div>
 
           <button
-            onClick={resetFilters}
-            className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-100"
+            onClick={() => setError("")}
+            className="text-red-500 hover:text-red-700"
           >
-            <RotateCcw size={17} />
-            Reset Filters
+            <X size={17} />
           </button>
         </div>
+      )}
 
-        <div className="mt-4 text-xs text-slate-500">
-          Showing{" "}
-          <span className="font-bold text-slate-900">
-            {filteredScheduled.length}
-          </span>{" "}
-          scheduled and{" "}
-          <span className="font-bold text-slate-900">
-            {filteredUnscheduled.length}
-          </span>{" "}
-          unscheduled tasks.
-        </div>
+      {/* ======================================================
+          KPI
+      ====================================================== */}
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <StatCard
+          title="Pending"
+          value={pending}
+          icon={Clock3}
+          description="Awaiting execution"
+        />
+
+        <StatCard
+          title="In Progress"
+          value={inProgress}
+          icon={RefreshCw}
+          description="Currently underway"
+        />
+
+        <StatCard
+          title="Completed"
+          value={completed}
+          icon={CheckCircle2}
+          description="Maintenance completed"
+        />
+
+        <StatCard
+          title="Not Done"
+          value={notDone}
+          icon={AlertTriangle}
+          description="Not completed"
+        />
+
+        <StatCard
+          title="Unscheduled"
+          value={unscheduledCount}
+          icon={AlertTriangle}
+          description="Require attention"
+        />
       </div>
 
-      {/* =====================================================
-          SCHEDULED TASKS
-      ===================================================== */}
+      {/* ======================================================
+          FILTER SECTION
+      ====================================================== */}
 
-      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div className="border-b border-slate-100 p-6">
-          <div className="flex items-center justify-between">
+      <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="border-b border-slate-100 px-5 py-4">
+          <div className="flex items-center gap-2">
+            <Filter size={18} className="text-blue-600" />
+
             <div>
-              <h2 className="text-lg font-bold text-slate-900">
-                Confirmed Maintenance Tasks
-              </h2>
+              <h2 className="font-semibold text-slate-900">Schedule Filters</h2>
 
-              <p className="mt-1 text-sm text-slate-500">
-                Tasks assigned to available railway block windows.
+              <p className="text-xs text-slate-500">
+                Filter maintenance tasks by department, status or search term.
               </p>
             </div>
+          </div>
+        </div>
+
+        <div className="p-5">
+          <div className="grid gap-3 lg:grid-cols-[1fr_220px_200px_auto]">
+            {/* Search */}
+
+            <div className="relative">
+              <Search
+                size={18}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+              />
+
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search task, asset, corridor or block..."
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+              />
+            </div>
+
+            {/* Department */}
+
+            <div className="relative">
+              <select
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
+                className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm font-medium text-slate-700 outline-none focus:border-blue-500"
+              >
+                <option value="ALL">All Departments</option>
+
+                <option value="Engineering">Engineering</option>
+
+                <option value="Traction">Traction Distribution</option>
+
+                <option value="S&T">Signal & Telecom</option>
+              </select>
+
+              <ChevronDown
+                size={16}
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400"
+              />
+            </div>
+
+            {/* Status */}
+
+            <div className="relative">
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm font-medium text-slate-700 outline-none focus:border-blue-500"
+              >
+                <option value="ALL">All Statuses</option>
+
+                {STATUS_OPTIONS.map((status) => (
+                  <option key={status.value} value={status.value}>
+                    {status.label}
+                  </option>
+                ))}
+              </select>
+
+              <ChevronDown
+                size={16}
+                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400"
+              />
+            </div>
+
+            {/* Clear */}
+
+            <button
+              onClick={clearFilters}
+              disabled={!filtersActive}
+              className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              <X size={16} />
+              Clear
+            </button>
+          </div>
+
+          {/* Department summary */}
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            <DepartmentFilterPill
+              label="Engineering"
+              count={departmentCounts.Engineering}
+              active={department === "Engineering"}
+              onClick={() =>
+                setDepartment(
+                  department === "Engineering" ? "ALL" : "Engineering",
+                )
+              }
+            />
+
+            <DepartmentFilterPill
+              label="Traction"
+              count={departmentCounts.Traction}
+              active={department === "Traction"}
+              onClick={() =>
+                setDepartment(department === "Traction" ? "ALL" : "Traction")
+              }
+            />
+
+            <DepartmentFilterPill
+              label="S&T"
+              count={departmentCounts["S&T"]}
+              active={department === "S&T"}
+              onClick={() =>
+                setDepartment(department === "S&T" ? "ALL" : "S&T")
+              }
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================
+          SCHEDULED MAINTENANCE
+      ====================================================== */}
+
+      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="flex flex-col justify-between gap-3 border-b border-slate-100 px-5 py-5 sm:flex-row sm:items-center">
+          <div>
+            <div className="flex items-center gap-2">
+              <CircleDot size={18} className="text-emerald-600" />
+
+              <h2 className="text-lg font-bold text-slate-900">
+                Scheduled Maintenance
+              </h2>
+            </div>
+
+            <p className="mt-1 text-sm text-slate-500">
+              Confirmed maintenance activities from the backend database.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {department !== "ALL" && (
+              <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                {department}
+              </span>
+            )}
 
             <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
               {filteredScheduled.length} Tasks
@@ -633,165 +613,327 @@ export default function ScheduleConfirmation() {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-xs uppercase text-slate-500">
-              <tr>
-                <th className="px-6 py-4">Task</th>
-                <th className="px-6 py-4">Department</th>
-                <th className="px-6 py-4">Asset</th>
-                <th className="px-6 py-4">Corridor</th>
-                <th className="px-6 py-4">Block</th>
-                <th className="px-6 py-4">Schedule</th>
-                <th className="px-6 py-4">Priority</th>
-                <th className="px-6 py-4">Risk</th>
-                <th className="px-6 py-4">Status</th>
+          <table className="w-full min-w-[1200px] table-auto text-left">
+            <thead className="border-b border-slate-100 bg-slate-50">
+              <tr className="text-[11px] font-bold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-5 py-3">Task</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Department</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Asset</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Corridor</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Block</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Date / Time</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Duration</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Priority</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Risk</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Status</th>
               </tr>
             </thead>
 
             <tbody className="divide-y divide-slate-100">
               {filteredScheduled.map((task) => (
-                <tr key={task.task_id} className="hover:bg-slate-50">
-                  <td className="px-6 py-4 font-semibold text-slate-900">
-                    {task.task_id}
-                  </td>
-
-                  <td className="px-6 py-4">
-                    <DepartmentBadge department={task.department} />
-                  </td>
-
-                  <td className="px-6 py-4 text-slate-600">{task.asset_id}</td>
-
-                  <td className="px-6 py-4 text-slate-600">
-                    {task.corridor_id}
-                  </td>
-
-                  <td className="px-6 py-4">
-                    <span className="rounded-lg bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700">
-                      {task.block_window_id}
-                    </span>
-                  </td>
-
-                  <td className="px-6 py-4">
-                    <div className="font-medium text-slate-800">
-                      {task.date}
-                    </div>
-
-                    <div className="text-xs text-slate-500">
-                      {task.start_time} - {task.end_time}
-                    </div>
-                  </td>
-
-                  <td className="px-6 py-4">
-                    <PriorityBadge priority={task.priority_score} />
-                  </td>
-
-                  <td className="px-6 py-4">
-                    <RiskBadge risk={task.failure_risk} />
-                  </td>
-
-                  <td className="px-6 py-4">
-                    <StatusSelector
-                      value={task.status}
-                      onChange={(status) =>
-                        updateStatus(task.task_id, status, "scheduled")
-                      }
-                    />
-                  </td>
-                </tr>
+                <ScheduledRow
+                  key={task.task_id}
+                  task={task}
+                  onStatusChange={handleScheduledStatus}
+                  getDepartment={getDepartment}
+                />
               ))}
             </tbody>
           </table>
-
-          {filteredScheduled.length === 0 && (
-            <EmptyState text="No scheduled tasks match the selected filters." />
-          )}
         </div>
-      </div>
 
-      {/* =====================================================
-          UNSCHEDULED
-      ===================================================== */}
+        {filteredScheduled.length === 0 && (
+          <EmptyState
+            title="No scheduled tasks found"
+            description="There are no confirmed scheduled tasks matching the current filters."
+          />
+        )}
+      </section>
 
-      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div className="border-b border-slate-100 p-6">
-          <div className="flex items-center gap-3">
-            <AlertTriangle size={20} className="text-amber-500" />
+      {/* ======================================================
+          UNSCHEDULED MAINTENANCE
+      ====================================================== */}
 
-            <div>
+      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="flex flex-col justify-between gap-3 border-b border-slate-100 px-5 py-5 sm:flex-row sm:items-center">
+          <div>
+            <div className="flex items-center gap-2">
+              <AlertTriangle size={18} className="text-amber-500" />
+
               <h2 className="text-lg font-bold text-slate-900">
                 Unscheduled Maintenance
               </h2>
-
-              <p className="text-sm text-slate-500">
-                Tasks that could not be assigned to a suitable block.
-              </p>
             </div>
+
+            <p className="mt-1 text-sm text-slate-500">
+              Tasks that require further planning or a compatible maintenance
+              block.
+            </p>
           </div>
+
+          <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
+            {filteredUnscheduled.length} Tasks
+          </span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-xs uppercase text-slate-500">
-              <tr>
-                <th className="px-6 py-4">Task</th>
-                <th className="px-6 py-4">Department</th>
-                <th className="px-6 py-4">Asset</th>
-                <th className="px-6 py-4">Corridor</th>
-                <th className="px-6 py-4">Group</th>
-                <th className="px-6 py-4">Reason Code</th>
-                <th className="px-6 py-4">Reason</th>
-                <th className="px-6 py-4">Status</th>
+          <table className="w-full min-w-[1000px] text-left">
+            <thead className="border-b border-slate-100 bg-slate-50">
+              <tr className="text-[11px] font-bold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-5 py-3">Task</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Department</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Asset</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Corridor</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Group</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Reason</th>
+
+                <th className="whitespace-nowrap px-4 py-3">Status</th>
               </tr>
             </thead>
 
             <tbody className="divide-y divide-slate-100">
               {filteredUnscheduled.map((task) => (
-                <tr key={task.task_id} className="hover:bg-slate-50">
-                  <td className="px-6 py-4 font-semibold">{task.task_id}</td>
-
-                  <td className="px-6 py-4">
-                    <DepartmentBadge department={task.department} />
-                  </td>
-
-                  <td className="px-6 py-4 text-slate-600">{task.asset_id}</td>
-
-                  <td className="px-6 py-4 text-slate-600">
-                    {task.corridor_id}
-                  </td>
-
-                  <td className="px-6 py-4">
-                    {task.compatibility_group || "-"}
-                  </td>
-
-                  <td className="px-6 py-4">
-                    <span className="rounded-lg bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-700">
-                      {task.reason_code}
-                    </span>
-                  </td>
-
-                  <td className="max-w-xs px-6 py-4 text-slate-500">
-                    {task.reason}
-                  </td>
-
-                  <td className="px-6 py-4">
-                    <StatusSelector
-                      value={task.status}
-                      onChange={(status) =>
-                        updateStatus(task.task_id, status, "unscheduled")
-                      }
-                    />
-                  </td>
-                </tr>
+                <UnscheduledRow
+                  key={task.task_id}
+                  task={task}
+                  onStatusChange={handleUnscheduledStatus}
+                  getDepartment={getDepartment}
+                />
               ))}
             </tbody>
           </table>
-
-          {filteredUnscheduled.length === 0 && (
-            <EmptyState text="No unscheduled tasks match the selected filters." />
-          )}
         </div>
-      </div>
+
+        {filteredUnscheduled.length === 0 && (
+          <EmptyState
+            title="No unscheduled tasks found"
+            description="There are no unscheduled tasks matching the current filters."
+          />
+        )}
+      </section>
+
+      {/* ======================================================
+          SYSTEM INFORMATION
+      ====================================================== */}
+
+      <section className="grid gap-4 md:grid-cols-3">
+        <InfoCard
+          icon={Database}
+          title="Data Source"
+          value="FastAPI + Database"
+        />
+
+        <InfoCard
+          icon={Train}
+          title="Train Operations"
+          value="Integrated Planning"
+        />
+
+        <InfoCard
+          icon={ShieldAlert}
+          title="AI Decision Support"
+          value="Risk + Priority + Blocks"
+        />
+      </section>
     </div>
+  );
+}
+
+/* ============================================================
+   SCHEDULED ROW
+============================================================ */
+
+function ScheduledRow({ task, onStatusChange, getDepartment }) {
+  return (
+    <tr className="group transition hover:bg-slate-50">
+      {/* TASK */}
+
+      <td className="whitespace-nowrap px-5 py-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+            <CalendarCheck size={17} />
+          </div>
+
+          <div>
+            <p className="font-bold text-slate-900">{task.task_id}</p>
+
+            <p className="text-[11px] text-slate-400">Maintenance</p>
+          </div>
+        </div>
+      </td>
+
+      {/* DEPARTMENT */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <DepartmentBadge department={getDepartment(task.task_id)} />
+      </td>
+
+      {/* ASSET */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <span className="font-medium text-slate-700">
+          {task.asset_id || "-"}
+        </span>
+      </td>
+
+      {/* CORRIDOR */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <div className="flex items-center gap-2">
+          <Route size={14} className="text-blue-500" />
+
+          <span className="font-medium text-slate-700">
+            {task.corridor_id || "-"}
+          </span>
+        </div>
+      </td>
+
+      {/* BLOCK */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <span className="rounded-lg bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
+          {task.block_window_id || "-"}
+        </span>
+      </td>
+
+      {/* DATE / TIME */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <div className="flex items-center gap-2">
+          <Clock3 size={14} className="text-slate-400" />
+
+          <div>
+            <span className="font-semibold text-slate-800">
+              {task.date || "-"}
+            </span>
+
+            <span className="ml-2 text-xs text-slate-500">
+              {task.start_time || "--:--"} - {task.end_time || "--:--"}
+            </span>
+          </div>
+        </div>
+      </td>
+
+      {/* DURATION */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <span className="text-sm font-medium text-slate-700">
+          {task.estimated_duration_hrs ?? "-"} hrs
+        </span>
+      </td>
+
+      {/* PRIORITY */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <PriorityBadge score={task.priority_score} />
+      </td>
+
+      {/* RISK */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <RiskBadge risk={task.failure_risk} />
+      </td>
+
+      {/* STATUS */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <ScheduledStatus
+          value={task.status}
+          onChange={(status) => onStatusChange(task.task_id, status)}
+        />
+      </td>
+    </tr>
+  );
+}
+
+/* ============================================================
+   UNSCHEDULED ROW
+============================================================ */
+
+function UnscheduledRow({ task, onStatusChange, getDepartment }) {
+  return (
+    <tr className="transition hover:bg-slate-50">
+      {/* TASK */}
+
+      <td className="whitespace-nowrap px-5 py-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-600">
+            <AlertTriangle size={17} />
+          </div>
+
+          <div>
+            <p className="font-bold text-slate-900">{task.task_id}</p>
+
+            <p className="text-[11px] text-slate-400">Unscheduled</p>
+          </div>
+        </div>
+      </td>
+
+      {/* DEPARTMENT */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <DepartmentBadge department={getDepartment(task.task_id)} />
+      </td>
+
+      {/* ASSET */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <span className="font-medium text-slate-700">
+          {task.asset_id || "-"}
+        </span>
+      </td>
+
+      {/* CORRIDOR */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <span className="font-medium text-slate-700">
+          {task.corridor_id || "-"}
+        </span>
+      </td>
+
+      {/* GROUP */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <span className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">
+          {task.compatibility_group || "-"}
+        </span>
+      </td>
+
+      {/* REASON */}
+
+      <td className="min-w-[320px] px-4 py-4">
+        <div className="flex items-start gap-3">
+          <span className="whitespace-nowrap rounded-lg bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-700">
+            {task.reason_code || "UNKNOWN"}
+          </span>
+
+          <span className="text-sm text-slate-500">{task.reason || "-"}</span>
+        </div>
+      </td>
+
+      {/* STATUS */}
+
+      <td className="whitespace-nowrap px-4 py-4">
+        <UnscheduledStatus
+          value={task.status}
+          onChange={(status) => onStatusChange(task.task_id, status)}
+        />
+      </td>
+    </tr>
   );
 }
 
@@ -799,54 +941,23 @@ export default function ScheduleConfirmation() {
    STAT CARD
 ============================================================ */
 
-function StatCard({ title, value, icon: Icon }) {
+function StatCard({ title, value, icon: Icon, description }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm text-slate-500">{title}</p>
-
-          <p className="mt-2 text-2xl font-bold text-slate-900">{value}</p>
-        </div>
-
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
-          <Icon size={20} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ============================================================
-   DEPARTMENT CARD
-============================================================ */
-
-function DepartmentCard({ icon: Icon, title, value, active, onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`rounded-2xl border p-5 text-left shadow-sm transition ${
-        active
-          ? "border-blue-500 bg-blue-50"
-          : "border-slate-200 bg-white hover:border-blue-300"
-      }`}
-    >
-      <div className="flex items-center justify-between">
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+      <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-medium text-slate-500">{title}</p>
 
-          <p className="mt-2 text-2xl font-bold text-slate-900">{value}</p>
+          <p className="mt-2 text-3xl font-bold text-slate-900">{value}</p>
 
-          <p className="mt-1 text-xs text-slate-500">
-            Scheduled maintenance tasks
-          </p>
+          <p className="mt-1 text-xs text-slate-400">{description}</p>
         </div>
 
         <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
           <Icon size={21} />
         </div>
       </div>
-    </button>
+    </div>
   );
 }
 
@@ -855,63 +966,85 @@ function DepartmentCard({ icon: Icon, title, value, active, onClick }) {
 ============================================================ */
 
 function DepartmentBadge({ department }) {
-  let className = "bg-slate-100 text-slate-700";
+  const styles = {
+    Engineering: "bg-blue-50 text-blue-700 border-blue-100",
 
-  if (department === "Engineering") {
-    className = "bg-orange-50 text-orange-700";
-  }
+    Traction: "bg-purple-50 text-purple-700 border-purple-100",
 
-  if (department === "S&T") {
-    className = "bg-purple-50 text-purple-700";
-  }
+    "S&T": "bg-emerald-50 text-emerald-700 border-emerald-100",
 
-  if (department === "Traction Distribution") {
-    className = "bg-yellow-50 text-yellow-700";
-  }
+    Other: "bg-slate-100 text-slate-600 border-slate-200",
+  };
 
   return (
     <span
-      className={`whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${className}`}
+      className={`inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-bold ${
+        styles[department] || styles.Other
+      }`}
     >
-      {department || "Unknown"}
+      {department}
     </span>
   );
 }
 
 /* ============================================================
-   PRIORITY BADGE
+   DEPARTMENT FILTER PILL
 ============================================================ */
 
-function PriorityBadge({ priority }) {
-  const value = Number(priority || 0);
+function DepartmentFilterPill({ label, count, active, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+        active
+          ? "border-blue-200 bg-blue-50 text-blue-700"
+          : "border-slate-200 bg-white text-slate-500 hover:bg-slate-50"
+      }`}
+    >
+      {label}
+
+      <span className="ml-1.5 rounded-full bg-slate-100 px-1.5 py-0.5 text-[10px]">
+        {count}
+      </span>
+    </button>
+  );
+}
+
+/* ============================================================
+   PRIORITY
+============================================================ */
+
+function PriorityBadge({ score }) {
+  const value = Number(score || 0);
 
   let className = "bg-slate-100 text-slate-700";
 
-  if (value >= 90) {
+  if (value >= 80) {
     className = "bg-red-50 text-red-700";
-  } else if (value >= 75) {
-    className = "bg-orange-50 text-orange-700";
-  } else if (value >= 50) {
-    className = "bg-yellow-50 text-yellow-700";
+  } else if (value >= 60) {
+    className = "bg-amber-50 text-amber-700";
   } else {
     className = "bg-emerald-50 text-emerald-700";
   }
 
   return (
-    <span className={`rounded-full px-3 py-1 text-xs font-bold ${className}`}>
+    <span
+      className={`inline-flex min-w-[38px] justify-center rounded-full px-2.5 py-1 text-xs font-bold ${className}`}
+    >
       {value}
     </span>
   );
 }
 
 /* ============================================================
-   RISK BADGE
+   RISK
 ============================================================ */
 
 function RiskBadge({ risk }) {
   const percentage = Math.round(Number(risk || 0) * 100);
 
   let label = "Low";
+
   let className = "bg-emerald-50 text-emerald-700";
 
   if (percentage >= 75) {
@@ -922,12 +1055,12 @@ function RiskBadge({ risk }) {
     className = "bg-orange-50 text-orange-700";
   } else if (percentage >= 25) {
     label = "Medium";
-    className = "bg-yellow-50 text-yellow-700";
+    className = "bg-amber-50 text-amber-700";
   }
 
   return (
     <span
-      className={`whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${className}`}
+      className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold ${className}`}
     >
       {label} {percentage}%
     </span>
@@ -935,23 +1068,61 @@ function RiskBadge({ risk }) {
 }
 
 /* ============================================================
-   STATUS SELECTOR
+   SCHEDULED STATUS
 ============================================================ */
 
-function StatusSelector({ value, onChange }) {
+function ScheduledStatus({ value, onChange }) {
+  const currentValue = value || "PENDING";
+
   return (
     <select
-      value={value || "PENDING"}
+      value={currentValue}
       onChange={(e) => onChange(e.target.value)}
-      className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium outline-none focus:border-blue-500"
+      className={`rounded-lg border px-3 py-2 text-xs font-bold outline-none transition focus:ring-2 focus:ring-blue-100 ${
+        currentValue === "DONE"
+          ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+          : currentValue === "IN_PROGRESS"
+            ? "border-blue-200 bg-blue-50 text-blue-700"
+            : currentValue === "NOT_DONE"
+              ? "border-red-200 bg-red-50 text-red-700"
+              : "border-slate-200 bg-white text-slate-700"
+      }`}
     >
-      <option value="PENDING">Pending</option>
+      {STATUS_OPTIONS.map((status) => (
+        <option key={status.value} value={status.value}>
+          {status.label}
+        </option>
+      ))}
+    </select>
+  );
+}
 
-      <option value="IN_PROGRESS">In Progress</option>
+/* ============================================================
+   UNSCHEDULED STATUS
+============================================================ */
 
-      <option value="DONE">Done</option>
+function UnscheduledStatus({ value, onChange }) {
+  const currentValue = value || "PENDING";
 
-      <option value="NOT_DONE">Not Done</option>
+  return (
+    <select
+      value={currentValue}
+      onChange={(e) => onChange(e.target.value)}
+      className={`rounded-lg border px-3 py-2 text-xs font-bold outline-none transition focus:ring-2 focus:ring-blue-100 ${
+        currentValue === "DONE"
+          ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+          : currentValue === "IN_PROGRESS"
+            ? "border-blue-200 bg-blue-50 text-blue-700"
+            : currentValue === "NOT_DONE"
+              ? "border-red-200 bg-red-50 text-red-700"
+              : "border-slate-200 bg-white text-slate-700"
+      }`}
+    >
+      {STATUS_OPTIONS.map((status) => (
+        <option key={status.value} value={status.value}>
+          {status.label}
+        </option>
+      ))}
     </select>
   );
 }
@@ -960,12 +1131,40 @@ function StatusSelector({ value, onChange }) {
    EMPTY STATE
 ============================================================ */
 
-function EmptyState({ text }) {
+function EmptyState({ title, description }) {
   return (
-    <div className="flex flex-col items-center justify-center py-12 text-center">
-      <Train size={35} className="mb-3 text-slate-300" />
+    <div className="px-6 py-14 text-center">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+        <CalendarCheck size={22} />
+      </div>
 
-      <p className="text-sm font-medium text-slate-500">{text}</p>
+      <h3 className="mt-3 font-semibold text-slate-900">{title}</h3>
+
+      <p className="mx-auto mt-1 max-w-md text-sm text-slate-500">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+/* ============================================================
+   INFO CARD
+============================================================ */
+
+function InfoCard({ icon: Icon, title, value }) {
+  return (
+    <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+        <Icon size={20} />
+      </div>
+
+      <div>
+        <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
+          {title}
+        </p>
+
+        <p className="mt-1 font-semibold text-slate-900">{value}</p>
+      </div>
     </div>
   );
 }
