@@ -22,11 +22,11 @@ import { NavLink } from "react-router-dom";
 import logo from "./logo/logo.png";
 
 const navigation = [
-  {
-    title: "Home",
-    icon: LayoutDashboard,
-    path: "/",
-  },
+  // {
+  //   title: "Home",
+  //   icon: LayoutDashboard,
+  //   path: "/",
+  // },
   {
     title: "Block Schedule",
     icon: ClipboardList,

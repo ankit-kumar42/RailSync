@@ -1,181 +1,360 @@
-import { useEffect, useMemo, useState } from "react";
+
+import { useCallback, useEffect, useState } from "react";
 
 import {
-  AlertTriangle,
-  CalendarClock,
-  CheckCircle2,
-  Clock3,
-  Database,
-  Eye,
   Plus,
-  RefreshCw,
-  Search,
-  ShieldAlert,
   Trash2,
-  Train,
   X,
+  RefreshCw,
+  ClipboardList,
+  AlertTriangle,
+  CheckCircle2,
+  Database,
+  MapPin,
+  CalendarDays,
+  Clock3,
 } from "lucide-react";
 
 import {
+  getTasks,
   createTask,
   deleteTask,
-  getTask,
-  getTasks,
 } from "../services/taskService";
 
-/* ============================================================
-   MAIN PAGE
-============================================================ */
+// ============================================================
+// INITIAL FORM
+// ============================================================
+
+const INITIAL_FORM = {
+  task_id: "",
+  asset_id: "",
+  corridor_id: "",
+
+  location_start_km: "",
+  location_end_km: "",
+  location_km: "",
+
+  defect_type: "",
+  severity: "",
+
+  overdue_days: "0",
+
+  last_maintenance_date: "",
+
+  estimated_duration_hrs: "",
+
+  system: "",
+};
+
+// ============================================================
+// HELPERS
+// ============================================================
+
+function getTaskId(task) {
+  return task?.task_id || task?.id || "";
+}
+
+function getTaskList(response) {
+  /*
+   * Backend currently returns:
+   *
+   * [
+   *   {...},
+   *   {...}
+   * ]
+   *
+   * The additional cases make this component tolerant
+   * if the API is later wrapped in { data: [...] }.
+   */
+
+  if (Array.isArray(response)) {
+    return response;
+  }
+
+  if (Array.isArray(response?.data)) {
+    return response.data;
+  }
+
+  if (Array.isArray(response?.data?.tasks)) {
+    return response.data.tasks;
+  }
+
+  if (Array.isArray(response?.tasks)) {
+    return response.tasks;
+  }
+
+  return [];
+}
+
+function formatDate(value) {
+  if (!value) {
+    return "-";
+  }
+
+  try {
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+      return value;
+    }
+
+    return date.toLocaleDateString();
+  } catch {
+    return value;
+  }
+}
+
+// ============================================================
+// COMPONENT
+// ============================================================
 
 export default function MaintenanceTasks() {
   const [tasks, setTasks] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [deletingTask, setDeletingTask] = useState(null);
+  const [deleting, setDeleting] = useState("");
 
-  const [search, setSearch] = useState("");
-  const [severityFilter, setSeverityFilter] = useState("ALL");
-  const [systemFilter, setSystemFilter] = useState("ALL");
-
-  const [selectedTask, setSelectedTask] = useState(null);
-
-  const [showCreateModal, setShowCreateModal] = useState(false);
-
-  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  /* ==========================================================
-     LOAD TASKS
-  ========================================================== */
+  const [showForm, setShowForm] = useState(false);
 
-  const loadTasks = async () => {
-    setLoading(true);
-    setError("");
+  const [form, setForm] = useState(INITIAL_FORM);
 
+  // ==========================================================
+  // LOAD TASKS
+  // ==========================================================
+
+  const loadTasks = useCallback(async () => {
     try {
-      const data = await getTasks();
+      setLoading(true);
+      setError("");
 
-      setTasks(Array.isArray(data) ? data : []);
+      const response = await getTasks();
+
+      console.log("GET /tasks response:", response);
+
+      const taskList = getTaskList(response);
+
+      console.log("Tasks extracted:", taskList);
+
+      setTasks(taskList);
     } catch (err) {
-      setError(err.message || "Unable to load maintenance tasks.");
+      console.error("Failed to load maintenance tasks:", err);
+
+      setTasks([]);
+
+      setError(
+        err?.message ||
+          "Unable to load maintenance tasks. Check that the backend is running on http://localhost:8000.",
+      );
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  // ==========================================================
+  // INITIAL LOAD
+  // ==========================================================
 
   useEffect(() => {
     loadTasks();
-  }, []);
+  }, [loadTasks]);
 
-  /* ==========================================================
-     SEARCH
-  ========================================================== */
+  // ==========================================================
+  // FORM CHANGE
+  // ==========================================================
 
-  const filteredTasks = useMemo(() => {
-    const query = search.trim().toLowerCase();
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-    return tasks.filter((task) => {
-      const matchesSearch =
-        !query ||
-        task.task_id?.toLowerCase().includes(query) ||
-        task.asset_id?.toLowerCase().includes(query) ||
-        task.corridor_id?.toLowerCase().includes(query) ||
-        task.defect_type?.toLowerCase().includes(query) ||
-        task.system?.toLowerCase().includes(query);
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
 
-      const matchesSeverity =
-        severityFilter === "ALL" ||
-        String(task.severity || "").toUpperCase() ===
-          severityFilter.toUpperCase();
+    if (error) {
+      setError("");
+    }
 
-      const matchesSystem =
-        systemFilter === "ALL" ||
-        String(task.system || "").toUpperCase() === systemFilter.toUpperCase();
-
-      return matchesSearch && matchesSeverity && matchesSystem;
-    });
-  }, [tasks, search, severityFilter, systemFilter]);
-
-  /* ==========================================================
-     FILTER OPTIONS
-  ========================================================== */
-
-  const severityOptions = useMemo(() => {
-    const values = tasks
-      .map((task) => task.severity)
-      .filter(Boolean)
-      .map((value) => String(value));
-
-    return [...new Set(values)].sort();
-  }, [tasks]);
-
-  const systemOptions = useMemo(() => {
-    const values = tasks
-      .map((task) => task.system)
-      .filter(Boolean)
-      .map((value) => String(value));
-
-    return [...new Set(values)].sort();
-  }, [tasks]);
-
-  /* ==========================================================
-     KPI
-  ========================================================== */
-
-  const totalTasks = tasks.length;
-
-  const overdueTasks = tasks.filter(
-    (task) => Number(task.overdue_days || 0) > 0,
-  ).length;
-
-  const highSeverityTasks = tasks.filter((task) => {
-    const severity = String(task.severity || "").toUpperCase();
-
-    return (
-      severity === "HIGH" || severity === "CRITICAL" || severity === "SEVERE"
-    );
-  }).length;
-
-  const totalDuration = tasks.reduce(
-    (sum, task) => sum + Number(task.estimated_duration_hrs || 0),
-    0,
-  );
-
-  /* ==========================================================
-     CLEAR FILTERS
-  ========================================================== */
-
-  const clearFilters = () => {
-    setSearch("");
-    setSeverityFilter("ALL");
-    setSystemFilter("ALL");
-  };
-
-  const filtersActive =
-    search !== "" || severityFilter !== "ALL" || systemFilter !== "ALL";
-
-  /* ==========================================================
-     VIEW TASK
-  ========================================================== */
-
-  const handleViewTask = async (taskId) => {
-    setError("");
-
-    try {
-      const task = await getTask(taskId);
-
-      setSelectedTask(task);
-    } catch (err) {
-      setError(err.message || "Unable to load task details.");
+    if (success) {
+      setSuccess("");
     }
   };
 
-  /* ==========================================================
-     DELETE TASK
-  ========================================================== */
+  // ==========================================================
+  // VALIDATE FORM
+  // ==========================================================
 
-  const handleDeleteTask = async (taskId) => {
+  const validateForm = () => {
+    if (!form.task_id.trim()) {
+      return "Task ID is required.";
+    }
+
+    if (!form.asset_id.trim()) {
+      return "Asset ID is required.";
+    }
+
+    if (!form.corridor_id.trim()) {
+      return "Corridor ID is required.";
+    }
+
+    if (!form.defect_type.trim()) {
+      return "Defect type is required.";
+    }
+
+    if (!form.severity) {
+      return "Severity is required.";
+    }
+
+    if (!form.last_maintenance_date) {
+      return "Last maintenance date is required.";
+    }
+
+    if (
+      form.estimated_duration_hrs === "" ||
+      Number.isNaN(Number(form.estimated_duration_hrs)) ||
+      Number(form.estimated_duration_hrs) < 0
+    ) {
+      return "Estimated duration must be 0 or greater.";
+    }
+
+    if (
+      form.overdue_days !== "" &&
+      (Number.isNaN(Number(form.overdue_days)) ||
+        Number(form.overdue_days) < 0)
+    ) {
+      return "Overdue days cannot be negative.";
+    }
+
+    if (
+      form.location_start_km !== "" &&
+      Number(form.location_start_km) < 0
+    ) {
+      return "Start KM cannot be negative.";
+    }
+
+    if (
+      form.location_end_km !== "" &&
+      Number(form.location_end_km) < 0
+    ) {
+      return "End KM cannot be negative.";
+    }
+
+    if (form.location_km !== "" && Number(form.location_km) < 0) {
+      return "Location KM cannot be negative.";
+    }
+
+    if (
+      form.location_start_km !== "" &&
+      form.location_end_km !== "" &&
+      Number(form.location_end_km) < Number(form.location_start_km)
+    ) {
+      return "End KM cannot be less than Start KM.";
+    }
+
+    return "";
+  };
+
+  // ==========================================================
+  // CREATE TASK
+  // ==========================================================
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setError("");
+    setSuccess("");
+
+    const validationError = validateForm();
+
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    try {
+      setSaving(true);
+
+      const payload = {
+        task_id: form.task_id.trim(),
+
+        asset_id: form.asset_id.trim(),
+
+        corridor_id: form.corridor_id.trim(),
+
+        location_start_km:
+          form.location_start_km === ""
+            ? null
+            : Number(form.location_start_km),
+
+        location_end_km:
+          form.location_end_km === ""
+            ? null
+            : Number(form.location_end_km),
+
+        location_km:
+          form.location_km === ""
+            ? null
+            : Number(form.location_km),
+
+        defect_type: form.defect_type.trim(),
+
+        severity: form.severity,
+
+        overdue_days:
+          form.overdue_days === ""
+            ? 0
+            : Number(form.overdue_days),
+
+        last_maintenance_date:
+          form.last_maintenance_date,
+
+        estimated_duration_hrs:
+          Number(form.estimated_duration_hrs),
+
+        system:
+          form.system.trim() || null,
+      };
+
+      console.log("POST /tasks payload:", payload);
+
+      const response = await createTask(payload);
+
+      console.log("POST /tasks response:", response);
+
+      setSuccess("Maintenance task created successfully.");
+
+      setForm({
+        ...INITIAL_FORM,
+      });
+
+      setShowForm(false);
+
+      await loadTasks();
+    } catch (err) {
+      console.error("Create task failed:", err);
+
+      setError(
+        err?.message ||
+          "Failed to create maintenance task.",
+      );
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // ==========================================================
+  // DELETE TASK
+  // ==========================================================
+
+  const handleDelete = async (taskId) => {
+    if (!taskId) {
+      setError("Unable to delete task: task ID is missing.");
+      return;
+    }
+
     const confirmed = window.confirm(
       `Are you sure you want to delete task ${taskId}?`,
     );
@@ -184,1058 +363,1015 @@ export default function MaintenanceTasks() {
       return;
     }
 
-    setDeletingTask(taskId);
-    setError("");
-    setMessage("");
-
     try {
-      const result = await deleteTask(taskId);
+      setDeleting(taskId);
 
-      setTasks((current) => current.filter((task) => task.task_id !== taskId));
+      setError("");
+      setSuccess("");
 
-      if (selectedTask?.task_id === taskId) {
-        setSelectedTask(null);
-      }
+      console.log(`DELETE /tasks/${taskId}`);
 
-      setMessage(result?.message || `Task ${taskId} deleted successfully.`);
+      await deleteTask(taskId);
+
+      setSuccess(
+        `Maintenance task ${taskId} deleted successfully.`,
+      );
+
+      await loadTasks();
     } catch (err) {
-      setError(err.message || "Unable to delete task.");
+      console.error("Delete task failed:", err);
+
+      setError(
+        err?.message ||
+          "Failed to delete maintenance task.",
+      );
     } finally {
-      setDeletingTask(null);
+      setDeleting("");
     }
   };
 
-  /* ==========================================================
-     CREATE TASK
-  ========================================================== */
+  // ==========================================================
+  // OPEN FORM
+  // ==========================================================
 
-  const handleCreateTask = async (formData) => {
-    setSaving(true);
+  const openForm = () => {
     setError("");
-    setMessage("");
+    setSuccess("");
 
-    try {
-      const createdTask = await createTask(formData);
+    setForm({
+      ...INITIAL_FORM,
+    });
 
-      setTasks((current) => [...current, createdTask]);
-
-      setShowCreateModal(false);
-
-      setMessage(`Task ${createdTask.task_id} created successfully.`);
-    } catch (err) {
-      setError(err.message || "Unable to create task.");
-    } finally {
-      setSaving(false);
-    }
+    setShowForm(true);
   };
 
-  /* ==========================================================
-     LOADING
-  ========================================================== */
+  // ==========================================================
+  // CLOSE FORM
+  // ==========================================================
 
-  if (loading) {
+  const closeForm = () => {
+    if (saving) {
+      return;
+    }
+
+    setShowForm(false);
+  };
+
+  // ==========================================================
+  // SUMMARY
+  // ==========================================================
+
+  const highSeverityCount = tasks.filter((task) => {
+    const severity = String(
+      task?.severity || "",
+    ).toUpperCase();
+
     return (
-      <div className="flex min-h-[500px] items-center justify-center">
-        <div className="flex items-center gap-3 text-slate-600">
-          <RefreshCw size={22} className="animate-spin" />
-
-          <span className="font-medium">Loading maintenance tasks...</span>
-        </div>
-      </div>
+      severity === "HIGH" ||
+      severity === "CRITICAL"
     );
-  }
+  }).length;
 
-  /* ==========================================================
-     RENDER
-  ========================================================== */
+  const overdueCount = tasks.filter(
+    (task) =>
+      Number(task?.overdue_days || 0) > 0,
+  ).length;
+
+  // ==========================================================
+  // RENDER
+  // ==========================================================
 
   return (
-    <div className="space-y-6 pb-8">
-      {/* ======================================================
-          HEADER
-      ====================================================== */}
+    <div className="min-h-screen bg-slate-100 p-4 sm:p-6 lg:p-8">
 
-      <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
+      {/* ====================================================
+          HEADER
+      ===================================================== */}
+
+      <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+
         <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg">
-            <Train size={25} />
+
+          <div className="rounded-2xl bg-blue-600 p-3 text-white shadow-lg shadow-blue-600/20">
+            <ClipboardList size={25} />
           </div>
 
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">
+            <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
               Maintenance Tasks
             </h1>
 
             <p className="mt-1 text-sm text-slate-500">
-              Manage railway maintenance tasks from the backend database.
+              Create and manage railway maintenance tasks.
             </p>
           </div>
+
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
+
           <button
+            type="button"
             onClick={loadTasks}
             disabled={loading}
-            className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:opacity-50"
+            className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <RefreshCw size={17} className={loading ? "animate-spin" : ""} />
+            <RefreshCw
+              size={17}
+              className={
+                loading ? "animate-spin" : ""
+              }
+            />
+
             Refresh
           </button>
 
           <button
-            onClick={() => {
-              setError("");
-              setMessage("");
-              setShowCreateModal(true);
-            }}
-            className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-blue-700"
+            type="button"
+            onClick={openForm}
+            className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700"
           >
-            <Plus size={17} />
+            <Plus size={18} />
+
             Add Task
           </button>
+
         </div>
       </div>
 
-      {/* ======================================================
+      {/* ====================================================
           SUCCESS
-      ====================================================== */}
+      ===================================================== */}
 
-      {message && (
-        <div className="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">
-          <CheckCircle2 size={18} className="shrink-0" />
+      {success && (
+        <div className="mb-6 flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700">
 
-          {message}
+          <CheckCircle2 size={19} />
 
-          <button onClick={() => setMessage("")} className="ml-auto">
-            <X size={16} />
-          </button>
+          <span>{success}</span>
+
         </div>
       )}
 
-      {/* ======================================================
+      {/* ====================================================
           ERROR
-      ====================================================== */}
+      ===================================================== */}
 
       {error && (
-        <div className="flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-          <AlertTriangle size={18} className="shrink-0" />
+        <div className="mb-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
 
-          <span>{error}</span>
+          <AlertTriangle
+            size={19}
+            className="mt-0.5 shrink-0"
+          />
 
-          <button onClick={() => setError("")} className="ml-auto">
-            <X size={16} />
-          </button>
+          <div>
+            <p className="font-semibold">
+              Request Error
+            </p>
+
+            <p className="mt-1">
+              {error}
+            </p>
+          </div>
+
         </div>
       )}
 
-      {/* ======================================================
-          KPI
-      ====================================================== */}
+      {/* ====================================================
+          SUMMARY
+      ===================================================== */}
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard
+      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+
+        <SummaryCard
           title="Total Tasks"
-          value={totalTasks}
-          icon={Database}
-          description="Tasks in database"
+          value={tasks.length}
+          icon={
+            <ClipboardList size={20} />
+          }
+          iconClass="bg-blue-100 text-blue-600"
         />
 
-        <StatCard
-          title="Overdue"
-          value={overdueTasks}
-          icon={Clock3}
-          description="Tasks past due"
+        <SummaryCard
+          title="High / Critical"
+          value={highSeverityCount}
+          icon={
+            <AlertTriangle size={20} />
+          }
+          iconClass="bg-red-100 text-red-600"
         />
 
-        <StatCard
-          title="High Severity"
-          value={highSeverityTasks}
-          icon={ShieldAlert}
-          description="High-risk maintenance"
+        <SummaryCard
+          title="Overdue Tasks"
+          value={overdueCount}
+          icon={
+            <Database size={20} />
+          }
+          iconClass="bg-orange-100 text-orange-600"
         />
 
-        <StatCard
-          title="Estimated Hours"
-          value={`${totalDuration.toFixed(1)} hrs`}
-          icon={CalendarClock}
-          description="Total maintenance effort"
-        />
       </div>
 
-      {/* ======================================================
-          FILTERS
-      ====================================================== */}
+      {/* ====================================================
+          TABLE CARD
+      ===================================================== */}
 
-      <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div className="border-b border-slate-100 px-5 py-4">
-          <h2 className="font-semibold text-slate-900">Task Filters</h2>
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-          <p className="mt-1 text-xs text-slate-500">
-            Search and filter maintenance tasks.
-          </p>
-        </div>
+        <div className="flex flex-col gap-2 border-b border-slate-200 px-5 py-5 sm:px-6">
 
-        <div className="p-5">
-          <div className="grid gap-3 lg:grid-cols-[1fr_200px_220px_auto]">
-            {/* Search */}
+          <div className="flex items-center justify-between gap-4">
 
-            <div className="relative">
-              <Search
-                size={18}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-              />
+            <div>
+              <h2 className="font-bold text-slate-900">
+                All Maintenance Tasks
+              </h2>
 
-              <input
-                type="text"
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                placeholder="Search task, asset, corridor, defect..."
-                className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
-              />
+              <p className="mt-1 text-sm text-slate-500">
+                Tasks currently stored in the backend database.
+              </p>
             </div>
 
-            {/* Severity */}
+            {!loading && (
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                {tasks.length}{" "}
+                {tasks.length === 1
+                  ? "Task"
+                  : "Tasks"}
+              </span>
+            )}
 
-            <select
-              value={severityFilter}
-              onChange={(event) => setSeverityFilter(event.target.value)}
-              className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-blue-500"
-            >
-              <option value="ALL">All Severities</option>
+          </div>
 
-              {severityOptions.map((severity) => (
-                <option key={severity} value={severity}>
-                  {severity}
-                </option>
-              ))}
-            </select>
+        </div>
 
-            {/* System */}
+        {/* ==================================================
+            LOADING
+        =================================================== */}
 
-            <select
-              value={systemFilter}
-              onChange={(event) => setSystemFilter(event.target.value)}
-              className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 outline-none focus:border-blue-500"
-            >
-              <option value="ALL">All Systems</option>
+        {loading && (
+          <div className="flex flex-col items-center justify-center py-20">
 
-              {systemOptions.map((system) => (
-                <option key={system} value={system}>
-                  {system}
-                </option>
-              ))}
-            </select>
+            <RefreshCw
+              size={32}
+              className="animate-spin text-blue-600"
+            />
 
-            {/* Clear */}
+            <p className="mt-4 text-sm text-slate-500">
+              Loading maintenance tasks...
+            </p>
+
+          </div>
+        )}
+
+        {/* ==================================================
+            EMPTY
+        =================================================== */}
+
+        {!loading && tasks.length === 0 && (
+          <div className="py-20 text-center">
+
+            <ClipboardList
+              size={45}
+              className="mx-auto text-slate-300"
+            />
+
+            <h3 className="mt-4 font-semibold text-slate-700">
+              No maintenance tasks
+            </h3>
+
+            <p className="mt-1 text-sm text-slate-400">
+              Click "Add Task" to create your first task.
+            </p>
 
             <button
-              onClick={clearFilters}
-              disabled={!filtersActive}
-              className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+              type="button"
+              onClick={openForm}
+              className="mt-5 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
             >
-              <X size={16} />
-              Clear
+              <span className="inline-flex items-center gap-2">
+                <Plus size={17} />
+                Add First Task
+              </span>
             </button>
+
           </div>
-        </div>
-      </section>
-
-      {/* ======================================================
-          TASK TABLE
-      ====================================================== */}
-
-      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div className="flex flex-col justify-between gap-3 border-b border-slate-100 px-5 py-5 sm:flex-row sm:items-center">
-          <div>
-            <h2 className="text-lg font-bold text-slate-900">
-              Maintenance Task Register
-            </h2>
-
-            <p className="mt-1 text-sm text-slate-500">
-              Tasks loaded directly from FastAPI.
-            </p>
-          </div>
-
-          <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-            {filteredTasks.length} Tasks
-          </span>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[1300px] text-left">
-            <thead className="border-b border-slate-100 bg-slate-50">
-              <tr className="text-[11px] font-bold uppercase tracking-wide text-slate-500">
-                <th className="px-5 py-3">Task</th>
-
-                <th className="px-4 py-3">Asset</th>
-
-                <th className="px-4 py-3">Corridor</th>
-
-                <th className="px-4 py-3">Location</th>
-
-                <th className="px-4 py-3">Defect</th>
-
-                <th className="px-4 py-3">Severity</th>
-
-                <th className="px-4 py-3">Overdue</th>
-
-                <th className="px-4 py-3">Duration</th>
-
-                <th className="px-4 py-3">System</th>
-
-                <th className="px-4 py-3 text-right">Actions</th>
-              </tr>
-            </thead>
-
-            <tbody className="divide-y divide-slate-100">
-              {filteredTasks.map((task) => (
-                <TaskRow
-                  key={task.task_id}
-                  task={task}
-                  onView={handleViewTask}
-                  onDelete={handleDeleteTask}
-                  deleting={deletingTask === task.task_id}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {filteredTasks.length === 0 && (
-          <EmptyState
-            title="No maintenance tasks found"
-            description={
-              tasks.length === 0
-                ? "There are currently no maintenance tasks in the database."
-                : "Try changing your search or filters."
-            }
-          />
         )}
-      </section>
 
-      {/* ======================================================
-          SYSTEM INFO
-      ====================================================== */}
+        {/* ==================================================
+            TABLE
+        =================================================== */}
 
-      <section className="grid gap-4 md:grid-cols-3">
-        <InfoCard
-          icon={Database}
-          title="Data Source"
-          value="FastAPI + SQLAlchemy"
-        />
+        {!loading && tasks.length > 0 && (
+          <div className="overflow-x-auto">
 
-        <InfoCard
-          icon={Train}
-          title="Maintenance"
-          value="Railway Task Management"
-        />
+            <table className="w-full min-w-[1250px] text-left">
 
-        <InfoCard
-          icon={ShieldAlert}
-          title="Planning"
-          value="Ready for AI Scheduling"
-        />
-      </section>
+              <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
 
-      {/* ======================================================
-          CREATE MODAL
-      ====================================================== */}
+                <tr>
 
-      {showCreateModal && (
-        <CreateTaskModal
-          saving={saving}
-          onClose={() => setShowCreateModal(false)}
-          onSubmit={handleCreateTask}
-        />
+                  <th className="px-6 py-4">
+                    Task ID
+                  </th>
+
+                  <th className="px-6 py-4">
+                    Asset
+                  </th>
+
+                  <th className="px-6 py-4">
+                    Corridor
+                  </th>
+
+                  <th className="px-6 py-4">
+                    Location
+                  </th>
+
+                  <th className="px-6 py-4">
+                    Defect
+                  </th>
+
+                  <th className="px-6 py-4">
+                    Severity
+                  </th>
+
+                  <th className="px-6 py-4">
+                    Overdue
+                  </th>
+
+                  <th className="px-6 py-4">
+                    Duration
+                  </th>
+
+                  <th className="px-6 py-4">
+                    Last Maintenance
+                  </th>
+
+                  <th className="px-6 py-4 text-right">
+                    Action
+                  </th>
+
+                </tr>
+
+              </thead>
+
+              <tbody className="divide-y divide-slate-100">
+
+                {tasks.map((task, index) => {
+
+                  const taskId =
+                    getTaskId(task);
+
+                  const location =
+                    task.location_km ??
+                    (
+                      task.location_start_km != null &&
+                      task.location_end_km != null
+                        ? `${task.location_start_km} - ${task.location_end_km}`
+                        : task.location_start_km ??
+                          task.location_end_km ??
+                          "-"
+                    );
+
+                  return (
+                    <tr
+                      key={`${taskId}-${index}`}
+                      className="transition hover:bg-slate-50"
+                    >
+
+                      {/* TASK ID */}
+
+                      <td className="px-6 py-4">
+                        <span className="font-semibold text-blue-600">
+                          {task.task_id || "-"}
+                        </span>
+                      </td>
+
+                      {/* ASSET */}
+
+                      <td className="px-6 py-4 text-sm text-slate-700">
+                        {task.asset_id || "-"}
+                      </td>
+
+                      {/* CORRIDOR */}
+
+                      <td className="px-6 py-4 text-sm text-slate-700">
+                        {task.corridor_id || "-"}
+                      </td>
+
+                      {/* LOCATION */}
+
+                      <td className="px-6 py-4 text-sm text-slate-600">
+
+                        <div className="flex items-center gap-2">
+
+                          <MapPin
+                            size={15}
+                            className="shrink-0 text-slate-400"
+                          />
+
+                          <span>
+                            {location}
+                            {location !== "-"
+                              ? " KM"
+                              : ""}
+                          </span>
+
+                        </div>
+
+                      </td>
+
+                      {/* DEFECT */}
+
+                      <td className="px-6 py-4 text-sm text-slate-700">
+
+                        <div>
+                          {task.defect_type || "-"}
+                        </div>
+
+                        {task.system && (
+                          <div className="mt-1 text-xs text-slate-400">
+                            {task.system}
+                          </div>
+                        )}
+
+                      </td>
+
+                      {/* SEVERITY */}
+
+                      <td className="px-6 py-4">
+                        <SeverityBadge
+                          severity={task.severity}
+                        />
+                      </td>
+
+                      {/* OVERDUE */}
+
+                      <td className="px-6 py-4 text-sm">
+
+                        <span
+                          className={
+                            Number(
+                              task.overdue_days || 0,
+                            ) > 0
+                              ? "font-bold text-red-600"
+                              : "text-slate-500"
+                          }
+                        >
+                          {task.overdue_days || 0} days
+                        </span>
+
+                      </td>
+
+                      {/* DURATION */}
+
+                      <td className="px-6 py-4 text-sm text-slate-600">
+
+                        <div className="flex items-center gap-2">
+
+                          <Clock3
+                            size={15}
+                            className="text-slate-400"
+                          />
+
+                          {task.estimated_duration_hrs ??
+                            "-"}{" "}
+                          hrs
+
+                        </div>
+
+                      </td>
+
+                      {/* DATE */}
+
+                      <td className="px-6 py-4 text-sm text-slate-600">
+
+                        <div className="flex items-center gap-2">
+
+                          <CalendarDays
+                            size={15}
+                            className="text-slate-400"
+                          />
+
+                          {formatDate(
+                            task.last_maintenance_date,
+                          )}
+
+                        </div>
+
+                      </td>
+
+                      {/* DELETE */}
+
+                      <td className="px-6 py-4 text-right">
+
+                        <button
+                          type="button"
+                          disabled={
+                            deleting === taskId
+                          }
+                          onClick={() =>
+                            handleDelete(taskId)
+                          }
+                          className="rounded-lg p-2 text-red-500 transition hover:bg-red-50 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+                          title="Delete task"
+                        >
+
+                          {deleting === taskId ? (
+                            <RefreshCw
+                              size={18}
+                              className="animate-spin"
+                            />
+                          ) : (
+                            <Trash2 size={18} />
+                          )}
+
+                        </button>
+
+                      </td>
+
+                    </tr>
+                  );
+                })}
+
+              </tbody>
+
+            </table>
+
+          </div>
+        )}
+
+      </div>
+
+      {/* ====================================================
+          CREATE TASK MODAL
+      ===================================================== */}
+
+      {showForm && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm"
+          onMouseDown={(event) => {
+            if (
+              event.target === event.currentTarget &&
+              !saving
+            ) {
+              closeForm();
+            }
+          }}
+        >
+
+          <div className="max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-3xl bg-white shadow-2xl">
+
+            {/* MODAL HEADER */}
+
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-white px-5 py-5 sm:px-6">
+
+              <div>
+
+                <h2 className="text-xl font-bold text-slate-900">
+                  Add Maintenance Task
+                </h2>
+
+                <p className="mt-1 text-sm text-slate-500">
+                  Enter the details of the railway maintenance task.
+                </p>
+
+              </div>
+
+              <button
+                type="button"
+                onClick={closeForm}
+                disabled={saving}
+                className="rounded-xl p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 disabled:opacity-50"
+                aria-label="Close"
+              >
+                <X size={22} />
+              </button>
+
+            </div>
+
+            {/* FORM */}
+
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-7 p-5 sm:p-6"
+            >
+
+              {/* ==================================================
+                  TASK INFORMATION
+              =================================================== */}
+
+              <section>
+
+                <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-slate-500">
+                  Task Information
+                </h3>
+
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+
+                  <Input
+                    label="Task ID"
+                    name="task_id"
+                    value={form.task_id}
+                    onChange={handleChange}
+                    placeholder="TASK-001"
+                    required
+                  />
+
+                  <Input
+                    label="Asset ID"
+                    name="asset_id"
+                    value={form.asset_id}
+                    onChange={handleChange}
+                    placeholder="ASSET-001"
+                    required
+                  />
+
+                  <Input
+                    label="Corridor ID"
+                    name="corridor_id"
+                    value={form.corridor_id}
+                    onChange={handleChange}
+                    placeholder="COR-001"
+                    required
+                  />
+
+                  <Input
+                    label="Defect Type"
+                    name="defect_type"
+                    value={form.defect_type}
+                    onChange={handleChange}
+                    placeholder="Track defect"
+                    required
+                  />
+
+                  <Select
+                    label="Severity"
+                    name="severity"
+                    value={form.severity}
+                    onChange={handleChange}
+                    options={[
+                      "Low",
+                      "Medium",
+                      "High",
+                      "Critical",
+                    ]}
+                    required
+                  />
+
+                  <Input
+                    label="System"
+                    name="system"
+                    value={form.system}
+                    onChange={handleChange}
+                    placeholder="Track / Signal / Power"
+                  />
+
+                </div>
+
+              </section>
+
+              {/* ==================================================
+                  LOCATION
+              =================================================== */}
+
+              <section>
+
+                <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-slate-500">
+                  Location
+                </h3>
+
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+
+                  <Input
+                    label="Start KM"
+                    name="location_start_km"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    value={form.location_start_km}
+                    onChange={handleChange}
+                    placeholder="10.50"
+                  />
+
+                  <Input
+                    label="End KM"
+                    name="location_end_km"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    value={form.location_end_km}
+                    onChange={handleChange}
+                    placeholder="12.50"
+                  />
+
+                  <Input
+                    label="Location KM"
+                    name="location_km"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    value={form.location_km}
+                    onChange={handleChange}
+                    placeholder="11.50"
+                  />
+
+                </div>
+
+              </section>
+
+              {/* ==================================================
+                  MAINTENANCE INFORMATION
+              =================================================== */}
+
+              <section>
+
+                <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-slate-500">
+                  Maintenance Information
+                </h3>
+
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+
+                  <Input
+                    label="Overdue Days"
+                    name="overdue_days"
+                    type="number"
+                    min="0"
+                    step="1"
+                    value={form.overdue_days}
+                    onChange={handleChange}
+                    placeholder="0"
+                  />
+
+                  <Input
+                    label="Estimated Duration (Hours)"
+                    name="estimated_duration_hrs"
+                    type="number"
+                    min="0"
+                    step="0.1"
+                    value={
+                      form.estimated_duration_hrs
+                    }
+                    onChange={handleChange}
+                    placeholder="4"
+                    required
+                  />
+
+                  <Input
+                    label="Last Maintenance Date"
+                    name="last_maintenance_date"
+                    type="date"
+                    value={
+                      form.last_maintenance_date
+                    }
+                    onChange={handleChange}
+                    required
+                  />
+
+                </div>
+
+              </section>
+
+              {/* ==================================================
+                  FORM ERROR
+              =================================================== */}
+
+              {error && (
+                <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+
+                  <AlertTriangle
+                    size={18}
+                    className="mt-0.5 shrink-0"
+                  />
+
+                  <div>
+                    <p className="font-semibold">
+                      Unable to create task
+                    </p>
+
+                    <p className="mt-1">
+                      {error}
+                    </p>
+                  </div>
+
+                </div>
+              )}
+
+              {/* ==================================================
+                  BUTTONS
+              =================================================== */}
+
+              <div className="flex flex-col-reverse gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:justify-end">
+
+                <button
+                  type="button"
+                  onClick={closeForm}
+                  disabled={saving}
+                  className="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+
+                  {saving && (
+                    <RefreshCw
+                      size={17}
+                      className="animate-spin"
+                    />
+                  )}
+
+                  {saving
+                    ? "Creating..."
+                    : "Create Task"}
+
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
       )}
 
-      {/* ======================================================
-          DETAIL MODAL
-      ====================================================== */}
-
-      {selectedTask && (
-        <TaskDetailModal
-          task={selectedTask}
-          onClose={() => setSelectedTask(null)}
-        />
-      )}
     </div>
   );
 }
 
-/* ============================================================
-   TASK ROW
-============================================================ */
-
-function TaskRow({ task, onView, onDelete, deleting }) {
-  return (
-    <tr className="transition hover:bg-slate-50">
-      {/* TASK */}
-
-      <td className="whitespace-nowrap px-5 py-4">
-        <div>
-          <p className="font-bold text-slate-900">{task.task_id}</p>
-
-          <p className="mt-1 text-[11px] text-slate-400">Maintenance task</p>
-        </div>
-      </td>
-
-      {/* ASSET */}
-
-      <td className="whitespace-nowrap px-4 py-4">
-        <span className="font-medium text-slate-700">
-          {task.asset_id || "-"}
-        </span>
-      </td>
-
-      {/* CORRIDOR */}
-
-      <td className="whitespace-nowrap px-4 py-4">
-        <span className="rounded-lg bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
-          {task.corridor_id || "-"}
-        </span>
-      </td>
-
-      {/* LOCATION */}
-
-      <td className="whitespace-nowrap px-4 py-4">
-        <div>
-          {task.location_km !== null && task.location_km !== undefined ? (
-            <p className="font-semibold text-slate-700">
-              KM {task.location_km}
-            </p>
-          ) : (
-            <p className="font-semibold text-slate-700">
-              {task.location_start_km ?? "-"} - {task.location_end_km ?? "-"}
-            </p>
-          )}
-
-          {(task.location_start_km !== null ||
-            task.location_end_km !== null) && (
-            <p className="text-[11px] text-slate-400">Range</p>
-          )}
-        </div>
-      </td>
-
-      {/* DEFECT */}
-
-      <td className="max-w-[220px] px-4 py-4">
-        <div>
-          <p className="font-medium text-slate-700">
-            {task.defect_type || "-"}
-          </p>
-
-          {task.last_maintenance_date && (
-            <p className="mt-1 text-[11px] text-slate-400">
-              Last: {formatDate(task.last_maintenance_date)}
-            </p>
-          )}
-        </div>
-      </td>
-
-      {/* SEVERITY */}
-
-      <td className="whitespace-nowrap px-4 py-4">
-        <SeverityBadge severity={task.severity} />
-      </td>
-
-      {/* OVERDUE */}
-
-      <td className="whitespace-nowrap px-4 py-4">
-        <OverdueBadge days={task.overdue_days} />
-      </td>
-
-      {/* DURATION */}
-
-      <td className="whitespace-nowrap px-4 py-4">
-        <span className="text-sm font-medium text-slate-700">
-          {task.estimated_duration_hrs ?? "-"} hrs
-        </span>
-      </td>
-
-      {/* SYSTEM */}
-
-      <td className="whitespace-nowrap px-4 py-4">
-        <span className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">
-          {task.system || "-"}
-        </span>
-      </td>
-
-      {/* ACTIONS */}
-
-      <td className="whitespace-nowrap px-4 py-4">
-        <div className="flex justify-end gap-2">
-          <button
-            onClick={() => onView(task.task_id)}
-            className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-600 transition hover:bg-slate-50"
-          >
-            <Eye size={14} />
-            View
-          </button>
-
-          <button
-            onClick={() => onDelete(task.task_id)}
-            disabled={deleting}
-            className="flex items-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {deleting ? (
-              <RefreshCw size={14} className="animate-spin" />
-            ) : (
-              <Trash2 size={14} />
-            )}
-            Delete
-          </button>
-        </div>
-      </td>
-    </tr>
-  );
-}
-
-/* ============================================================
-   CREATE TASK MODAL
-============================================================ */
-
-function CreateTaskModal({ saving, onClose, onSubmit }) {
-  const [form, setForm] = useState({
-    task_id: "",
-    asset_id: "",
-    corridor_id: "",
-    location_start_km: "",
-    location_end_km: "",
-    location_km: "",
-    defect_type: "",
-    severity: "",
-    overdue_days: "0",
-    last_maintenance_date: "",
-    estimated_duration_hrs: "",
-    system: "",
-  });
-
-  const [formError, setFormError] = useState("");
-
-  const updateField = (field, value) => {
-    setForm((current) => ({
-      ...current,
-      [field]: value,
-    }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    setFormError("");
-
-    if (!form.task_id.trim()) {
-      setFormError("Task ID is required.");
-      return;
-    }
-
-    if (!form.asset_id.trim()) {
-      setFormError("Asset ID is required.");
-      return;
-    }
-
-    if (!form.corridor_id.trim()) {
-      setFormError("Corridor ID is required.");
-      return;
-    }
-
-    /*
-     * Convert numeric fields from strings to numbers.
-     * Empty optional numeric fields become null.
-     */
-
-    const payload = {
-      task_id: form.task_id.trim(),
-      asset_id: form.asset_id.trim(),
-      corridor_id: form.corridor_id.trim(),
-
-      location_start_km:
-        form.location_start_km === "" ? null : Number(form.location_start_km),
-
-      location_end_km:
-        form.location_end_km === "" ? null : Number(form.location_end_km),
-
-      location_km: form.location_km === "" ? null : Number(form.location_km),
-
-      defect_type: form.defect_type.trim() || null,
-
-      severity: form.severity.trim() || null,
-
-      overdue_days: form.overdue_days === "" ? 0 : Number(form.overdue_days),
-
-      last_maintenance_date: form.last_maintenance_date || null,
-
-      estimated_duration_hrs:
-        form.estimated_duration_hrs === ""
-          ? null
-          : Number(form.estimated_duration_hrs),
-
-      system: form.system.trim() || null,
-    };
-
-    try {
-      await onSubmit(payload);
-    } catch {
-      // Parent handles API errors.
-    }
-  };
-
-  return (
-    <Modal onClose={onClose}>
-      <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
-        <div>
-          <h2 className="text-lg font-bold text-slate-900">
-            Create Maintenance Task
-          </h2>
-
-          <p className="mt-1 text-sm text-slate-500">
-            Add a new task to the maintenance database.
-          </p>
-        </div>
-
-        <button
-          onClick={onClose}
-          className="rounded-lg p-2 text-slate-400 hover:bg-slate-100"
-        >
-          <X size={20} />
-        </button>
-      </div>
-
-      <form onSubmit={handleSubmit} className="space-y-5 p-6">
-        {formError && (
-          <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
-            {formError}
-          </div>
-        )}
-
-        {/* BASIC INFORMATION */}
-
-        <div>
-          <h3 className="mb-3 text-sm font-bold text-slate-800">
-            Task Information
-          </h3>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            <FormInput
-              label="Task ID *"
-              value={form.task_id}
-              onChange={(value) => updateField("task_id", value)}
-              placeholder="ENG-001"
-            />
-
-            <FormInput
-              label="Asset ID *"
-              value={form.asset_id}
-              onChange={(value) => updateField("asset_id", value)}
-              placeholder="TRK-4521"
-            />
-
-            <FormInput
-              label="Corridor ID *"
-              value={form.corridor_id}
-              onChange={(value) => updateField("corridor_id", value)}
-              placeholder="COR-101"
-            />
-
-            <FormInput
-              label="Defect Type"
-              value={form.defect_type}
-              onChange={(value) => updateField("defect_type", value)}
-              placeholder="Rail crack"
-            />
-
-            <FormInput
-              label="Severity"
-              value={form.severity}
-              onChange={(value) => updateField("severity", value)}
-              placeholder="HIGH"
-            />
-
-            <FormInput
-              label="System"
-              value={form.system}
-              onChange={(value) => updateField("system", value)}
-              placeholder="Track"
-            />
-          </div>
-        </div>
-
-        {/* LOCATION */}
-
-        <div>
-          <h3 className="mb-3 text-sm font-bold text-slate-800">Location</h3>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            <FormInput
-              label="Start KM"
-              type="number"
-              step="0.001"
-              value={form.location_start_km}
-              onChange={(value) => updateField("location_start_km", value)}
-              placeholder="100.500"
-            />
-
-            <FormInput
-              label="End KM"
-              type="number"
-              step="0.001"
-              value={form.location_end_km}
-              onChange={(value) => updateField("location_end_km", value)}
-              placeholder="101.500"
-            />
-
-            <FormInput
-              label="Location KM"
-              type="number"
-              step="0.001"
-              value={form.location_km}
-              onChange={(value) => updateField("location_km", value)}
-              placeholder="101.000"
-            />
-          </div>
-        </div>
-
-        {/* MAINTENANCE */}
-
-        <div>
-          <h3 className="mb-3 text-sm font-bold text-slate-800">
-            Maintenance Details
-          </h3>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            <FormInput
-              label="Overdue Days"
-              type="number"
-              value={form.overdue_days}
-              onChange={(value) => updateField("overdue_days", value)}
-              placeholder="0"
-            />
-
-            <FormInput
-              label="Estimated Duration (hrs)"
-              type="number"
-              step="0.1"
-              value={form.estimated_duration_hrs}
-              onChange={(value) => updateField("estimated_duration_hrs", value)}
-              placeholder="2"
-            />
-
-            <FormInput
-              label="Last Maintenance Date"
-              type="date"
-              value={form.last_maintenance_date}
-              onChange={(value) => updateField("last_maintenance_date", value)}
-            />
-          </div>
-        </div>
-
-        {/* BUTTONS */}
-
-        <div className="flex justify-end gap-3 border-t border-slate-100 pt-5">
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-50"
-          >
-            Cancel
-          </button>
-
-          <button
-            type="submit"
-            disabled={saving}
-            className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {saving && <RefreshCw size={16} className="animate-spin" />}
-
-            {saving ? "Creating..." : "Create Task"}
-          </button>
-        </div>
-      </form>
-    </Modal>
-  );
-}
-
-/* ============================================================
-   TASK DETAIL MODAL
-============================================================ */
-
-function TaskDetailModal({ task, onClose }) {
-  return (
-    <Modal onClose={onClose}>
-      <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-wide text-blue-600">
-            Maintenance Task
-          </p>
-
-          <h2 className="mt-1 text-xl font-bold text-slate-900">
-            {task.task_id}
-          </h2>
-        </div>
-
-        <button
-          onClick={onClose}
-          className="rounded-lg p-2 text-slate-400 hover:bg-slate-100"
-        >
-          <X size={20} />
-        </button>
-      </div>
-
-      <div className="max-h-[75vh] overflow-y-auto p-6">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <DetailItem label="Task ID" value={task.task_id} />
-
-          <DetailItem label="Asset ID" value={task.asset_id} />
-
-          <DetailItem label="Corridor ID" value={task.corridor_id} />
-
-          <DetailItem label="System" value={task.system} />
-
-          <DetailItem label="Defect Type" value={task.defect_type} />
-
-          <DetailItem label="Severity" value={task.severity} />
-
-          <DetailItem label="Overdue Days" value={task.overdue_days} />
-
-          <DetailItem
-            label="Estimated Duration"
-            value={
-              task.estimated_duration_hrs !== null &&
-              task.estimated_duration_hrs !== undefined
-                ? `${task.estimated_duration_hrs} hrs`
-                : null
-            }
-          />
-
-          <DetailItem label="Location KM" value={task.location_km} />
-
-          <DetailItem
-            label="Location Start KM"
-            value={task.location_start_km}
-          />
-
-          <DetailItem label="Location End KM" value={task.location_end_km} />
-
-          <DetailItem
-            label="Last Maintenance"
-            value={
-              task.last_maintenance_date
-                ? formatDate(task.last_maintenance_date)
-                : null
-            }
-          />
-
-          <DetailItem label="Database ID" value={task.id} />
-        </div>
-      </div>
-
-      <div className="flex justify-end border-t border-slate-100 px-6 py-4">
-        <button
-          onClick={onClose}
-          className="rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800"
-        >
-          Close
-        </button>
-      </div>
-    </Modal>
-  );
-}
-
-/* ============================================================
-   FORM INPUT
-============================================================ */
-
-function FormInput({
-  label,
-  type = "text",
+// ============================================================
+// SUMMARY CARD
+// ============================================================
+
+function SummaryCard({
+  title,
   value,
-  onChange,
-  placeholder,
-  step,
+  icon,
+  iconClass,
 }) {
   return (
-    <label className="block">
-      <span className="mb-1.5 block text-xs font-bold text-slate-600">
-        {label}
-      </span>
+    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
-      <input
-        type={type}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        placeholder={placeholder}
-        step={step}
-        className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-      />
-    </label>
-  );
-}
+      <div className="flex items-center justify-between">
 
-/* ============================================================
-   DETAIL ITEM
-============================================================ */
+        <p className="text-sm font-medium text-slate-500">
+          {title}
+        </p>
 
-function DetailItem({ label, value }) {
-  return (
-    <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-      <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
-        {label}
-      </p>
-
-      <p className="mt-1 break-words font-semibold text-slate-800">
-        {value !== null && value !== undefined && value !== ""
-          ? String(value)
-          : "-"}
-      </p>
-    </div>
-  );
-}
-
-/* ============================================================
-   STAT CARD
-============================================================ */
-
-function StatCard({ title, value, icon: Icon, description }) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-sm font-medium text-slate-500">{title}</p>
-
-          <p className="mt-2 text-3xl font-bold text-slate-900">{value}</p>
-
-          <p className="mt-1 text-xs text-slate-400">{description}</p>
+        <div
+          className={`rounded-xl p-2 ${iconClass}`}
+        >
+          {icon}
         </div>
 
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
-          <Icon size={21} />
-        </div>
       </div>
+
+      <p className="mt-3 text-3xl font-bold text-slate-900">
+        {value}
+      </p>
+
     </div>
   );
 }
 
-/* ============================================================
-   SEVERITY BADGE
-============================================================ */
+// ============================================================
+// SEVERITY BADGE
+// ============================================================
 
 function SeverityBadge({ severity }) {
-  const value = String(severity || "UNKNOWN").toUpperCase();
+  const value = String(
+    severity || "",
+  ).toUpperCase();
 
-  let className = "bg-slate-100 text-slate-600";
+  let className =
+    "bg-slate-100 text-slate-600";
 
-  if (value === "CRITICAL" || value === "SEVERE") {
-    className = "bg-red-50 text-red-700";
+  if (value === "CRITICAL") {
+    className =
+      "bg-red-100 text-red-700";
   } else if (value === "HIGH") {
-    className = "bg-orange-50 text-orange-700";
+    className =
+      "bg-orange-100 text-orange-700";
   } else if (value === "MEDIUM") {
-    className = "bg-amber-50 text-amber-700";
+    className =
+      "bg-yellow-100 text-yellow-700";
   } else if (value === "LOW") {
-    className = "bg-emerald-50 text-emerald-700";
+    className =
+      "bg-emerald-100 text-emerald-700";
   }
 
   return (
     <span
-      className={`inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold ${className}`}
+      className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${className}`}
     >
-      {value}
+      {severity || "-"}
     </span>
   );
 }
 
-/* ============================================================
-   OVERDUE BADGE
-============================================================ */
+// ============================================================
+// INPUT
+// ============================================================
 
-function OverdueBadge({ days }) {
-  const value = Number(days || 0);
-
-  if (value <= 0) {
-    return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700">
-        <CheckCircle2 size={12} />
-        On time
-      </span>
-    );
-  }
-
+function Input({
+  label,
+  name,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+  required = false,
+  min,
+  step,
+}) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-red-50 px-2.5 py-1 text-[11px] font-bold text-red-700">
-      <AlertTriangle size={12} />
-      {value} day{value === 1 ? "" : "s"}
-    </span>
-  );
-}
+    <div>
 
-/* ============================================================
-   EMPTY STATE
-============================================================ */
+      <label className="mb-2 block text-sm font-semibold text-slate-700">
 
-function EmptyState({ title, description }) {
-  return (
-    <div className="px-6 py-14 text-center">
-      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-        <Database size={22} />
-      </div>
+        {label}
 
-      <h3 className="mt-3 font-semibold text-slate-900">{title}</h3>
+        {required && (
+          <span className="ml-1 text-red-500">
+            *
+          </span>
+        )}
 
-      <p className="mx-auto mt-1 max-w-md text-sm text-slate-500">
-        {description}
-      </p>
+      </label>
+
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        required={required}
+        min={min}
+        step={step}
+        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+      />
+
     </div>
   );
 }
 
-/* ============================================================
-   INFO CARD
-============================================================ */
+// ============================================================
+// SELECT
+// ============================================================
 
-function InfoCard({ icon: Icon, title, value }) {
+function Select({
+  label,
+  name,
+  value,
+  onChange,
+  options,
+  required = false,
+}) {
   return (
-    <div className="flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-        <Icon size={20} />
-      </div>
+    <div>
 
-      <div>
-        <p className="text-[11px] font-bold uppercase tracking-wide text-slate-400">
-          {title}
-        </p>
+      <label className="mb-2 block text-sm font-semibold text-slate-700">
 
-        <p className="mt-1 font-semibold text-slate-900">{value}</p>
-      </div>
+        {label}
+
+        {required && (
+          <span className="ml-1 text-red-500">
+            *
+          </span>
+        )}
+
+      </label>
+
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+        className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+      >
+
+        <option value="">
+          Select {label}
+        </option>
+
+        {options.map((option) => (
+          <option
+            key={option}
+            value={option}
+          >
+            {option}
+          </option>
+        ))}
+
+      </select>
+
     </div>
   );
 }
 
-/* ============================================================
-   MODAL
-============================================================ */
-
-function Modal({ children }) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm">
-      <div className="max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-/* ============================================================
-   DATE FORMAT
-============================================================ */
-
-function formatDate(value) {
-  if (!value) {
-    return "-";
-  }
-
-  try {
-    return new Date(value).toLocaleDateString();
-  } catch {
-    return String(value);
-  }
-}
