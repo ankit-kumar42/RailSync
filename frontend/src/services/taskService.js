@@ -1,18 +1,14 @@
-
 // ============================================================
 // API BASE URLs
 // ============================================================
 
-// Main backend: tasks, maintenance, database
-const API_BASE_URL ="http://127.0.0.1:8001";
+const API_BASE_URL = "http://127.0.0.1:8001";
+const AI_API_BASE_URL = "http://127.0.0.1:8000";
 
-// AI / scheduling backend
-const AI_API_BASE_URL ="http://127.0.0.1:8000";
+// ============================================================
+// RESPONSE HANDLER
+// ============================================================
 
-
-/**
- * Convert backend errors into a useful Error.
- */
 async function handleResponse(response) {
   let data = null;
 
@@ -39,16 +35,10 @@ async function handleResponse(response) {
   return data;
 }
 
-
 // ============================================================
 // TASKS
 // ============================================================
 
-/**
- * GET /tasks
- *
- * Main backend: http://127.0.0.1:8001
- */
 export async function getTasks() {
   const response = await fetch(`${API_BASE_URL}/tasks`, {
     method: "GET",
@@ -60,12 +50,6 @@ export async function getTasks() {
   return handleResponse(response);
 }
 
-
-/**
- * POST /tasks
- *
- * Main backend: http://127.0.0.1:8001
- */
 export async function createTask(payload) {
   if (!payload) {
     throw new Error("Task payload is required.");
@@ -85,12 +69,6 @@ export async function createTask(payload) {
   return handleResponse(response);
 }
 
-
-/**
- * DELETE /tasks/{task_id}
- *
- * Main backend: http://127.0.0.1:8001
- */
 export async function deleteTask(taskId) {
   if (!taskId) {
     throw new Error("Task ID is required.");
@@ -100,6 +78,7 @@ export async function deleteTask(taskId) {
     `${API_BASE_URL}/tasks/${encodeURIComponent(taskId)}`,
     {
       method: "DELETE",
+
       headers: {
         Accept: "application/json",
       },
@@ -109,24 +88,22 @@ export async function deleteTask(taskId) {
   return handleResponse(response);
 }
 
-
 // ============================================================
-// AI SCHEDULING
+// SCHEDULE GENERATION
 // ============================================================
+//
+// IMPORTANT:
+// Frontend calls 8001.
+// Main backend 8001 reads MaintenanceTask.
+// 8001 then communicates with AI backend 8000.
+//
 
-/**
- * POST /schedule
- *
- * AI backend: http://127.0.0.1:8000
- *
- * Generates a maintenance schedule.
- */
 export async function generateSchedule(payload) {
   if (!payload) {
     throw new Error("Schedule payload is required.");
   }
 
-  const response = await fetch(`${AI_API_BASE_URL}/schedule`, {
+  const response = await fetch(`${API_BASE_URL}/schedule`, {
     method: "POST",
 
     headers: {
@@ -140,59 +117,51 @@ export async function generateSchedule(payload) {
   return handleResponse(response);
 }
 
+// ============================================================
+// CONFIRM SCHEDULE
+// ============================================================
+//
+// Main backend owns the confirmed schedule database.
+//
 
-/**
- * POST /schedule/confirm
- *
- * Saves the user's confirmed schedule.
- */
-export async function confirmSchedule({
-  scheduled = [],
-  unscheduled = [],
-}) {
-  const response = await fetch(
-    `${AI_API_BASE_URL}/schedule/confirm`,
-    {
-      method: "POST",
+export async function confirmSchedule({ scheduled = [], unscheduled = [] }) {
+  const response = await fetch(`${API_BASE_URL}/schedule/confirm`, {
+    method: "POST",
 
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-
-      body: JSON.stringify({
-        scheduled,
-        unscheduled,
-      }),
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
     },
-  );
+
+    body: JSON.stringify({
+      scheduled,
+      unscheduled,
+    }),
+  });
 
   return handleResponse(response);
 }
 
+// ============================================================
+// GET CONFIRMED SCHEDULE
+// ============================================================
 
-/**
- * GET /schedule/confirmed
- */
 export async function getConfirmedSchedule() {
-  const response = await fetch(
-    `${AI_API_BASE_URL}/schedule/confirmed`,
-    {
-      method: "GET",
+  const response = await fetch(`${API_BASE_URL}/schedule/confirmed`, {
+    method: "GET",
 
-      headers: {
-        Accept: "application/json",
-      },
+    headers: {
+      Accept: "application/json",
     },
-  );
+  });
 
   return handleResponse(response);
 }
 
+// ============================================================
+// UPDATE SCHEDULED STATUS
+// ============================================================
 
-/**
- * PATCH /schedule/scheduled/{task_id}/status
- */
 export async function updateScheduledStatus(taskId, status) {
   if (!taskId) {
     throw new Error("Task ID is required.");
@@ -203,7 +172,7 @@ export async function updateScheduledStatus(taskId, status) {
   }
 
   const url =
-    `${AI_API_BASE_URL}/schedule/scheduled/` +
+    `${API_BASE_URL}/schedule/scheduled/` +
     `${encodeURIComponent(taskId)}/status` +
     `?status=${encodeURIComponent(status)}`;
 
@@ -218,10 +187,10 @@ export async function updateScheduledStatus(taskId, status) {
   return handleResponse(response);
 }
 
+// ============================================================
+// UPDATE UNSCHEDULED STATUS
+// ============================================================
 
-/**
- * PATCH /schedule/unscheduled/{task_id}/status
- */
 export async function updateUnscheduledStatus(taskId, status) {
   if (!taskId) {
     throw new Error("Task ID is required.");
@@ -232,7 +201,7 @@ export async function updateUnscheduledStatus(taskId, status) {
   }
 
   const url =
-    `${AI_API_BASE_URL}/schedule/unscheduled/` +
+    `${API_BASE_URL}/schedule/unscheduled/` +
     `${encodeURIComponent(taskId)}/status` +
     `?status=${encodeURIComponent(status)}`;
 

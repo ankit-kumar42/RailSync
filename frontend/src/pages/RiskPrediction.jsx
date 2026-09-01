@@ -12,6 +12,7 @@ import {
   Loader2,
   TrendingUp,
   Wrench,
+  Train,
 } from "lucide-react";
 
 import { predictRisk } from "../services/predictRisk.js";
@@ -26,14 +27,12 @@ export default function RiskPrediction() {
   });
 
   const [result, setResult] = useState(null);
-
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState("");
 
-  /* =========================================================
-     HANDLE INPUT
-  ========================================================= */
+  // ============================================================
+  // HANDLE INPUT
+  // ============================================================
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -44,44 +43,78 @@ export default function RiskPrediction() {
     }));
   };
 
-  /* =========================================================
-     PREDICT RISK
-  ========================================================= */
+  // ============================================================
+  // PREDICT RISK
+  // ============================================================
 
-  const handlePredict = async () => {
+  const handlePredict = async (event) => {
+    event.preventDefault();
+
     setLoading(true);
     setError("");
+    setResult(null);
 
     try {
       const payload = {
         age_years: Number(form.age_years),
-
         days_since_last_maintenance: Number(form.days_since_last_maintenance),
-
         overdue_days: Number(form.overdue_days),
-
         prior_failure_count: Number(form.prior_failure_count),
-
         traffic_load: Number(form.traffic_load),
       };
 
+      // Basic frontend validation
+      if (!Number.isFinite(payload.age_years) || payload.age_years < 0) {
+        throw new Error("Asset age must be a valid number.");
+      }
+
+      if (
+        !Number.isFinite(payload.days_since_last_maintenance) ||
+        payload.days_since_last_maintenance < 0
+      ) {
+        throw new Error("Days since last maintenance must be a valid number.");
+      }
+
+      if (!Number.isFinite(payload.overdue_days) || payload.overdue_days < 0) {
+        throw new Error("Overdue days must be a valid number.");
+      }
+
+      if (
+        !Number.isInteger(payload.prior_failure_count) ||
+        payload.prior_failure_count < 0
+      ) {
+        throw new Error(
+          "Previous failure count must be a non-negative integer.",
+        );
+      }
+
+      if (
+        !Number.isFinite(payload.traffic_load) ||
+        payload.traffic_load < 0 ||
+        payload.traffic_load > 1
+      ) {
+        throw new Error("Traffic load must be between 0 and 1.");
+      }
+
+      console.log("Sending risk prediction payload:", payload);
+
       const response = await predictRisk(payload);
 
-      console.log("Risk response:", response);
+      console.log("Risk prediction response:", response);
 
       setResult(response);
     } catch (err) {
-      console.error(err);
+      console.error("Risk prediction error:", err);
 
-      setError(err.message || "Unable to calculate asset failure risk.");
+      setError(err?.message || "Unable to calculate asset failure risk.");
     } finally {
       setLoading(false);
     }
   };
 
-  /* =========================================================
-     RESET
-  ========================================================= */
+  // ============================================================
+  // RESET
+  // ============================================================
 
   const handleReset = () => {
     setForm({
@@ -97,55 +130,22 @@ export default function RiskPrediction() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 p-6">
+    <div className="min-h-screen bg-slate-100 p-4 sm:p-6">
       <div className="mx-auto max-w-[1600px]">
-        {/* =================================================
+        {/* ======================================================
             HEADER
-        ================================================= */}
+        ======================================================= */}
 
-        <div className="mb-6 overflow-hidden rounded-2xl bg-slate-950 text-white shadow-lg">
-          <div className="bg-gradient-to-r from-slate-950 via-blue-950 to-slate-900 p-7">
-            <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
-              <div>
-                <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-400">
-                  <BrainCircuit size={16} />
-                  AI Asset Intelligence
-                </div>
+       
 
-                <h1 className="text-3xl font-bold">Asset Risk Prediction</h1>
-
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
-                  Predict the probability of infrastructure asset failure using
-                  maintenance history, asset age, overdue work, previous
-                  failures and traffic load.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3">
-                <span className="h-3 w-3 animate-pulse rounded-full bg-emerald-400" />
-
-                <div>
-                  <p className="text-xs font-bold text-emerald-400">
-                    RISK ENGINE ONLINE
-                  </p>
-
-                  <p className="text-xs text-slate-400">
-                    ML prediction service ready
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* =================================================
+        {/* ======================================================
             MAIN GRID
-        ================================================= */}
+        ======================================================= */}
 
-        <div className="grid gap-6 xl:grid-cols-[480px_1fr]">
-          {/* =================================================
+        <div className="grid gap-6 xl:grid-cols-[450px_1fr]">
+          {/* ====================================================
               INPUT PANEL
-          ================================================= */}
+          ==================================================== */}
 
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="mb-6">
@@ -166,7 +166,7 @@ export default function RiskPrediction() {
               </div>
             </div>
 
-            <div className="space-y-5">
+            <form onSubmit={handlePredict} className="space-y-5">
               {/* AGE */}
 
               <InputField
@@ -190,6 +190,7 @@ export default function RiskPrediction() {
                 unit="days"
                 icon={<Wrench size={16} />}
                 min="0"
+                step="1"
               />
 
               {/* OVERDUE */}
@@ -202,6 +203,7 @@ export default function RiskPrediction() {
                 unit="days"
                 icon={<AlertTriangle size={16} />}
                 min="0"
+                step="1"
               />
 
               {/* FAILURES */}
@@ -214,6 +216,7 @@ export default function RiskPrediction() {
                 unit="events"
                 icon={<TrendingUp size={16} />}
                 min="0"
+                step="1"
               />
 
               {/* TRAFFIC */}
@@ -242,11 +245,9 @@ export default function RiskPrediction() {
                   />
 
                   <div className="mt-2 flex justify-between text-[10px] text-slate-400">
-                    <span>Low</span>
-
-                    <span>Medium</span>
-
-                    <span>High</span>
+                    <span>0.00 Low</span>
+                    <span>0.50 Medium</span>
+                    <span>1.00 High</span>
                   </div>
                 </div>
               </div>
@@ -255,12 +256,12 @@ export default function RiskPrediction() {
 
               {error && (
                 <div className="flex gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-red-700">
-                  <AlertTriangle size={18} className="mt-0.5" />
+                  <AlertTriangle size={18} className="mt-0.5 shrink-0" />
 
                   <div>
                     <p className="text-sm font-bold">Prediction Failed</p>
 
-                    <p className="mt-1 text-xs">{error}</p>
+                    <p className="mt-1 text-xs leading-5">{error}</p>
                   </div>
                 </div>
               )}
@@ -269,17 +270,19 @@ export default function RiskPrediction() {
 
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <button
+                  type="button"
                   onClick={handleReset}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-600 hover:bg-slate-50"
+                  disabled={loading}
+                  className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <RefreshCw size={16} />
                   Reset
                 </button>
 
                 <button
-                  onClick={handlePredict}
+                  type="submit"
                   disabled={loading}
-                  className="flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-4 py-3 text-sm font-bold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-blue-700 px-4 py-3 text-sm font-bold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {loading ? (
                     <>
@@ -294,17 +297,19 @@ export default function RiskPrediction() {
                   )}
                 </button>
               </div>
-            </div>
+            </form>
           </div>
 
-          {/* =================================================
+          {/* ====================================================
               RESULT PANEL
-          ================================================= */}
+          ==================================================== */}
 
           <div className="space-y-6">
-            {!result && <EmptyRiskState />}
+            {!result && !loading && <EmptyRiskState />}
 
-            {result && <RiskResult result={result} />}
+            {loading && <LoadingRiskState />}
+
+            {result && !loading && <RiskResult result={result} />}
           </div>
         </div>
       </div>
@@ -312,9 +317,9 @@ export default function RiskPrediction() {
   );
 }
 
-/* ============================================================
-   INPUT FIELD
-============================================================ */
+// ============================================================
+// INPUT FIELD
+// ============================================================
 
 function InputField({
   label,
@@ -344,7 +349,8 @@ function InputField({
           onChange={onChange}
           min={min}
           step={step}
-          className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-16 text-sm font-semibold text-slate-700 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          required
+          className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-16 text-sm font-semibold text-slate-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
         />
 
         <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400">
@@ -355,9 +361,31 @@ function InputField({
   );
 }
 
-/* ============================================================
-   EMPTY STATE
-============================================================ */
+// ============================================================
+// LOADING STATE
+// ============================================================
+
+function LoadingRiskState() {
+  return (
+    <div className="flex min-h-[500px] items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="text-center">
+        <Loader2 size={45} className="mx-auto animate-spin text-blue-600" />
+
+        <h2 className="mt-5 text-lg font-bold text-slate-800">
+          Analyzing Asset Risk
+        </h2>
+
+        <p className="mt-2 text-sm text-slate-500">
+          Sending the five required features to the AI risk model...
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// EMPTY STATE
+// ============================================================
 
 function EmptyRiskState() {
   return (
@@ -372,8 +400,8 @@ function EmptyRiskState() {
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-slate-500">
-          Enter asset maintenance and operational parameters on the left to
-          calculate the probability of failure.
+          Enter the five asset parameters on the left and run the AI model to
+          calculate the probability of asset failure.
         </p>
 
         <div className="mt-6 grid grid-cols-2 gap-3">
@@ -390,9 +418,9 @@ function EmptyRiskState() {
   );
 }
 
-/* ============================================================
-   INFO BOX
-============================================================ */
+// ============================================================
+// INFO BOX
+// ============================================================
 
 function InfoBox({ icon, text }) {
   return (
@@ -404,20 +432,54 @@ function InfoBox({ icon, text }) {
   );
 }
 
-/* ============================================================
-   RESULT
-============================================================ */
+// ============================================================
+// RESULT
+// ============================================================
 
 function RiskResult({ result }) {
-  const probability = Number(result.failure_probability || 0);
+  /*
+   * Expected backend response:
+   *
+   * {
+   *   failure_probability: 0.72,
+   *   risk_level: "High",
+   *   features: {
+   *      age_years: 10,
+   *      days_since_last_maintenance: 90,
+   *      overdue_days: 15,
+   *      prior_failure_count: 1,
+   *      traffic_load: 0.7
+   *   }
+   * }
+   *
+   * The feature fallback below also supports responses where
+   * the backend returns the five values directly.
+   */
 
-  const percentage = Math.round(probability * 100);
+  const probability = Number(
+    result?.failure_probability ??
+      result?.probability ??
+      result?.failureProbability ??
+      0,
+  );
 
-  const risk = result.risk_level || "Unknown";
+  const safeProbability = Math.min(Math.max(probability, 0), 1);
+
+  const percentage = Math.round(safeProbability * 100);
+
+  const risk =
+    result?.risk_level ??
+    result?.risk ??
+    result?.riskLevel ??
+    getRiskFromPercentage(percentage);
+
+  const features = result?.features ?? result ?? {};
 
   return (
     <>
-      {/* RISK CARD */}
+      {/* ======================================================
+          RISK CARD
+      ======================================================= */}
 
       <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
@@ -469,7 +531,9 @@ function RiskResult({ result }) {
         </div>
       </div>
 
-      {/* FEATURE CARDS */}
+      {/* ======================================================
+          FEATURE CARDS
+      ======================================================= */}
 
       <div>
         <h3 className="mb-3 text-sm font-bold text-slate-700">
@@ -479,34 +543,32 @@ function RiskResult({ result }) {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <FeatureCard
             title="Asset Age"
-            value={`${result.features?.age_years ?? "—"} years`}
+            value={`${features.age_years ?? "—"} years`}
             icon={<Clock3 size={18} />}
           />
 
           <FeatureCard
             title="Maintenance Gap"
-            value={`${result.features?.days_since_last_maintenance ?? "—"} days`}
+            value={`${features.days_since_last_maintenance ?? "—"} days`}
             icon={<Wrench size={18} />}
           />
 
           <FeatureCard
             title="Overdue Work"
-            value={`${result.features?.overdue_days ?? "—"} days`}
+            value={`${features.overdue_days ?? "—"} days`}
             icon={<AlertTriangle size={18} />}
           />
 
           <FeatureCard
             title="Previous Failures"
-            value={`${result.features?.prior_failure_count ?? "—"} events`}
+            value={`${features.prior_failure_count ?? "—"} events`}
             icon={<TrendingUp size={18} />}
           />
 
           <FeatureCard
             title="Traffic Load"
-            value={`${(
-              Number(result.features?.traffic_load ?? 0) * 100
-            ).toFixed(0)}%`}
-            icon={<TrainIcon />}
+            value={formatTrafficLoad(features.traffic_load)}
+            icon={<Train size={18} />}
           />
 
           <FeatureCard
@@ -517,11 +579,13 @@ function RiskResult({ result }) {
         </div>
       </div>
 
-      {/* DECISION */}
+      {/* ======================================================
+          DECISION
+      ======================================================= */}
 
       <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5">
         <div className="flex gap-3">
-          <CheckCircle2 size={20} className="mt-0.5 text-blue-600" />
+          <CheckCircle2 size={20} className="mt-0.5 shrink-0 text-blue-600" />
 
           <div>
             <p className="text-sm font-bold text-blue-900">
@@ -530,8 +594,8 @@ function RiskResult({ result }) {
 
             <p className="mt-1 text-xs leading-5 text-blue-800">
               Use this risk score as an input to the AI Block Planner.
-              Higher-risk assets should receive higher maintenance priority and
-              should be considered when allocating available maintenance blocks.
+              Higher-risk assets should receive higher maintenance priority when
+              allocating available maintenance blocks.
             </p>
           </div>
         </div>
@@ -540,19 +604,21 @@ function RiskResult({ result }) {
   );
 }
 
-/* ============================================================
-   RISK GAUGE
-============================================================ */
+// ============================================================
+// RISK GAUGE
+// ============================================================
 
 function RiskGauge({ percentage }) {
+  const angle = percentage * 3.6;
+
   return (
     <div className="relative mx-auto h-48 w-48">
       <div
         className="absolute inset-0 rounded-full"
         style={{
           background: `conic-gradient(
-            #2563eb ${percentage * 3.6}deg,
-            #e2e8f0 ${percentage * 3.6}deg
+            #2563eb ${angle}deg,
+            #e2e8f0 ${angle}deg
           )`,
         }}
       />
@@ -568,44 +634,59 @@ function RiskGauge({ percentage }) {
   );
 }
 
-/* ============================================================
-   RISK BADGE
-============================================================ */
+// ============================================================
+// RISK BADGE
+// ============================================================
 
 function RiskBadge({ risk }) {
+  const normalizedRisk = String(risk || "Unknown")
+    .trim()
+    .toLowerCase();
+
   const styles = {
-    Critical: "bg-red-100 text-red-700 border-red-200",
+    critical: "bg-red-100 text-red-700 border-red-200",
 
-    High: "bg-orange-100 text-orange-700 border-orange-200",
+    high: "bg-orange-100 text-orange-700 border-orange-200",
 
-    Medium: "bg-amber-100 text-amber-700 border-amber-200",
+    medium: "bg-amber-100 text-amber-700 border-amber-200",
 
-    Low: "bg-emerald-100 text-emerald-700 border-emerald-200",
+    low: "bg-emerald-100 text-emerald-700 border-emerald-200",
+
+    unknown: "bg-slate-100 text-slate-600 border-slate-200",
   };
+
+  const displayRisk =
+    normalizedRisk === "critical"
+      ? "Critical"
+      : normalizedRisk === "high"
+        ? "High"
+        : normalizedRisk === "medium"
+          ? "Medium"
+          : normalizedRisk === "low"
+            ? "Low"
+            : "Unknown";
 
   return (
     <div
       className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-bold ${
-        styles[risk] || "bg-slate-100 text-slate-600 border-slate-200"
+        styles[normalizedRisk] || styles.unknown
       }`}
     >
       <span className="h-2 w-2 rounded-full bg-current" />
-      {risk} Risk
+      {displayRisk} Risk
     </div>
   );
 }
 
-/* ============================================================
-   FEATURE CARD
-============================================================ */
+// ============================================================
+// FEATURE CARD
+// ============================================================
 
 function FeatureCard({ title, value, icon }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="flex items-center justify-between">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50 text-slate-500">
-          {icon}
-        </div>
+      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-50 text-slate-500">
+        {icon}
       </div>
 
       <p className="mt-4 text-xs font-bold uppercase tracking-wide text-slate-400">
@@ -617,22 +698,26 @@ function FeatureCard({ title, value, icon }) {
   );
 }
 
-/* ============================================================
-   RECOMMENDATION
-============================================================ */
+// ============================================================
+// RECOMMENDATION
+// ============================================================
 
 function getRecommendation(risk) {
-  switch (risk) {
-    case "Critical":
+  const normalized = String(risk || "")
+    .trim()
+    .toLowerCase();
+
+  switch (normalized) {
+    case "critical":
       return "Immediate inspection and priority maintenance block recommended.";
 
-    case "High":
+    case "high":
       return "Schedule maintenance at the earliest suitable block window.";
 
-    case "Medium":
-      return "Monitor asset condition and include in upcoming maintenance planning.";
+    case "medium":
+      return "Monitor asset condition and include it in upcoming maintenance planning.";
 
-    case "Low":
+    case "low":
       return "Continue normal monitoring and scheduled preventive maintenance.";
 
     default:
@@ -640,10 +725,40 @@ function getRecommendation(risk) {
   }
 }
 
-/* ============================================================
-   TRAIN ICON
-============================================================ */
+// ============================================================
+// FALLBACK RISK CALCULATION
+// ============================================================
 
-function TrainIcon() {
-  return <Activity size={18} />;
+function getRiskFromPercentage(percentage) {
+  if (percentage >= 80) {
+    return "Critical";
+  }
+
+  if (percentage >= 60) {
+    return "High";
+  }
+
+  if (percentage >= 30) {
+    return "Medium";
+  }
+
+  return "Low";
+}
+
+// ============================================================
+// TRAFFIC DISPLAY
+// ============================================================
+
+function formatTrafficLoad(value) {
+  if (value === null || value === undefined || value === "") {
+    return "—";
+  }
+
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) {
+    return "—";
+  }
+
+  return `${(number * 100).toFixed(0)}%`;
 }

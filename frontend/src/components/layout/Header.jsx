@@ -20,22 +20,6 @@ export default function Header() {
         </h2>
       </div>
 
-      <div className="flex items-center gap-3">
-        <div
-          className="
-            flex items-center gap-2 rounded-xl
-            border border-slate-200 px-3 py-2
-          "
-        >
-          <CircleUserRound size={24} className="text-blue-600" />
-
-          <div className="hidden sm:block">
-            <p className="text-xs font-bold">Control Officer</p>
-
-            <p className="text-[10px] text-slate-400">Operations Admin</p>
-          </div>
-        </div>
-      </div>
     </header>
   );
 }

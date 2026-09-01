@@ -1,9 +1,38 @@
 
-const AI_API_BASE_URL = "http://127.0.0.1:8001";
+// ============================================================
+// src/services/scheduleService.js
+//
+// FRONTEND -> MAIN BACKEND :8001
+//
+// The frontend NEVER calls the AI backend :8000 directly.
+//
+// Flow:
+//
+// GET  /tasks
+// POST /tasks
+//
+// POST /schedule
+//      |
+//      +--> Backend :8001 reads tasks from DB
+//      |
+//      +--> Backend :8001 calls AI :8000
+//
+// POST /schedule/confirm
+//
+// GET /schedule/confirmed
+//
+// PATCH /schedule/scheduled/{task_id}/status
+//
+// PATCH /schedule/unscheduled/{task_id}/status
+// ============================================================
 
-/**
- * Convert backend errors into a useful Error.
- */
+const API_BASE_URL = "http://127.0.0.1:8001";
+
+
+// ============================================================
+// RESPONSE HANDLER
+// ============================================================
+
 async function handleResponse(response) {
   let data = null;
 
@@ -30,42 +59,137 @@ async function handleResponse(response) {
   return data;
 }
 
-/**
- * POST /schedule
- */
-export async function generateSchedule(payload) {
-  if (!payload) {
-    throw new Error("Schedule payload is required.");
+
+// ============================================================
+// GENERIC FETCH HELPER
+// ============================================================
+
+async function request(url, options = {}) {
+  let response;
+
+  try {
+    response = await fetch(url, options);
+  } catch (error) {
+    console.error("Fetch error:", error);
+
+    throw new Error(
+      `Cannot connect to backend at ${API_BASE_URL}. ` +
+        `Make sure your backend is running on port 8001.`,
+    );
   }
-
-  const response = await fetch(`${AI_API_BASE_URL}/schedule`, {
-    method: "POST",
-
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-
-    body: JSON.stringify(payload),
-  });
 
   return handleResponse(response);
 }
 
-/**
- * POST /schedule/confirm
- */
-export async function confirmSchedule({
-  scheduled = [],
-  unscheduled = [],
-}) {
-  const response = await fetch(
-    `${AI_API_BASE_URL}/schedule/confirm`,
+
+// ============================================================
+// TASKS
+// ============================================================
+
+export async function getTasks() {
+  return request(
+    `${API_BASE_URL}/tasks`,
+    {
+      method: "GET",
+
+      headers: {
+        Accept: "application/json",
+      },
+    },
+  );
+}
+
+
+export async function createTask(payload) {
+  if (!payload) {
+    throw new Error(
+      "Task payload is required.",
+    );
+  }
+
+  return request(
+    `${API_BASE_URL}/tasks`,
     {
       method: "POST",
 
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type":
+          "application/json",
+        Accept: "application/json",
+      },
+
+      body: JSON.stringify(payload),
+    },
+  );
+}
+
+
+export async function deleteTask(taskId) {
+  if (!taskId) {
+    throw new Error(
+      "Task ID is required.",
+    );
+  }
+
+  return request(
+    `${API_BASE_URL}/tasks/${encodeURIComponent(
+      taskId,
+    )}`,
+    {
+      method: "DELETE",
+
+      headers: {
+        Accept: "application/json",
+      },
+    },
+  );
+}
+
+
+// ============================================================
+// GENERATE SCHEDULE
+// ============================================================
+
+export async function generateSchedule({
+  planning_start_date = null,
+  planning_end_date = null,
+} = {}) {
+  return request(
+    `${API_BASE_URL}/schedule`,
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type":
+          "application/json",
+        Accept: "application/json",
+      },
+
+      body: JSON.stringify({
+        planning_start_date,
+        planning_end_date,
+      }),
+    },
+  );
+}
+
+
+// ============================================================
+// CONFIRM SCHEDULE
+// ============================================================
+
+export async function confirmSchedule({
+  scheduled = [],
+  unscheduled = [],
+} = {}) {
+  return request(
+    `${API_BASE_URL}/schedule/confirm`,
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type":
+          "application/json",
         Accept: "application/json",
       },
 
@@ -75,16 +199,16 @@ export async function confirmSchedule({
       }),
     },
   );
-
-  return handleResponse(response);
 }
 
-/**
- * GET /schedule/confirmed
- */
+
+// ============================================================
+// GET CONFIRMED SCHEDULE
+// ============================================================
+
 export async function getConfirmedSchedule() {
-  const response = await fetch(
-    `${AI_API_BASE_URL}/schedule/confirmed`,
+  return request(
+    `${API_BASE_URL}/schedule/confirmed`,
     {
       method: "GET",
 
@@ -93,63 +217,101 @@ export async function getConfirmedSchedule() {
       },
     },
   );
-
-  return handleResponse(response);
 }
 
-/**
- * PATCH /schedule/scheduled/{task_id}/status
- */
-export async function updateScheduledStatus(taskId, status) {
+
+// ============================================================
+// UPDATE SCHEDULED STATUS
+// ============================================================
+
+export async function updateScheduledStatus(
+  taskId,
+  status,
+) {
   if (!taskId) {
-    throw new Error("Task ID is required.");
+    throw new Error(
+      "Task ID is required.",
+    );
   }
 
   if (!status) {
-    throw new Error("Status is required.");
+    throw new Error(
+      "Status is required.",
+    );
   }
 
   const url =
-    `${AI_API_BASE_URL}/schedule/scheduled/` +
+    `${API_BASE_URL}/schedule/scheduled/` +
     `${encodeURIComponent(taskId)}/status` +
     `?status=${encodeURIComponent(status)}`;
 
-  const response = await fetch(url, {
-    method: "PATCH",
+  return request(
+    url,
+    {
+      method: "PATCH",
 
-    headers: {
-      Accept: "application/json",
+      headers: {
+        Accept: "application/json",
+      },
     },
-  });
-
-  return handleResponse(response);
+  );
 }
 
-/**
- * PATCH /schedule/unscheduled/{task_id}/status
- */
-export async function updateUnscheduledStatus(taskId, status) {
+
+// ============================================================
+// UPDATE UNSCHEDULED STATUS
+// ============================================================
+
+export async function updateUnscheduledStatus(
+  taskId,
+  status,
+) {
   if (!taskId) {
-    throw new Error("Task ID is required.");
+    throw new Error(
+      "Task ID is required.",
+    );
   }
 
   if (!status) {
-    throw new Error("Status is required.");
+    throw new Error(
+      "Status is required.",
+    );
   }
 
   const url =
-    `${AI_API_BASE_URL}/schedule/unscheduled/` +
+    `${API_BASE_URL}/schedule/unscheduled/` +
     `${encodeURIComponent(taskId)}/status` +
     `?status=${encodeURIComponent(status)}`;
 
-  const response = await fetch(url, {
-    method: "PATCH",
+  return request(
+    url,
+    {
+      method: "PATCH",
 
-    headers: {
-      Accept: "application/json",
+      headers: {
+        Accept: "application/json",
+      },
     },
-  });
-
-  return handleResponse(response);
+  );
 }
+
+
+// ============================================================
+// DEFAULT EXPORT
+// ============================================================
+
+const scheduleService = {
+  getTasks,
+  createTask,
+  deleteTask,
+
+  generateSchedule,
+  confirmSchedule,
+  getConfirmedSchedule,
+
+  updateScheduledStatus,
+  updateUnscheduledStatus,
+};
+
+export default scheduleService;
 

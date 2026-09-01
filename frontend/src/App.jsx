@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Sidebar from "./components/layout/Sidebar.jsx";
 import Header from "./components/layout/Header.jsx";
-import BlockSchedule from "./pages/BlockSchedule.jsx";
 import DataCenter from "./pages/DataCenter.jsx";
 import RiskPrediction from "./pages/RiskPrediction.jsx";
 import MaintenancePriority from "./pages/MaintenancePriority.jsx";
@@ -12,6 +11,8 @@ import MaintenanceTasks from "./pages/MaintenanceTasks.jsx";
 import ConfirmedSchedule from "./pages/ConfirmedSchedule";
 import FAQs from "./pages/FAQs";
 import Support from "./pages/Support";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 function App() {
   return (
     <div className="min-h-screen bg-[#f4f7fb]">
@@ -24,10 +25,8 @@ function App() {
           <Routes>
             {/* HOME */}
             <Route path="/" element={<Home />} />
-
-            {/* Block Schedule */}
-            <Route path="/block-schedule" element={<BlockSchedule />} />
-
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             {/* Data Center */}
             <Route path="/data-center" element={<DataCenter />} />
 
