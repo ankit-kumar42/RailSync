@@ -368,26 +368,7 @@ export default function ConfirmedSchedule() {
         </div>
       )}
 
-      {/* ======================================================
-          INFO
-      ======================================================= */}
-
-      <div className="mb-6 rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4">
-        <div className="flex items-start gap-3">
-          <ExternalLink size={19} className="mt-0.5 shrink-0 text-blue-600" />
-
-          <div>
-            <p className="text-sm font-semibold text-blue-900">
-              View complete task information
-            </p>
-
-            <p className="mt-1 text-xs leading-5 text-blue-700">
-              Click a Task ID or any task row to view additional maintenance
-              information.
-            </p>
-          </div>
-        </div>
-      </div>
+      
 
       {/* ======================================================
           SUMMARY

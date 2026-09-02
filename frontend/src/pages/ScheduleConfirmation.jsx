@@ -538,68 +538,6 @@ export default function ScheduleConfirmation() {
       </div>
 
       {/* ======================================================
-          PLANNING RANGE
-      ====================================================== */}
-
-      <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-
-        <h2 className="mb-4 font-bold text-slate-900">
-          Planning Range
-        </h2>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-          <div>
-
-            <label className="mb-2 block text-sm font-semibold text-slate-600">
-              Start Date
-            </label>
-
-            <input
-              type="date"
-              value={planningStartDate}
-              onChange={(event) =>
-                setPlanningStartDate(
-                  event.target.value,
-                )
-              }
-              disabled={
-                loading ||
-                confirming
-              }
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-50"
-            />
-
-          </div>
-
-          <div>
-
-            <label className="mb-2 block text-sm font-semibold text-slate-600">
-              End Date
-            </label>
-
-            <input
-              type="date"
-              value={planningEndDate}
-              onChange={(event) =>
-                setPlanningEndDate(
-                  event.target.value,
-                )
-              }
-              disabled={
-                loading ||
-                confirming
-              }
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-50"
-            />
-
-          </div>
-
-        </div>
-
-      </div>
-
-      {/* ======================================================
           SUCCESS
       ====================================================== */}
 

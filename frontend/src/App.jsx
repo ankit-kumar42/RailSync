@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Sidebar from "./components/layout/Sidebar.jsx";
 import Header from "./components/layout/Header.jsx";
-import DataCenter from "./pages/DataCenter.jsx";
 import RiskPrediction from "./pages/RiskPrediction.jsx";
 import MaintenancePriority from "./pages/MaintenancePriority.jsx";
 import TaskCompatibility from "./pages/TaskCompatibility.jsx";
@@ -27,8 +26,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            {/* Data Center */}
-            <Route path="/data-center" element={<DataCenter />} />
 
             {/* Risk Prediction */}
             <Route path="/risk-prediction" element={<RiskPrediction />} />
