@@ -8,9 +8,66 @@ import {
   Clock3,
   Train,
   MapPin,
+  X,
+  ExternalLink,
+  Activity,
+  Gauge,
+  ShieldAlert,
+  Navigation,
+  Wrench,
+  AlertCircle,
 } from "lucide-react";
 
 import { getConfirmedSchedule } from "../services/scheduleService";
+
+// ============================================================
+// API
+// ============================================================
+
+const TASK_API = "http://127.0.0.1:8001";
+
+// ============================================================
+// GLOBAL HELPERS
+// ============================================================
+
+function displayValue(value, fallback = "-") {
+  if (value === null || value === undefined || value === "") {
+    return fallback;
+  }
+
+  return String(value);
+}
+
+function normalizeStatus(status) {
+  return String(status || "PENDING")
+    .trim()
+    .toUpperCase();
+}
+
+function displayStatus(status) {
+  const value = normalizeStatus(status);
+
+  switch (value) {
+    case "IN_PROGRESS":
+      return "IN PROGRESS";
+
+    case "NOT_DONE":
+      return "NOT DONE";
+
+    case "DONE":
+      return "DONE";
+
+    case "RESOLVED":
+      return "RESOLVED";
+
+    case "CANCELLED":
+      return "CANCELLED";
+
+    case "PENDING":
+    default:
+      return "PENDING";
+  }
+}
 
 // ============================================================
 // COMPONENT
@@ -26,6 +83,14 @@ export default function ConfirmedSchedule() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  // Selected task for modal
+  const [selectedTask, setSelectedTask] = useState(null);
+
+  // Detailed API state
+  const [taskDetailsLoading, setTaskDetailsLoading] = useState(false);
+
+  const [taskDetailsError, setTaskDetailsError] = useState("");
+
   // ============================================================
   // LOAD CONFIRMED SCHEDULE
   // ============================================================
@@ -39,6 +104,7 @@ export default function ConfirmedSchedule() {
       }
 
       setError("");
+      setSuccess("");
 
       const response = await getConfirmedSchedule();
 
@@ -55,25 +121,6 @@ export default function ConfirmedSchedule() {
             "Unable to load confirmed schedule.",
         );
       }
-
-      /*
-       * Support both:
-       *
-       * {
-       *   success: true,
-       *   data: {
-       *     scheduled: [],
-       *     unscheduled: []
-       *   }
-       * }
-       *
-       * and:
-       *
-       * {
-       *   scheduled: [],
-       *   unscheduled: []
-       * }
-       */
 
       const data = response?.data || response;
 
@@ -108,79 +155,134 @@ export default function ConfirmedSchedule() {
   }, []);
 
   // ============================================================
-  // DISPLAY VALUE
+  // OPEN TASK DETAILS
   // ============================================================
 
-  const displayValue = (value, fallback = "-") => {
-    if (value === null || value === undefined || value === "") {
-      return fallback;
+  const openTaskDetails = async (task) => {
+    const taskId = task?.task_id ?? task?.id ?? null;
+
+    console.log("Opening task details for:", taskId);
+
+    /*
+     * First show the information already available
+     * in the confirmed schedule.
+     *
+     * This means the modal opens immediately even if
+     * the detailed task API later returns 404.
+     */
+
+    setSelectedTask({
+      ...task,
+    });
+
+    setTaskDetailsError("");
+
+    if (!taskId) {
+      setTaskDetailsError(
+        "This scheduled item does not contain a valid task ID.",
+      );
+
+      return;
     }
 
-    return String(value);
+    setTaskDetailsLoading(true);
+
+    try {
+      const url = `${TASK_API}/tasks/${encodeURIComponent(taskId)}`;
+
+      console.log("Fetching complete task:", url);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      /*
+       * Handle 404 separately.
+       *
+       * A schedule record may contain a generated/test ID
+       * which does not exist in the task database.
+       */
+
+      if (response.status === 404) {
+        console.warn(`Task ${taskId} was not found in the task API.`);
+
+        setTaskDetailsError(
+          `Complete task information was not found for "${taskId}". Showing the information available from the confirmed schedule.`,
+        );
+
+        return;
+      }
+
+      if (!response.ok) {
+        let errorMessage = "Unable to load complete task information.";
+
+        try {
+          const errorData = await response.json();
+
+          if (typeof errorData?.detail === "string") {
+            errorMessage = errorData.detail;
+          } else if (typeof errorData?.message === "string") {
+            errorMessage = errorData.message;
+          }
+        } catch {
+          // Ignore JSON parsing errors
+        }
+
+        throw new Error(errorMessage);
+      }
+
+      const taskData = await response.json();
+
+      console.log("COMPLETE TASK RESPONSE:", taskData);
+
+      /*
+       * Merge:
+       *
+       * 1. confirmed schedule information
+       * 2. complete task information
+       *
+       * If the same field exists in both,
+       * taskData takes priority.
+       */
+
+      setSelectedTask({
+        ...task,
+        ...taskData,
+      });
+    } catch (err) {
+      console.error("Load task details error:", err);
+
+      /*
+       * Do NOT close the modal.
+       *
+       * The user can still see the confirmed schedule
+       * information.
+       */
+
+      setTaskDetailsError(
+        err?.message ||
+          "Unable to load complete task information. Showing available schedule information.",
+      );
+    } finally {
+      setTaskDetailsLoading(false);
+    }
   };
 
   // ============================================================
-  // NORMALIZE STATUS FOR DISPLAY
+  // CLOSE MODAL
   // ============================================================
 
-  const displayStatus = (status) => {
-    const value = String(status || "PENDING")
-      .trim()
-      .toUpperCase();
-
-    switch (value) {
-      case "IN_PROGRESS":
-        return "IN PROGRESS";
-
-      case "NOT_DONE":
-        return "NOT DONE";
-
-      case "DONE":
-        return "DONE";
-
-      case "RESOLVED":
-        return "RESOLVED";
-
-      case "CANCELLED":
-        return "CANCELLED";
-
-      case "PENDING":
-      default:
-        return "PENDING";
-    }
+  const closeTaskDetails = () => {
+    setSelectedTask(null);
+    setTaskDetailsError("");
+    setTaskDetailsLoading(false);
   };
 
   // ============================================================
-  // STATUS BADGE CLASS
-  // ============================================================
-
-  const getStatusClass = (status) => {
-    const value = String(status || "PENDING")
-      .trim()
-      .toUpperCase();
-
-    switch (value) {
-      case "DONE":
-      case "RESOLVED":
-        return "bg-emerald-100 text-emerald-700";
-
-      case "IN_PROGRESS":
-        return "bg-blue-100 text-blue-700";
-
-      case "NOT_DONE":
-        return "bg-red-100 text-red-700";
-
-      case "CANCELLED":
-        return "bg-slate-200 text-slate-700";
-
-      case "PENDING":
-      default:
-        return "bg-yellow-100 text-yellow-700";
-    }
-  };
-
-  // ============================================================
-  // LOADING SCREEN
+  // LOADING
   // ============================================================
 
   if (loading) {
@@ -224,12 +326,11 @@ export default function ConfirmedSchedule() {
             </h1>
 
             <p className="mt-1 text-sm text-slate-500">
-              Newly confirmed maintenance tasks stored in the database.
+              Confirmed railway maintenance tasks and allocated maintenance
+              blocks.
             </p>
           </div>
         </div>
-
-        {/* REFRESH */}
 
         <button
           type="button"
@@ -244,7 +345,7 @@ export default function ConfirmedSchedule() {
       </div>
 
       {/* ======================================================
-          SUCCESS MESSAGE
+          SUCCESS
       ======================================================= */}
 
       {success && (
@@ -256,7 +357,7 @@ export default function ConfirmedSchedule() {
       )}
 
       {/* ======================================================
-          ERROR MESSAGE
+          ERROR
       ======================================================= */}
 
       {error && (
@@ -266,6 +367,27 @@ export default function ConfirmedSchedule() {
           <span className="break-words">{error}</span>
         </div>
       )}
+
+      {/* ======================================================
+          INFO
+      ======================================================= */}
+
+      <div className="mb-6 rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4">
+        <div className="flex items-start gap-3">
+          <ExternalLink size={19} className="mt-0.5 shrink-0 text-blue-600" />
+
+          <div>
+            <p className="text-sm font-semibold text-blue-900">
+              View complete task information
+            </p>
+
+            <p className="mt-1 text-xs leading-5 text-blue-700">
+              Click a Task ID or any task row to view additional maintenance
+              information.
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* ======================================================
           SUMMARY
@@ -292,12 +414,10 @@ export default function ConfirmedSchedule() {
       </div>
 
       {/* ======================================================
-          CONFIRMED SCHEDULED TASKS
+          SCHEDULED TASKS
       ======================================================= */}
 
       <section className="mb-8 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-        {/* HEADER */}
-
         <div className="flex flex-col justify-between gap-3 border-b border-slate-200 bg-emerald-50/50 px-6 py-5 md:flex-row md:items-center">
           <div>
             <div className="flex items-center gap-2">
@@ -318,8 +438,6 @@ export default function ConfirmedSchedule() {
           </span>
         </div>
 
-        {/* EMPTY */}
-
         {scheduledTasks.length === 0 ? (
           <EmptyState
             icon={<CalendarCheck size={30} />}
@@ -328,10 +446,10 @@ export default function ConfirmedSchedule() {
           />
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[1250px] text-left">
+            <table className="w-full min-w-[1050px] text-left">
               <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
                 <tr>
-                  <th className="px-6 py-4">Task ID</th>
+                  <th className="px-6 py-4">Task</th>
 
                   <th className="px-6 py-4">Asset</th>
 
@@ -345,12 +463,6 @@ export default function ConfirmedSchedule() {
 
                   <th className="px-6 py-4">Duration</th>
 
-                  <th className="px-6 py-4">Priority</th>
-
-                  <th className="px-6 py-4">Risk</th>
-
-                  <th className="px-6 py-4">Traffic</th>
-
                   <th className="px-6 py-4">Status</th>
                 </tr>
               </thead>
@@ -359,19 +471,36 @@ export default function ConfirmedSchedule() {
                 {scheduledTasks.map((task, index) => {
                   const taskId = task?.task_id ?? task?.id ?? index;
 
-                  const status = displayStatus(task?.status);
-
                   return (
                     <tr
                       key={String(taskId)}
-                      className="transition hover:bg-slate-50"
+                      onClick={() => openTaskDetails(task)}
+                      className="cursor-pointer transition hover:bg-blue-50/50"
                     >
-                      {/* TASK ID */}
+                      {/* TASK */}
 
                       <td className="px-6 py-4">
-                        <span className="font-bold text-blue-600">
-                          {displayValue(task?.task_id ?? task?.id)}
-                        </span>
+                        <button
+                          type="button"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            openTaskDetails(task);
+                          }}
+                          className="group flex items-center gap-2 text-left"
+                        >
+                          <span className="font-bold text-blue-600 group-hover:text-blue-800 group-hover:underline">
+                            {displayValue(task?.task_id ?? task?.id)}
+                          </span>
+
+                          <ExternalLink
+                            size={14}
+                            className="text-blue-400 opacity-0 transition group-hover:opacity-100"
+                          />
+                        </button>
+
+                        <p className="mt-1 text-[11px] text-slate-400">
+                          Click to view details
+                        </p>
                       </td>
 
                       {/* ASSET */}
@@ -394,7 +523,7 @@ export default function ConfirmedSchedule() {
                         </div>
                       </td>
 
-                      {/* BLOCK WINDOW */}
+                      {/* BLOCK */}
 
                       <td className="px-6 py-4 text-sm text-slate-600">
                         {displayValue(task?.block_window_id)}
@@ -426,34 +555,10 @@ export default function ConfirmedSchedule() {
                         {displayValue(task?.estimated_duration_hrs)} hrs
                       </td>
 
-                      {/* PRIORITY */}
+                      {/* STATUS */}
 
                       <td className="px-6 py-4">
-                        <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-700">
-                          {displayValue(task?.priority_score)}
-                        </span>
-                      </td>
-
-                      {/* RISK */}
-
-                      <td className="px-6 py-4">
-                        <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-700">
-                          {displayValue(task?.failure_risk)}
-                        </span>
-                      </td>
-
-                      {/* TRAFFIC */}
-
-                      <td className="px-6 py-4">
-                        <span className="text-sm text-slate-600">
-                          {displayValue(task?.traffic_load)}
-                        </span>
-                      </td>
-
-                      {/* STATUS - DISPLAY ONLY */}
-
-                      <td className="px-6 py-4">
-                        <StatusBadge status={status} />
+                        <StatusBadge status={displayStatus(task?.status)} />
                       </td>
                     </tr>
                   );
@@ -465,12 +570,10 @@ export default function ConfirmedSchedule() {
       </section>
 
       {/* ======================================================
-          CONFIRMED UNSCHEDULED TASKS
+          UNSCHEDULED TASKS
       ======================================================= */}
 
       <section className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-        {/* HEADER */}
-
         <div className="flex flex-col justify-between gap-3 border-b border-slate-200 bg-orange-50/50 px-6 py-5 md:flex-row md:items-center">
           <div>
             <div className="flex items-center gap-2">
@@ -491,8 +594,6 @@ export default function ConfirmedSchedule() {
           </span>
         </div>
 
-        {/* EMPTY */}
-
         {unscheduledTasks.length === 0 ? (
           <EmptyState
             icon={<CheckCircle2 size={30} />}
@@ -501,17 +602,16 @@ export default function ConfirmedSchedule() {
           />
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[1000px] text-left">
+            <table className="w-full min-w-[950px] text-left">
               <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
                 <tr>
-                  <th className="px-6 py-4">Task ID</th>
+                  <th className="px-6 py-4">Task</th>
 
                   <th className="px-6 py-4">Asset</th>
 
                   <th className="px-6 py-4">Corridor</th>
 
                   <th className="px-6 py-4">Compatibility</th>
-
 
                   <th className="px-6 py-4">Reason</th>
 
@@ -523,53 +623,54 @@ export default function ConfirmedSchedule() {
                 {unscheduledTasks.map((task, index) => {
                   const taskId = task?.task_id ?? task?.id ?? index;
 
-                  const status = displayStatus(task?.status);
-
                   return (
                     <tr
                       key={String(taskId)}
-                      className="transition hover:bg-slate-50"
+                      onClick={() => openTaskDetails(task)}
+                      className="cursor-pointer transition hover:bg-blue-50/50"
                     >
-                      {/* TASK ID */}
-
                       <td className="px-6 py-4">
-                        <span className="font-bold text-blue-600">
-                          {displayValue(task?.task_id ?? task?.id)}
-                        </span>
-                      </td>
+                        <button
+                          type="button"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            openTaskDetails(task);
+                          }}
+                          className="group flex items-center gap-2"
+                        >
+                          <span className="font-bold text-blue-600 group-hover:text-blue-800 group-hover:underline">
+                            {displayValue(task?.task_id ?? task?.id)}
+                          </span>
 
-                      {/* ASSET */}
+                          <ExternalLink
+                            size={14}
+                            className="text-blue-400 opacity-0 transition group-hover:opacity-100"
+                          />
+                        </button>
+
+                        <p className="mt-1 text-[11px] text-slate-400">
+                          Click to view details
+                        </p>
+                      </td>
 
                       <td className="px-6 py-4 text-sm text-slate-700">
                         {displayValue(task?.asset_id)}
                       </td>
 
-                      {/* CORRIDOR */}
-
                       <td className="px-6 py-4 text-sm text-slate-700">
                         {displayValue(task?.corridor_id)}
                       </td>
-
-                      {/* COMPATIBILITY */}
 
                       <td className="px-6 py-4 text-sm text-slate-600">
                         {displayValue(task?.compatibility_group)}
                       </td>
 
-                      {/* REASON CODE */}
-
-                     
-
-                      {/* REASON */}
-
                       <td className="max-w-md px-6 py-4 text-sm text-slate-600">
                         {displayValue(task?.reason)}
                       </td>
 
-                      {/* STATUS - DISPLAY ONLY */}
-
                       <td className="px-6 py-4">
-                        <StatusBadge status={status} />
+                        <StatusBadge status={displayStatus(task?.status)} />
                       </td>
                     </tr>
                   );
@@ -579,6 +680,339 @@ export default function ConfirmedSchedule() {
           </div>
         )}
       </section>
+
+      {/* ======================================================
+          TASK DETAILS MODAL
+      ======================================================= */}
+
+      {selectedTask && (
+        <TaskDetailsModal
+          task={selectedTask}
+          loading={taskDetailsLoading}
+          error={taskDetailsError}
+          onClose={closeTaskDetails}
+        />
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// TASK DETAILS MODAL
+// ============================================================
+
+function TaskDetailsModal({ task, loading, error, onClose }) {
+  const taskId = task?.task_id ?? task?.id ?? "-";
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <div className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+        {/* HEADER */}
+
+        <div className="flex items-center justify-between border-b border-slate-200 bg-slate-950 px-6 py-5 text-white">
+          <div className="flex items-center gap-4">
+            <div className="rounded-xl bg-blue-600 p-3">
+              <Wrench size={22} />
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                Maintenance Task
+              </p>
+
+              <h2 className="mt-1 text-xl font-bold">{displayValue(taskId)}</h2>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-xl p-2 text-slate-400 transition hover:bg-white/10 hover:text-white"
+          >
+            <X size={23} />
+          </button>
+        </div>
+
+        {/* CONTENT */}
+
+        <div className="max-h-[calc(92vh-150px)] overflow-y-auto p-6">
+          {/* API ERROR */}
+
+          {error && (
+            <div className="mb-6 flex items-start gap-3 rounded-xl border border-orange-200 bg-orange-50 px-4 py-4 text-sm text-orange-700">
+              <AlertCircle size={19} className="mt-0.5 shrink-0" />
+
+              <div>
+                <p className="font-semibold">
+                  Complete task information unavailable
+                </p>
+
+                <p className="mt-1 leading-6">{error}</p>
+              </div>
+            </div>
+          )}
+
+          {/* LOADING */}
+
+          {loading && (
+            <div className="mb-6 flex items-center gap-3 rounded-xl border border-blue-200 bg-blue-50 px-4 py-4">
+              <RefreshCw size={19} className="animate-spin text-blue-600" />
+
+              <p className="text-sm font-medium text-blue-700">
+                Loading complete task information...
+              </p>
+            </div>
+          )}
+
+          {/* TASK INFORMATION */}
+
+          <DetailSection title="Task Information" icon={<Wrench size={18} />}>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <DetailItem label="Task ID" value={task?.task_id} />
+
+              <DetailItem label="Database ID" value={task?.id} />
+
+              <DetailItem label="Asset ID" value={task?.asset_id} />
+
+              <DetailItem label="Corridor ID" value={task?.corridor_id} />
+
+              <DetailItem label="System" value={task?.system} />
+
+              <DetailItem label="Defect Type" value={task?.defect_type} />
+
+              <DetailItem
+                label="Severity"
+                value={task?.severity}
+                highlight={String(task?.severity || "").toUpperCase()}
+              />
+
+              <DetailItem label="Overdue Days" value={task?.overdue_days} />
+
+              <DetailItem
+                label="Last Maintenance Date"
+                value={task?.last_maintenance_date}
+              />
+            </div>
+          </DetailSection>
+
+          {/* LOCATION */}
+
+          <DetailSection
+            title="Location Information"
+            icon={<Navigation size={18} />}
+          >
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <DetailItem
+                label="Start Location"
+                value={
+                  task?.location_start_km !== undefined
+                    ? `${task.location_start_km} km`
+                    : undefined
+                }
+              />
+
+              <DetailItem
+                label="End Location"
+                value={
+                  task?.location_end_km !== undefined
+                    ? `${task.location_end_km} km`
+                    : undefined
+                }
+              />
+
+              <DetailItem
+                label="Location"
+                value={
+                  task?.location_km !== undefined
+                    ? `${task.location_km} km`
+                    : undefined
+                }
+              />
+            </div>
+          </DetailSection>
+
+          {/* MAINTENANCE */}
+
+          <DetailSection
+            title="Maintenance Information"
+            icon={<Activity size={18} />}
+          >
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <DetailItem
+                label="Estimated Duration"
+                value={
+                  task?.estimated_duration_hrs !== undefined
+                    ? `${task.estimated_duration_hrs} hrs`
+                    : undefined
+                }
+              />
+
+              <DetailItem label="Defect Type" value={task?.defect_type} />
+
+              <DetailItem label="Severity" value={task?.severity} />
+
+              <DetailItem label="Overdue Days" value={task?.overdue_days} />
+            </div>
+          </DetailSection>
+
+          {/* AI */}
+
+          <DetailSection
+            title="AI & Risk Information"
+            icon={<ShieldAlert size={18} />}
+          >
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <MetricBox
+                label="Priority Score"
+                value={task?.priority_score}
+                icon={<Gauge size={18} />}
+              />
+
+              <MetricBox
+                label="Failure Risk"
+                value={task?.failure_risk}
+                icon={<ShieldAlert size={18} />}
+              />
+
+              <MetricBox
+                label="Traffic Load"
+                value={task?.traffic_load}
+                icon={<Train size={18} />}
+              />
+
+              <MetricBox
+                label="Status"
+                value={displayStatus(task?.status)}
+                icon={<Activity size={18} />}
+              />
+            </div>
+          </DetailSection>
+
+          {/* CONFIRMED SCHEDULE */}
+
+          <DetailSection
+            title="Confirmed Schedule"
+            icon={<CalendarCheck size={18} />}
+          >
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <DetailItem label="Block Window" value={task?.block_window_id} />
+
+              <DetailItem label="Date" value={task?.date} />
+
+              <DetailItem label="Start Time" value={task?.start_time} />
+
+              <DetailItem label="End Time" value={task?.end_time} />
+
+              <DetailItem
+                label="Duration"
+                value={
+                  task?.estimated_duration_hrs !== undefined
+                    ? `${task.estimated_duration_hrs} hrs`
+                    : undefined
+                }
+              />
+
+              <DetailItem label="Status" value={displayStatus(task?.status)} />
+
+              <DetailItem
+                label="Compatibility"
+                value={task?.compatibility_group}
+              />
+
+              <DetailItem label="Reason" value={task?.reason} />
+            </div>
+          </DetailSection>
+        </div>
+
+        {/* FOOTER */}
+
+        <div className="flex justify-end border-t border-slate-200 bg-slate-50 px-6 py-4">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// DETAIL SECTION
+// ============================================================
+
+function DetailSection({ title, icon, children }) {
+  return (
+    <section className="mb-6 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+      <div className="flex items-center gap-2 border-b border-slate-200 bg-slate-50 px-5 py-4">
+        <div className="text-blue-600">{icon}</div>
+
+        <h3 className="font-bold text-slate-900">{title}</h3>
+      </div>
+
+      <div className="p-5">{children}</div>
+    </section>
+  );
+}
+
+// ============================================================
+// DETAIL ITEM
+// ============================================================
+
+function DetailItem({ label, value, highlight }) {
+  const text = displayValue(value);
+
+  let valueClass = "text-sm font-semibold text-slate-800";
+
+  if (highlight === "CRITICAL") {
+    valueClass = "text-sm font-bold text-red-600";
+  } else if (highlight === "HIGH") {
+    valueClass = "text-sm font-bold text-orange-600";
+  } else if (highlight === "MEDIUM") {
+    valueClass = "text-sm font-bold text-yellow-600";
+  } else if (highlight === "LOW") {
+    valueClass = "text-sm font-bold text-emerald-600";
+  }
+
+  return (
+    <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
+      <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+        {label}
+      </p>
+
+      <p className={`mt-2 break-words ${valueClass}`}>{text}</p>
+    </div>
+  );
+}
+
+// ============================================================
+// METRIC BOX
+// ============================================================
+
+function MetricBox({ label, value, icon }) {
+  return (
+    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <div className="flex items-center justify-between">
+        <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+          {label}
+        </p>
+
+        <div className="rounded-lg bg-blue-100 p-2 text-blue-600">{icon}</div>
+      </div>
+
+      <p className="mt-3 text-lg font-bold text-slate-900">
+        {displayValue(value)}
+      </p>
     </div>
   );
 }
@@ -588,9 +1022,7 @@ export default function ConfirmedSchedule() {
 // ============================================================
 
 function StatusBadge({ status }) {
-  const value = String(status || "PENDING")
-    .trim()
-    .toUpperCase();
+  const value = normalizeStatus(status);
 
   let className = "bg-yellow-100 text-yellow-700";
 
@@ -612,21 +1044,15 @@ function StatusBadge({ status }) {
       className = "bg-slate-200 text-slate-700";
       break;
 
-    case "PENDING":
     default:
       className = "bg-yellow-100 text-yellow-700";
-      break;
   }
 
   return (
     <span
       className={`inline-flex min-w-[90px] items-center justify-center rounded-full px-3 py-1.5 text-xs font-bold ${className}`}
     >
-      {value === "IN_PROGRESS"
-        ? "IN PROGRESS"
-        : value === "NOT_DONE"
-          ? "NOT DONE"
-          : value}
+      {displayStatus(value)}
     </span>
   );
 }
