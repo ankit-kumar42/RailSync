@@ -1,0 +1,501 @@
+corridor_id,corridor_name,total_length_km,stations,operational_criticality
+COR001,Kanpur-Kolkata Link Line,643,Kanpur;Pune;Bhopal;Kolkata,5
+COR002,Surat-Bangarapet Main Line,141,Surat;Kanpur;Bangarapet,2
+COR003,Kolkata-Vadodara Link Line,1410,Kolkata;Nashik;Ranchi;Patna;Nagpur;Vadodara,3
+COR004,Madurai-Guwahati Chord,1643,Madurai;Vadodara;Chennai Central;Bengaluru;Guwahati,3
+COR005,Visakhapatnam-Chennai Central Link Line,1020,Visakhapatnam;Sealdah;Chennai Central,4
+COR006,Ahmedabad-Kochi Route,1367,Ahmedabad;Lucknow;Srinagar;Mangalore;Kochi,2
+COR007,Kochi-Ahmedabad Route,556,Kochi;Vadodara;Ahmedabad,3
+COR008,Vapi-Jammu Chord,838,Vapi;Bilaspur;Lucknow;Indore;Jammu,5
+COR009,Amritsar-Bhubaneswar Chord,1026,Amritsar;Indore;Jammu;Bilaspur;Sealdah;Bhubaneswar,1
+COR010,Allahabad-Howrah Route,726,Allahabad;New Jalpaiguri;Chennai Central;Patna;Kanpur;Howrah,4
+COR011,Vapi-Patna Loop Line,365,Vapi;Gorakhpur;Trivandrum;Patna,5
+COR012,Bangarapet-Alwar Loop Line,529,Bangarapet;Bhubaneswar;Vijayawada;Alwar,1
+COR013,Kanpur-Guwahati Link Line,407,Kanpur;Howrah;Aurangabad;Bhubaneswar;Gwalior;Guwahati,1
+COR014,Coimbatore-Jabalpur Main Line,681,Coimbatore;Allahabad;Ahmedabad;Gaya;New Delhi;Jabalpur,5
+COR015,Lucknow-Mangalore Route,1388,Lucknow;Ratlam;Pune;Mangalore,5
+COR016,New Delhi-Raipur Branch Line,119,New Delhi;Sealdah;Raipur,3
+COR017,Nashik-Ranchi Main Line,573,Nashik;Chennai Central;Ranchi,4
+COR018,Secunderabad-Bhopal Chord,1431,Secunderabad;Kochi;Surat;Mughalsarai;Patna;Bhopal,3
+COR019,Alwar-Srinagar Branch Line,1922,Alwar;Nagpur;Howrah;Hyderabad;Kanpur;Srinagar,5
+COR020,Varanasi-New Delhi Main Line,1529,Varanasi;Nagpur;New Delhi,1
+COR021,Howrah-Bilaspur Main Line,1132,Howrah;Patna;Dehradun;Bilaspur,2
+COR022,Bhopal-New Jalpaiguri Chord,1686,Bhopal;Bengaluru;Agra;Jaipur;Gurgaon;New Jalpaiguri,3
+COR023,Bangarapet-Gurgaon Branch Line,1849,Bangarapet;Jabalpur;Gurgaon,1
+COR024,Hyderabad-Alwar Link Line,774,Hyderabad;Bhopal;Alwar,2
+COR025,Ratlam-Betul Chord,944,Ratlam;Ranchi;Indore;Betul,1
+COR026,Itarsi-Jaipur Main Line,1415,Itarsi;Chennai Central;Jaipur,2
+COR027,Amritsar-Gurgaon Branch Line,1065,Amritsar;Gwalior;Betul;Gurgaon,2
+COR028,Gorakhpur-New Delhi Branch Line,623,Gorakhpur;Varanasi;Haridwar;Guwahati;Gaya;New Delhi,3
+COR029,Agra-Hyderabad Express Line,1586,Agra;Bareilly;Hyderabad,3
+COR030,Hyderabad-Bengaluru Express Line,1056,Hyderabad;Gaya;Kolkata;Bengaluru,2
+COR031,Secunderabad-Ranchi Branch Line,325,Secunderabad;Aurangabad;Nashik;Ranchi,5
+COR032,Ahmedabad-Katpadi Link Line,1275,Ahmedabad;Sealdah;Indore;Kanpur;Katpadi,2
+COR033,Visakhapatnam-Meerut Chord,1455,Visakhapatnam;Chandigarh;Sealdah;Allahabad;Meerut,4
+COR034,Jaipur-Pune Express Line,516,Jaipur;Sealdah;Ratlam;Secunderabad;Pune,3
+COR035,Trivandrum-Chandigarh Branch Line,1787,Trivandrum;Katpadi;Raipur;Jabalpur;Chandigarh,5
+COR036,Mangalore-Lucknow Chord,621,Mangalore;Vapi;Lucknow,1
+COR037,Guwahati-Coimbatore Loop Line,1318,Guwahati;Jodhpur;Srinagar;Coimbatore,3
+COR038,Mughalsarai-Vijayawada Route,184,Mughalsarai;Raipur;Vijayawada,4
+COR039,Madurai-Chennai Central Main Line,763,Madurai;Indore;Bilaspur;Chennai Central,4
+COR040,Bangarapet-Mumbai CST Main Line,234,Bangarapet;Madurai;Kolkata;Mumbai CST,5
+COR041,Patna-Khammam Chord,165,Patna;Sealdah;Malda;Ratlam;Khammam,2
+COR042,Bhubaneswar-Lucknow Loop Line,1677,Bhubaneswar;Sealdah;Pune;Raipur;Bareilly;Lucknow,4
+COR043,Kolkata-Jodhpur Link Line,1973,Kolkata;Sealdah;Gurgaon;Varanasi;Jodhpur,3
+COR044,Chandigarh-Lucknow Branch Line,1866,Chandigarh;Itarsi;Lucknow,4
+COR045,Varanasi-Vadodara Route,1960,Varanasi;Gurgaon;Bangarapet;Jodhpur;Guwahati;Vadodara,2
+COR046,Alwar-Bilaspur Loop Line,1850,Alwar;Gaya;Bilaspur,3
+COR047,Dehradun-Alwar Link Line,1807,Dehradun;Hyderabad;Mughalsarai;Mumbai CST;Alwar,5
+COR048,Visakhapatnam-Howrah Main Line,1301,Visakhapatnam;Gorakhpur;Kota;Gurgaon;Amritsar;Howrah,4
+COR049,Ratlam-Vijayawada Main Line,1531,Ratlam;New Delhi;Sealdah;Katpadi;Madurai;Vijayawada,1
+COR050,Bilaspur-Aurangabad Link Line,1816,Bilaspur;Gorakhpur;Aurangabad,3
+COR051,Nashik-Gurgaon Loop Line,904,Nashik;Madurai;Jaipur;Secunderabad;Gurgaon,2
+COR052,Mangalore-Alwar Express Line,1787,Mangalore;Guwahati;Alwar,3
+COR053,Gwalior-Khammam Route,1267,Gwalior;Dehradun;Allahabad;Ranchi;Khammam,2
+COR054,Ahmedabad-Trivandrum Express Line,1439,Ahmedabad;Mughalsarai;Bangarapet;Chennai Central;Trivandrum,2
+COR055,Vadodara-Patna Main Line,174,Vadodara;Raipur;Vijayawada;Patna,4
+COR056,Katpadi-Ratlam Link Line,1506,Katpadi;Nagpur;Gwalior;Pune;Vijayawada;Ratlam,2
+COR057,Jodhpur-Malda Main Line,1221,Jodhpur;Khammam;New Jalpaiguri;Malda,4
+COR058,Indore-Malda Link Line,1167,Indore;Mughalsarai;Vapi;Bareilly;Malda,5
+COR059,Betul-Chandigarh Link Line,1844,Betul;Allahabad;Bhopal;Nagpur;Bareilly;Chandigarh,2
+COR060,Madurai-Itarsi Main Line,1541,Madurai;Amritsar;Nagpur;Indore;Itarsi,2
+COR061,Guwahati-Allahabad Branch Line,1501,Guwahati;Lucknow;Srinagar;Allahabad,4
+COR062,Gurgaon-Bilaspur Express Line,1034,Gurgaon;Lucknow;Kolkata;Khammam;Gwalior;Bilaspur,5
+COR063,Gorakhpur-Sealdah Main Line,800,Gorakhpur;Khammam;Bareilly;Ratlam;Sealdah,4
+COR064,Varanasi-Coimbatore Branch Line,1074,Varanasi;Ratlam;Coimbatore,3
+COR065,Alwar-Amritsar Route,1037,Alwar;Madurai;Aurangabad;Amritsar,4
+COR066,Kolkata-Ahmedabad Link Line,957,Kolkata;Bhubaneswar;Betul;Ahmedabad,1
+COR067,Visakhapatnam-Gorakhpur Loop Line,513,Visakhapatnam;Chandigarh;Meerut;Amritsar;Vapi;Gorakhpur,3
+COR068,Ahmedabad-New Jalpaiguri Main Line,1614,Ahmedabad;Mughalsarai;New Jalpaiguri,3
+COR069,Varanasi-Secunderabad Route,1414,Varanasi;Meerut;Secunderabad,1
+COR070,Bhubaneswar-Vadodara Route,121,Bhubaneswar;Nagpur;Secunderabad;Vadodara,1
+COR071,Agra-Malda Link Line,604,Agra;Nashik;Ahmedabad;Gaya;Malda,2
+COR072,Nashik-Lucknow Express Line,132,Nashik;Kochi;New Jalpaiguri;Haridwar;Lucknow,2
+COR073,Pune-Bhubaneswar Main Line,1507,Pune;Haridwar;Aurangabad;Itarsi;Bhubaneswar,3
+COR074,Bangarapet-Srinagar Main Line,1116,Bangarapet;Gwalior;New Delhi;Itarsi;Srinagar,4
+COR075,Jammu-Vapi Link Line,393,Jammu;Surat;Srinagar;Gaya;Visakhapatnam;Vapi,4
+COR076,Khammam-Coimbatore Loop Line,1824,Khammam;Sealdah;Bangarapet;Coimbatore,3
+COR077,Betul-Bhubaneswar Route,1031,Betul;Khammam;Mumbai CST;Amritsar;Vijayawada;Bhubaneswar,2
+COR078,Haridwar-Visakhapatnam Loop Line,652,Haridwar;New Delhi;Coimbatore;Trivandrum;Visakhapatnam,2
+COR079,Gurgaon-Mughalsarai Express Line,1632,Gurgaon;Dehradun;Ranchi;Mughalsarai,4
+COR080,Mumbai Central-Surat Loop Line,533,Mumbai Central;Jammu;Dehradun;Indore;Amritsar;Surat,4
+COR081,Bilaspur-Haridwar Link Line,1009,Bilaspur;Bhopal;Kanpur;Guwahati;Haridwar,3
+COR082,Nagpur-Kota Chord,523,Nagpur;Gorakhpur;Meerut;Patna;Nashik;Kota,3
+COR083,Allahabad-Jammu Chord,699,Allahabad;Srinagar;Jammu,5
+COR084,Bhopal-Madurai Main Line,191,Bhopal;Jammu;Mughalsarai;Secunderabad;Madurai,1
+COR085,Mumbai CST-Trivandrum Branch Line,1060,Mumbai CST;Howrah;Jodhpur;Jaipur;Gaya;Trivandrum,1
+COR086,Alwar-Mughalsarai Main Line,1261,Alwar;Pune;Mughalsarai,2
+COR087,Mangalore-Ahmedabad Chord,322,Mangalore;Aurangabad;Raipur;Gurgaon;Nagpur;Ahmedabad,3
+COR088,Bangarapet-Nashik Express Line,1351,Bangarapet;Aurangabad;Nashik,1
+COR089,Gwalior-Agra Loop Line,1432,Gwalior;Ahmedabad;Agra,2
+COR090,Jodhpur-Pune Chord,85,Jodhpur;Jammu;Vijayawada;Ranchi;Aurangabad;Pune,3
+COR091,Trivandrum-Vapi Main Line,1487,Trivandrum;Bhopal;Sealdah;Vapi,4
+COR092,Kanpur-Varanasi Link Line,385,Kanpur;Pune;Howrah;Bangarapet;Varanasi,3
+COR093,Trivandrum-Itarsi Main Line,1039,Trivandrum;Haridwar;Mughalsarai;Vadodara;Itarsi,4
+COR094,Ahmedabad-Chennai Central Branch Line,1584,Ahmedabad;Patna;Mumbai CST;Aurangabad;Chennai Central,5
+COR095,Mumbai Central-Coimbatore Express Line,162,Mumbai Central;Bhubaneswar;Madurai;Coimbatore,3
+COR096,Kota-Khammam Link Line,1747,Kota;Agra;Chennai Central;Bhubaneswar;Jodhpur;Khammam,2
+COR097,Bilaspur-Gurgaon Link Line,1094,Bilaspur;Mughalsarai;Jabalpur;Vadodara;Gurgaon,4
+COR098,Surat-Aurangabad Loop Line,742,Surat;Alwar;Aurangabad,4
+COR099,New Delhi-Malda Branch Line,191,New Delhi;Coimbatore;Ratlam;Malda,4
+COR100,Bengaluru-Gwalior Loop Line,1204,Bengaluru;Sealdah;Guwahati;Gwalior,4
+COR101,Nagpur-Kolkata Link Line,1326,Nagpur;Srinagar;Surat;Kolkata,5
+COR102,Mumbai CST-Gurgaon Main Line,540,Mumbai CST;Ranchi;Gurgaon,1
+COR103,Guwahati-Gaya Link Line,677,Guwahati;Bhubaneswar;Agra;Bangarapet;Gaya,4
+COR104,Patna-Bareilly Chord,1967,Patna;Betul;Howrah;Bareilly,4
+COR105,Jabalpur-Coimbatore Route,85,Jabalpur;Gorakhpur;Guwahati;Khammam;Coimbatore,2
+COR106,Betul-Sealdah Loop Line,760,Betul;Khammam;Allahabad;Chandigarh;New Jalpaiguri;Sealdah,5
+COR107,Bareilly-Allahabad Route,1668,Bareilly;Gorakhpur;Mumbai Central;Chandigarh;Bhubaneswar;Allahabad,4
+COR108,Howrah-Bhopal Express Line,1288,Howrah;Itarsi;Betul;Hyderabad;Bhopal,5
+COR109,Vapi-Mumbai CST Link Line,375,Vapi;Itarsi;Ahmedabad;Bilaspur;Chennai Central;Mumbai CST,5
+COR110,Meerut-Ahmedabad Route,752,Meerut;Amritsar;Gaya;Raipur;Jammu;Ahmedabad,5
+COR111,Secunderabad-Ranchi Link Line,1481,Secunderabad;Chennai Central;Nagpur;Bareilly;Ranchi,1
+COR112,Itarsi-Amritsar Link Line,693,Itarsi;Mumbai Central;Amritsar,3
+COR113,Hyderabad-Kochi Loop Line,847,Hyderabad;Agra;Coimbatore;Ahmedabad;Bhopal;Kochi,1
+COR114,Gorakhpur-Ranchi Branch Line,1949,Gorakhpur;Kanpur;Allahabad;Ranchi,4
+COR115,Vijayawada-Mumbai CST Route,1032,Vijayawada;Surat;Trivandrum;Haridwar;Mumbai CST,3
+COR116,Mangalore-Bangarapet Link Line,592,Mangalore;Guwahati;Jaipur;Itarsi;Ratlam;Bangarapet,4
+COR117,Haridwar-Kochi Link Line,684,Haridwar;Khammam;Kochi,4
+COR118,Madurai-Mumbai CST Express Line,1851,Madurai;New Jalpaiguri;Mumbai CST,5
+COR119,Gaya-Trivandrum Route,1716,Gaya;Nashik;Gurgaon;Trivandrum,2
+COR120,Ratlam-Vijayawada Link Line,1627,Ratlam;Bengaluru;Bilaspur;Vijayawada,3
+COR121,Itarsi-Howrah Express Line,827,Itarsi;Bengaluru;New Jalpaiguri;Howrah,3
+COR122,Katpadi-Jodhpur Chord,350,Katpadi;New Jalpaiguri;Coimbatore;Visakhapatnam;Jodhpur,3
+COR123,Sealdah-Kochi Link Line,1862,Sealdah;Hyderabad;Allahabad;Gurgaon;Kochi,2
+COR124,Meerut-Jammu Main Line,1699,Meerut;New Delhi;Coimbatore;Bhopal;Hyderabad;Jammu,5
+COR125,Gorakhpur-Srinagar Main Line,1462,Gorakhpur;Ranchi;Mumbai CST;Srinagar,5
+COR126,Varanasi-Secunderabad Link Line,1767,Varanasi;Jammu;Chandigarh;New Jalpaiguri;Jabalpur;Secunderabad,1
+COR127,Howrah-Mangalore Branch Line,317,Howrah;Bhopal;Mangalore,5
+COR128,Indore-Bareilly Branch Line,839,Indore;Gorakhpur;Mangalore;Srinagar;Pune;Bareilly,4
+COR129,Gurgaon-Madurai Main Line,1493,Gurgaon;Mughalsarai;Varanasi;Lucknow;Madurai,1
+COR130,Srinagar-Haridwar Main Line,895,Srinagar;Hyderabad;Jaipur;Gaya;Haridwar,2
+COR131,Mumbai Central-Bengaluru Route,763,Mumbai Central;Gurgaon;Ahmedabad;Bengaluru,1
+COR132,Gwalior-Agra Route,1861,Gwalior;Alwar;Amritsar;Agra,5
+COR133,New Delhi-Madurai Route,376,New Delhi;Indore;Trivandrum;Madurai,1
+COR134,Kolkata-Bhopal Main Line,813,Kolkata;Jodhpur;Nashik;Bhopal,2
+COR135,Visakhapatnam-Bengaluru Chord,1599,Visakhapatnam;Madurai;Bareilly;Secunderabad;Howrah;Bengaluru,5
+COR136,Lucknow-Betul Express Line,533,Lucknow;Srinagar;Betul,5
+COR137,Mangalore-Vapi Link Line,143,Mangalore;Ranchi;Vapi,4
+COR138,Bangarapet-Lucknow Branch Line,1538,Bangarapet;Amritsar;Chennai Central;Howrah;Malda;Lucknow,3
+COR139,Raipur-Gorakhpur Express Line,1166,Raipur;Mangalore;Allahabad;Vijayawada;Gorakhpur,1
+COR140,Agra-Khammam Branch Line,1898,Agra;Gwalior;Amritsar;Khammam,4
+COR141,Katpadi-Jaipur Loop Line,954,Katpadi;Ratlam;Indore;Jabalpur;Jaipur,1
+COR142,Surat-Ahmedabad Main Line,964,Surat;Bareilly;Ahmedabad,3
+COR143,Bhopal-Hyderabad Express Line,1230,Bhopal;Dehradun;Varanasi;Secunderabad;Hyderabad,1
+COR144,Trivandrum-Nashik Loop Line,292,Trivandrum;Pune;Dehradun;Nashik,2
+COR145,Lucknow-Dehradun Route,1219,Lucknow;Meerut;Hyderabad;Patna;Dehradun,4
+COR146,Kolkata-Coimbatore Main Line,449,Kolkata;Jammu;Chandigarh;Meerut;Coimbatore,1
+COR147,Kota-Patna Express Line,1426,Kota;Pune;Bareilly;Bilaspur;Howrah;Patna,4
+COR148,Katpadi-Vapi Loop Line,402,Katpadi;Jammu;Guwahati;Chandigarh;Vapi,1
+COR149,Guwahati-Chandigarh Route,1345,Guwahati;Haridwar;Chandigarh,1
+COR150,Coimbatore-Itarsi Link Line,948,Coimbatore;Indore;Nashik;Gwalior;Varanasi;Itarsi,3
+COR151,Khammam-Kanpur Loop Line,1468,Khammam;Chandigarh;Coimbatore;Mumbai Central;Jabalpur;Kanpur,1
+COR152,Gwalior-Mangalore Chord,1651,Gwalior;Meerut;Bhopal;Mangalore,3
+COR153,Nagpur-New Delhi Branch Line,1609,Nagpur;Jaipur;Trivandrum;Gwalior;Pune;New Delhi,1
+COR154,Meerut-Chennai Central Branch Line,118,Meerut;New Jalpaiguri;Howrah;Betul;Amritsar;Chennai Central,4
+COR155,Kochi-Kanpur Branch Line,122,Kochi;Ahmedabad;Katpadi;Mughalsarai;Kanpur,3
+COR156,Surat-Khammam Route,296,Surat;Varanasi;Mangalore;Khammam,5
+COR157,Ahmedabad-Meerut Route,715,Ahmedabad;Jodhpur;Alwar;Nagpur;Meerut,5
+COR158,Kanpur-Ratlam Route,795,Kanpur;Gaya;Gorakhpur;Bangarapet;Ratlam,2
+COR159,Lucknow-Patna Loop Line,484,Lucknow;Pune;Aurangabad;Patna,2
+COR160,Gaya-Malda Route,1234,Gaya;Jabalpur;New Jalpaiguri;Trivandrum;Itarsi;Malda,2
+COR161,Itarsi-Secunderabad Branch Line,985,Itarsi;Mangalore;Patna;Alwar;Secunderabad,5
+COR162,Pune-Nashik Branch Line,1005,Pune;Kolkata;Nashik,3
+COR163,Trivandrum-Pune Link Line,1849,Trivandrum;Raipur;Pune,5
+COR164,Bareilly-Malda Express Line,1215,Bareilly;Varanasi;Malda,5
+COR165,Ratlam-Raipur Express Line,1054,Ratlam;Gaya;Kolkata;Raipur,1
+COR166,Jabalpur-Ahmedabad Express Line,1403,Jabalpur;Mumbai Central;Bhopal;Ahmedabad,4
+COR167,Chandigarh-Jammu Loop Line,1959,Chandigarh;Alwar;Vadodara;Agra;Jammu,3
+COR168,Secunderabad-Bilaspur Main Line,1222,Secunderabad;Gorakhpur;Guwahati;Itarsi;Indore;Bilaspur,5
+COR169,Patna-Dehradun Loop Line,1423,Patna;Mughalsarai;Srinagar;Nashik;Secunderabad;Dehradun,3
+COR170,Bhopal-Surat Link Line,1453,Bhopal;Mumbai CST;Amritsar;Coimbatore;Vadodara;Surat,4
+COR171,Ratlam-Varanasi Chord,397,Ratlam;Patna;Varanasi,1
+COR172,Howrah-Jabalpur Route,1345,Howrah;Vadodara;Nashik;Jabalpur,2
+COR173,Kota-Amritsar Link Line,976,Kota;Varanasi;Amritsar,3
+COR174,Ranchi-Itarsi Express Line,663,Ranchi;Nagpur;Madurai;Kanpur;Guwahati;Itarsi,5
+COR175,Itarsi-Malda Route,657,Itarsi;Gaya;Gwalior;Vijayawada;Visakhapatnam;Malda,3
+COR176,Bengaluru-Sealdah Route,840,Bengaluru;Jammu;Sealdah,5
+COR177,Nagpur-Trivandrum Main Line,1642,Nagpur;Allahabad;Patna;Trivandrum,4
+COR178,Surat-Varanasi Route,1003,Surat;Agra;Mumbai CST;Sealdah;Varanasi,5
+COR179,Srinagar-Ranchi Branch Line,247,Srinagar;Chandigarh;Mumbai CST;Kanpur;Ranchi,2
+COR180,Indore-Howrah Loop Line,1958,Indore;Pune;Jammu;Khammam;Meerut;Howrah,1
+COR181,Mumbai Central-Vijayawada Chord,1790,Mumbai Central;Kochi;Mughalsarai;Vijayawada,1
+COR182,Trivandrum-Ranchi Loop Line,329,Trivandrum;Nagpur;Ranchi,4
+COR183,Vapi-Secunderabad Main Line,1793,Vapi;Raipur;Nashik;Mumbai CST;Madurai;Secunderabad,3
+COR184,Bangarapet-New Delhi Express Line,802,Bangarapet;Agra;Kochi;New Delhi,1
+COR185,Jammu-Secunderabad Express Line,1194,Jammu;Vadodara;Secunderabad,4
+COR186,Chennai Central-Bareilly Loop Line,599,Chennai Central;Kota;Bareilly,1
+COR187,Dehradun-Ranchi Link Line,1425,Dehradun;Alwar;Ranchi,5
+COR188,Bilaspur-Indore Main Line,801,Bilaspur;Bangarapet;Jabalpur;Surat;Indore,4
+COR189,Kota-Indore Main Line,1546,Kota;Jaipur;Gurgaon;Mumbai Central;Guwahati;Indore,3
+COR190,Meerut-New Jalpaiguri Loop Line,154,Meerut;Jodhpur;Patna;New Jalpaiguri,3
+COR191,Coimbatore-Nagpur Route,833,Coimbatore;Bareilly;Vapi;Gwalior;Allahabad;Nagpur,4
+COR192,Gaya-Srinagar Route,1143,Gaya;Jammu;Gurgaon;Chennai Central;Srinagar,4
+COR193,Kota-Kochi Loop Line,290,Kota;Chandigarh;Kochi,3
+COR194,Nashik-Betul Express Line,1549,Nashik;Varanasi;Haridwar;Ahmedabad;Jodhpur;Betul,5
+COR195,Khammam-Madurai Link Line,1700,Khammam;Howrah;Madurai,4
+COR196,Jammu-Chandigarh Main Line,372,Jammu;Mumbai Central;Nagpur;Secunderabad;Howrah;Chandigarh,5
+COR197,Howrah-Guwahati Link Line,1001,Howrah;Ranchi;Meerut;Vadodara;Guwahati,5
+COR198,Jammu-Meerut Loop Line,1410,Jammu;Gaya;Hyderabad;Nagpur;Meerut,4
+COR199,Bareilly-Nagpur Loop Line,1667,Bareilly;Jammu;Allahabad;Lucknow;Nagpur,4
+COR200,Vadodara-Nagpur Chord,1826,Vadodara;Ranchi;Nagpur,2
+COR201,Itarsi-Surat Route,1476,Itarsi;Jammu;Kota;Jabalpur;Surat,3
+COR202,Chandigarh-Jodhpur Route,820,Chandigarh;Jaipur;Hyderabad;Jodhpur,2
+COR203,Gaya-Kolkata Loop Line,1214,Gaya;Gurgaon;Trivandrum;Ranchi;Kolkata,1
+COR204,Nashik-Meerut Link Line,1552,Nashik;Alwar;Gwalior;Bangarapet;Visakhapatnam;Meerut,1
+COR205,Betul-Malda Link Line,1139,Betul;Itarsi;Secunderabad;Katpadi;Malda,2
+COR206,Khammam-Hyderabad Route,334,Khammam;Surat;Chandigarh;Hyderabad,3
+COR207,Varanasi-Dehradun Express Line,1912,Varanasi;Bhopal;Chennai Central;Itarsi;Dehradun,2
+COR208,Mangalore-Surat Express Line,1392,Mangalore;Mughalsarai;Nashik;Surat,2
+COR209,Jabalpur-Chennai Central Route,1849,Jabalpur;Bengaluru;Chennai Central,1
+COR210,Visakhapatnam-Gwalior Route,1251,Visakhapatnam;Raipur;Bilaspur;Vijayawada;Mumbai CST;Gwalior,4
+COR211,Bhubaneswar-Alwar Loop Line,1008,Bhubaneswar;Haridwar;Alwar,1
+COR212,Chandigarh-Itarsi Branch Line,1071,Chandigarh;Lucknow;Jodhpur;Pune;Nashik;Itarsi,3
+COR213,Alwar-Bhopal Route,838,Alwar;Amritsar;Bhopal,2
+COR214,Malda-Nagpur Loop Line,1000,Malda;Bengaluru;Pune;Nagpur,3
+COR215,Bareilly-Katpadi Chord,1852,Bareilly;Bangarapet;Chandigarh;Katpadi,2
+COR216,Chandigarh-Gaya Express Line,1036,Chandigarh;Mumbai CST;Vijayawada;Guwahati;Betul;Gaya,2
+COR217,Agra-Haridwar Main Line,183,Agra;Vijayawada;Nashik;Vapi;Haridwar,3
+COR218,Mumbai CST-Lucknow Branch Line,354,Mumbai CST;Gorakhpur;Meerut;Vadodara;Lucknow,1
+COR219,Alwar-Bengaluru Express Line,1230,Alwar;Ratlam;Trivandrum;Bengaluru,1
+COR220,Bareilly-Betul Route,1206,Bareilly;Nashik;Katpadi;Jabalpur;Betul,2
+COR221,Jaipur-Meerut Loop Line,1707,Jaipur;Mughalsarai;Ratlam;Trivandrum;Meerut,5
+COR222,Alwar-Chennai Central Main Line,159,Alwar;Jammu;Jodhpur;Chennai Central,5
+COR223,Vapi-Guwahati Express Line,1909,Vapi;Amritsar;Sealdah;Guwahati,2
+COR224,Meerut-Mangalore Express Line,768,Meerut;Ranchi;Guwahati;Trivandrum;Jammu;Mangalore,1
+COR225,Katpadi-Nashik Route,1920,Katpadi;Mangalore;Nashik,4
+COR226,Visakhapatnam-Allahabad Link Line,185,Visakhapatnam;Madurai;Bilaspur;Ahmedabad;Gorakhpur;Allahabad,1
+COR227,Kanpur-Ratlam Main Line,983,Kanpur;Jammu;Pune;Varanasi;Ratlam,5
+COR228,New Jalpaiguri-Hyderabad Link Line,362,New Jalpaiguri;Trivandrum;Amritsar;Hyderabad,5
+COR229,Gorakhpur-Aurangabad Chord,1021,Gorakhpur;Coimbatore;Jodhpur;Dehradun;Aurangabad,5
+COR230,Sealdah-Ratlam Chord,651,Sealdah;Guwahati;Kanpur;Mughalsarai;Ratlam,4
+COR231,Aurangabad-Sealdah Loop Line,1227,Aurangabad;Patna;Hyderabad;Trivandrum;Sealdah,4
+COR232,Dehradun-Patna Loop Line,166,Dehradun;Gaya;Chennai Central;Srinagar;Patna,3
+COR233,Sealdah-Agra Chord,1775,Sealdah;Haridwar;New Jalpaiguri;Trivandrum;Agra,1
+COR234,Ranchi-Bhubaneswar Main Line,1451,Ranchi;Kanpur;Bilaspur;Bhubaneswar,1
+COR235,Gurgaon-Bilaspur Link Line,1047,Gurgaon;Dehradun;Bilaspur,2
+COR236,New Delhi-Chandigarh Branch Line,1417,New Delhi;Vijayawada;Meerut;Jabalpur;Lucknow;Chandigarh,1
+COR237,Surat-Allahabad Express Line,1592,Surat;New Jalpaiguri;Allahabad,2
+COR238,Katpadi-Jodhpur Main Line,1792,Katpadi;Vijayawada;Sealdah;Alwar;Surat;Jodhpur,3
+COR239,Lucknow-Bilaspur Loop Line,1010,Lucknow;Secunderabad;Vapi;Mughalsarai;Itarsi;Bilaspur,1
+COR240,Bilaspur-Chandigarh Link Line,1019,Bilaspur;Srinagar;Surat;New Delhi;Chandigarh,3
+COR241,Ratlam-Jodhpur Express Line,1833,Ratlam;Coimbatore;Chandigarh;Allahabad;Bangarapet;Jodhpur,2
+COR242,Indore-Sealdah Loop Line,1996,Indore;New Delhi;Bhopal;Sealdah,2
+COR243,Betul-Coimbatore Loop Line,698,Betul;Bhopal;Coimbatore,3
+COR244,Ranchi-Hyderabad Link Line,322,Ranchi;Surat;Chandigarh;Haridwar;Gwalior;Hyderabad,3
+COR245,Srinagar-Varanasi Chord,353,Srinagar;Pune;Nashik;Ranchi;Bareilly;Varanasi,5
+COR246,Agra-Bhubaneswar Link Line,1625,Agra;Madurai;Bhubaneswar,4
+COR247,Jammu-Pune Express Line,309,Jammu;Khammam;Pune,5
+COR248,Vadodara-Guwahati Chord,751,Vadodara;Lucknow;Haridwar;Hyderabad;Srinagar;Guwahati,1
+COR249,Vapi-Bhopal Express Line,930,Vapi;Kolkata;Kochi;Ranchi;Trivandrum;Bhopal,4
+COR250,Vijayawada-New Delhi Link Line,526,Vijayawada;Kolkata;New Delhi,4
+COR251,Dehradun-Secunderabad Express Line,203,Dehradun;Sealdah;Secunderabad,4
+COR252,Howrah-Trivandrum Branch Line,448,Howrah;Alwar;Jabalpur;Trivandrum,3
+COR253,Gorakhpur-Betul Route,1958,Gorakhpur;Ratlam;Gaya;Jabalpur;Chennai Central;Betul,1
+COR254,Jodhpur-Meerut Express Line,340,Jodhpur;New Delhi;Khammam;Meerut,3
+COR255,Malda-Bangarapet Express Line,856,Malda;Nagpur;Allahabad;Bangarapet,2
+COR256,Madurai-Ratlam Link Line,1647,Madurai;Mumbai Central;Ratlam,4
+COR257,Mumbai Central-Ranchi Chord,217,Mumbai Central;Aurangabad;Ranchi,1
+COR258,Betul-Bengaluru Chord,1596,Betul;Gwalior;Bengaluru,4
+COR259,Allahabad-Agra Route,1848,Allahabad;Secunderabad;Agra,5
+COR260,Kochi-Allahabad Route,1956,Kochi;Mangalore;Aurangabad;Alwar;Allahabad,2
+COR261,Mangalore-Patna Link Line,1147,Mangalore;Agra;Chandigarh;Patna,1
+COR262,Jodhpur-Bangarapet Express Line,1095,Jodhpur;Kota;Bangarapet,4
+COR263,Aurangabad-Katpadi Branch Line,385,Aurangabad;Ratlam;Surat;Bareilly;Katpadi,2
+COR264,Varanasi-Mangalore Route,1529,Varanasi;Ranchi;Katpadi;Mangalore,5
+COR265,Gurgaon-Katpadi Express Line,1165,Gurgaon;Ratlam;Nagpur;Katpadi,2
+COR266,Bilaspur-Ahmedabad Branch Line,1814,Bilaspur;Madurai;Gorakhpur;Chennai Central;Ahmedabad,3
+COR267,Gorakhpur-Chennai Central Route,229,Gorakhpur;Meerut;Katpadi;Chennai Central,4
+COR268,Gwalior-Bilaspur Loop Line,1941,Gwalior;Lucknow;Bilaspur,2
+COR269,Nagpur-Sealdah Chord,1504,Nagpur;Malda;Gwalior;Sealdah,5
+COR270,Raipur-Trivandrum Branch Line,1034,Raipur;Guwahati;Bhopal;Kota;Trivandrum,4
+COR271,Jaipur-New Jalpaiguri Route,1799,Jaipur;Malda;Ratlam;Kanpur;New Jalpaiguri,1
+COR272,Varanasi-Patna Main Line,614,Varanasi;Jaipur;Guwahati;Jodhpur;Pune;Patna,4
+COR273,Jabalpur-Vijayawada Route,1762,Jabalpur;Bilaspur;Gaya;Gorakhpur;Bareilly;Vijayawada,3
+COR274,Amritsar-Indore Link Line,1199,Amritsar;New Jalpaiguri;Trivandrum;Vapi;Surat;Indore,1
+COR275,Bengaluru-New Delhi Branch Line,361,Bengaluru;Srinagar;Chennai Central;New Delhi,1
+COR276,Agra-Vapi Loop Line,203,Agra;Vijayawada;Mumbai CST;Jabalpur;New Delhi;Vapi,5
+COR277,Madurai-Trivandrum Main Line,1108,Madurai;Mughalsarai;New Jalpaiguri;Surat;Katpadi;Trivandrum,2
+COR278,Ratlam-Vijayawada Route,805,Ratlam;Gurgaon;Chennai Central;Gwalior;Vijayawada,4
+COR279,Bhubaneswar-Varanasi Loop Line,1480,Bhubaneswar;Jabalpur;Varanasi,1
+COR280,Surat-Alwar Branch Line,852,Surat;New Delhi;Haridwar;Kolkata;Raipur;Alwar,4
+COR281,Bilaspur-Jaipur Express Line,1962,Bilaspur;Nagpur;Jaipur,2
+COR282,New Jalpaiguri-Coimbatore Main Line,1972,New Jalpaiguri;Dehradun;Coimbatore,3
+COR283,Howrah-Jodhpur Route,724,Howrah;Gaya;Jodhpur,2
+COR284,Patna-Meerut Main Line,692,Patna;Kochi;Nagpur;Meerut,5
+COR285,Bilaspur-Bareilly Route,1594,Bilaspur;Haridwar;Gurgaon;Bareilly,5
+COR286,Dehradun-Bengaluru Main Line,975,Dehradun;Khammam;Howrah;Bengaluru,5
+COR287,Meerut-Raipur Main Line,1378,Meerut;Bhubaneswar;Varanasi;Gurgaon;Raipur,5
+COR288,Gorakhpur-Khammam Chord,1472,Gorakhpur;Patna;Chennai Central;Nashik;Meerut;Khammam,1
+COR289,Coimbatore-Guwahati Branch Line,1537,Coimbatore;Bareilly;Vadodara;Guwahati,3
+COR290,Lucknow-Surat Main Line,711,Lucknow;Bengaluru;Guwahati;Vadodara;Meerut;Surat,4
+COR291,Betul-Gurgaon Main Line,133,Betul;Jodhpur;Gurgaon,5
+COR292,Surat-Raipur Route,868,Surat;Guwahati;Raipur,4
+COR293,Bareilly-Ahmedabad Link Line,1925,Bareilly;Coimbatore;Kochi;Ahmedabad,4
+COR294,Amritsar-Indore Loop Line,696,Amritsar;Howrah;Pune;Visakhapatnam;Indore,3
+COR295,Katpadi-Mangalore Branch Line,1682,Katpadi;Kota;Mangalore,3
+COR296,Bhubaneswar-Gaya Express Line,1342,Bhubaneswar;Bengaluru;Allahabad;Gaya,3
+COR297,New Delhi-Meerut Loop Line,1803,New Delhi;Allahabad;Katpadi;Betul;Jodhpur;Meerut,3
+COR298,Raipur-Vadodara Branch Line,723,Raipur;Gaya;Gwalior;Vadodara,3
+COR299,Mughalsarai-Bhubaneswar Loop Line,850,Mughalsarai;Vadodara;Katpadi;Alwar;Bhubaneswar,5
+COR300,Vadodara-Kota Link Line,1652,Vadodara;Mughalsarai;Kota,4
+COR301,Gwalior-Itarsi Route,676,Gwalior;Katpadi;Itarsi,4
+COR302,Gaya-Indore Link Line,700,Gaya;Jabalpur;Bhopal;Indore,4
+COR303,Gorakhpur-Pune Branch Line,1304,Gorakhpur;Gwalior;Mangalore;Madurai;Visakhapatnam;Pune,3
+COR304,Ahmedabad-Lucknow Route,588,Ahmedabad;Raipur;Jabalpur;Surat;Lucknow,3
+COR305,Khammam-Lucknow Main Line,281,Khammam;Visakhapatnam;Nagpur;Gorakhpur;Lucknow,4
+COR306,Srinagar-Meerut Branch Line,1661,Srinagar;Jodhpur;Mumbai CST;Meerut,1
+COR307,Kochi-Katpadi Main Line,317,Kochi;Jodhpur;Guwahati;Katpadi,4
+COR308,Gwalior-Sealdah Loop Line,1055,Gwalior;Allahabad;Sealdah,4
+COR309,Aurangabad-Secunderabad Loop Line,171,Aurangabad;Mumbai CST;Secunderabad,3
+COR310,Lucknow-Amritsar Link Line,579,Lucknow;Kochi;Ahmedabad;Amritsar,5
+COR311,Bangarapet-Malda Chord,1713,Bangarapet;Surat;Bilaspur;Aurangabad;Agra;Malda,4
+COR312,Bangarapet-Bareilly Main Line,1523,Bangarapet;Indore;Lucknow;Bareilly,5
+COR313,Lucknow-Kota Loop Line,747,Lucknow;Bhubaneswar;Hyderabad;Kota,4
+COR314,Aurangabad-Bareilly Express Line,883,Aurangabad;Jodhpur;Bareilly,3
+COR315,Vapi-Jodhpur Route,1459,Vapi;Aurangabad;Mangalore;New Jalpaiguri;Jodhpur,3
+COR316,Nagpur-Ranchi Loop Line,319,Nagpur;Jammu;Ratlam;Ranchi,5
+COR317,Bareilly-Katpadi Express Line,362,Bareilly;Aurangabad;Agra;Bhubaneswar;Surat;Katpadi,4
+COR318,Trivandrum-Indore Chord,724,Trivandrum;Betul;Kota;Kolkata;Raipur;Indore,2
+COR319,Bareilly-Gaya Branch Line,1482,Bareilly;Haridwar;Bangarapet;Gwalior;Varanasi;Gaya,5
+COR320,Kolkata-Varanasi Loop Line,146,Kolkata;Guwahati;Trivandrum;Nagpur;Varanasi,5
+COR321,Gaya-Kanpur Express Line,313,Gaya;Katpadi;Meerut;Madurai;Kanpur,4
+COR322,Agra-Bangarapet Main Line,1587,Agra;Betul;Guwahati;Bangarapet,4
+COR323,Visakhapatnam-Dehradun Route,1752,Visakhapatnam;Varanasi;Dehradun,1
+COR324,Ranchi-Gwalior Route,1590,Ranchi;Betul;Srinagar;Raipur;Gwalior,2
+COR325,Indore-Gwalior Route,503,Indore;Mangalore;Gwalior,3
+COR326,Madurai-Amritsar Loop Line,1521,Madurai;Mangalore;Patna;Indore;Amritsar,2
+COR327,Gurgaon-Hyderabad Loop Line,1855,Gurgaon;Betul;Haridwar;Hyderabad,2
+COR328,Patna-Raipur Route,586,Patna;Vijayawada;Pune;Bilaspur;Kochi;Raipur,4
+COR329,Betul-Pune Link Line,1707,Betul;Gwalior;Pune,5
+COR330,Madurai-Srinagar Branch Line,1079,Madurai;New Delhi;Mangalore;Betul;Srinagar,4
+COR331,Haridwar-Secunderabad Route,1174,Haridwar;Kanpur;Varanasi;Bangarapet;Gaya;Secunderabad,3
+COR332,Trivandrum-Jabalpur Express Line,1263,Trivandrum;Kochi;Itarsi;Jabalpur,3
+COR333,Bengaluru-Chennai Central Main Line,1362,Bengaluru;Mumbai CST;Sealdah;Itarsi;Pune;Chennai Central,1
+COR334,Bangarapet-Vadodara Link Line,1942,Bangarapet;Vapi;Bilaspur;Vadodara,2
+COR335,Madurai-Surat Link Line,818,Madurai;Ratlam;Chennai Central;Dehradun;Surat,1
+COR336,Meerut-Nashik Link Line,1512,Meerut;Bilaspur;Agra;Nashik,1
+COR337,New Delhi-Agra Branch Line,239,New Delhi;Nashik;Nagpur;Agra,1
+COR338,Mumbai CST-Jabalpur Route,326,Mumbai CST;Bhubaneswar;Jammu;Chennai Central;Pune;Jabalpur,1
+COR339,Lucknow-Aurangabad Loop Line,1884,Lucknow;Vadodara;Alwar;Secunderabad;Aurangabad,1
+COR340,Mumbai CST-Amritsar Branch Line,799,Mumbai CST;Bareilly;Bilaspur;Amritsar,4
+COR341,Itarsi-Agra Main Line,1916,Itarsi;Secunderabad;Agra,1
+COR342,Bareilly-Dehradun Branch Line,724,Bareilly;Indore;Nagpur;Dehradun,2
+COR343,Trivandrum-Kolkata Route,1814,Trivandrum;Coimbatore;Kanpur;Aurangabad;Kolkata,4
+COR344,Kochi-Bengaluru Route,1918,Kochi;Vadodara;Vijayawada;Bengaluru,2
+COR345,Gaya-Pune Express Line,1900,Gaya;Ratlam;Pune,3
+COR346,Bhopal-Bareilly Route,1798,Bhopal;Madurai;Dehradun;Ratlam;Surat;Bareilly,5
+COR347,Secunderabad-Mumbai CST Loop Line,521,Secunderabad;Sealdah;Mumbai CST,1
+COR348,Meerut-Trivandrum Link Line,1539,Meerut;Vadodara;Agra;Chennai Central;Haridwar;Trivandrum,3
+COR349,Ahmedabad-Gwalior Route,398,Ahmedabad;Nashik;Agra;Bilaspur;Gwalior,3
+COR350,Khammam-Ranchi Main Line,580,Khammam;Sealdah;Ranchi,4
+COR351,Kanpur-Vapi Express Line,1326,Kanpur;Chandigarh;Vapi,2
+COR352,Nagpur-Mumbai CST Link Line,361,Nagpur;Surat;Mumbai CST,4
+COR353,Dehradun-Visakhapatnam Chord,841,Dehradun;Bareilly;Alwar;Visakhapatnam,1
+COR354,Kolkata-Bilaspur Route,959,Kolkata;Chennai Central;Coimbatore;Indore;Bilaspur,4
+COR355,Vapi-Jammu Main Line,1103,Vapi;Kota;Ahmedabad;Jammu,1
+COR356,Kanpur-Allahabad Link Line,1122,Kanpur;Mumbai Central;Allahabad,1
+COR357,Bhubaneswar-Chennai Central Branch Line,825,Bhubaneswar;Sealdah;Ahmedabad;Jaipur;New Jalpaiguri;Chennai Central,2
+COR358,Raipur-Bhubaneswar Branch Line,1955,Raipur;Indore;Bangarapet;Howrah;Bhubaneswar,1
+COR359,Bengaluru-Jodhpur Chord,1727,Bengaluru;Gaya;Jodhpur,4
+COR360,Secunderabad-Malda Route,658,Secunderabad;Trivandrum;Amritsar;Chennai Central;Malda,3
+COR361,Vadodara-Kochi Express Line,1686,Vadodara;Bareilly;Nagpur;Raipur;Kochi,5
+COR362,Gaya-Vadodara Link Line,1924,Gaya;Pune;New Delhi;Vadodara,1
+COR363,Allahabad-Dehradun Link Line,1799,Allahabad;Mughalsarai;Dehradun,3
+COR364,New Delhi-Gorakhpur Route,1591,New Delhi;Coimbatore;Kanpur;Hyderabad;Gorakhpur,4
+COR365,Hyderabad-Patna Link Line,653,Hyderabad;Mumbai Central;Patna,2
+COR366,Gurgaon-Srinagar Branch Line,1611,Gurgaon;Kochi;Srinagar,1
+COR367,Indore-Meerut Main Line,1292,Indore;Varanasi;Meerut,2
+COR368,Ranchi-Kochi Loop Line,1822,Ranchi;Sealdah;Katpadi;Vadodara;Kochi,3
+COR369,Betul-Coimbatore Chord,232,Betul;Meerut;Secunderabad;Coimbatore,2
+COR370,Lucknow-Amritsar Branch Line,1034,Lucknow;Trivandrum;Varanasi;Hyderabad;Amritsar,4
+COR371,Nashik-Malda Loop Line,1825,Nashik;Chennai Central;Malda,2
+COR372,Mangalore-Chennai Central Chord,1791,Mangalore;Srinagar;Bengaluru;Ahmedabad;Chennai Central,4
+COR373,Bengaluru-Mangalore Loop Line,1759,Bengaluru;Mumbai CST;Mughalsarai;Mangalore,4
+COR374,Bhubaneswar-Jaipur Branch Line,288,Bhubaneswar;New Delhi;Hyderabad;Jaipur,2
+COR375,Bhopal-Vadodara Route,900,Bhopal;Bilaspur;Haridwar;Mughalsarai;Vadodara,5
+COR376,Visakhapatnam-Pune Main Line,212,Visakhapatnam;Malda;Jabalpur;Pune,2
+COR377,Surat-Bilaspur Main Line,167,Surat;Kolkata;Ahmedabad;Sealdah;Kochi;Bilaspur,4
+COR378,Kolkata-Gorakhpur Link Line,953,Kolkata;Kanpur;Kota;Gorakhpur,3
+COR379,Madurai-Betul Chord,150,Madurai;Bilaspur;Patna;Betul,4
+COR380,Sealdah-Hyderabad Main Line,652,Sealdah;Bilaspur;Pune;Lucknow;Agra;Hyderabad,4
+COR381,Haridwar-Sealdah Express Line,1680,Haridwar;Jodhpur;Vijayawada;Malda;Trivandrum;Sealdah,2
+COR382,Kolkata-Aurangabad Express Line,528,Kolkata;Malda;Aurangabad,3
+COR383,Hyderabad-New Jalpaiguri Express Line,812,Hyderabad;Bengaluru;Surat;New Jalpaiguri,2
+COR384,Coimbatore-Hyderabad Route,529,Coimbatore;Itarsi;Khammam;Kota;Sealdah;Hyderabad,5
+COR385,Aurangabad-Haridwar Express Line,137,Aurangabad;Trivandrum;Mughalsarai;Pune;Haridwar,4
+COR386,Nashik-Jodhpur Branch Line,157,Nashik;Kolkata;Jodhpur,2
+COR387,Varanasi-Mumbai Central Express Line,1058,Varanasi;Jodhpur;Mumbai Central,5
+COR388,Vadodara-Bhopal Loop Line,1548,Vadodara;New Jalpaiguri;Katpadi;Bhopal,1
+COR389,Mumbai Central-Patna Express Line,1523,Mumbai Central;Alwar;Secunderabad;Patna,1
+COR390,Srinagar-Meerut Express Line,286,Srinagar;Secunderabad;Chandigarh;Guwahati;Meerut,4
+COR391,Aurangabad-Jodhpur Link Line,1230,Aurangabad;Mangalore;Dehradun;Kanpur;Jodhpur,3
+COR392,Kochi-Bhopal Chord,1572,Kochi;Mughalsarai;Bhopal,5
+COR393,Meerut-Howrah Chord,1313,Meerut;Katpadi;New Jalpaiguri;Gaya;Howrah,5
+COR394,Lucknow-Gaya Chord,758,Lucknow;Bhopal;Gaya,3
+COR395,Aurangabad-Amritsar Link Line,1893,Aurangabad;Bangarapet;Amritsar,3
+COR396,Betul-Mumbai CST Loop Line,509,Betul;Haridwar;Chennai Central;Mumbai CST,3
+COR397,Lucknow-New Delhi Main Line,870,Lucknow;Gorakhpur;Surat;Varanasi;Vapi;New Delhi,3
+COR398,Gorakhpur-Jaipur Route,1061,Gorakhpur;Allahabad;Ahmedabad;Jaipur,1
+COR399,Kochi-Mumbai Central Loop Line,614,Kochi;Chennai Central;Mumbai Central,3
+COR400,Amritsar-Gorakhpur Chord,1579,Amritsar;Trivandrum;Gorakhpur,1
+COR401,Jabalpur-Sealdah Link Line,143,Jabalpur;Raipur;Ahmedabad;Mughalsarai;Mangalore;Sealdah,1
+COR402,Bilaspur-Gwalior Chord,918,Bilaspur;Patna;Guwahati;Dehradun;Gwalior,1
+COR403,Meerut-Mughalsarai Chord,191,Meerut;New Delhi;Chennai Central;Agra;Mughalsarai,2
+COR404,Jaipur-Kolkata Chord,429,Jaipur;Itarsi;Vijayawada;Bengaluru;Kolkata,4
+COR405,New Jalpaiguri-Mughalsarai Link Line,622,New Jalpaiguri;Raipur;Mughalsarai,5
+COR406,Bareilly-Kota Loop Line,1893,Bareilly;Ratlam;Mumbai Central;Surat;Allahabad;Kota,3
+COR407,Varanasi-Coimbatore Express Line,206,Varanasi;Jammu;Meerut;Coimbatore,1
+COR408,Dehradun-Gurgaon Route,1287,Dehradun;Madurai;Kolkata;Gurgaon,5
+COR409,Katpadi-New Jalpaiguri Express Line,1885,Katpadi;Guwahati;Ranchi;New Jalpaiguri,4
+COR410,Howrah-Patna Main Line,1630,Howrah;Kanpur;Surat;Jaipur;Mughalsarai;Patna,4
+COR411,Ahmedabad-Khammam Chord,1764,Ahmedabad;Bangarapet;Nashik;Khammam,3
+COR412,Secunderabad-Surat Branch Line,1219,Secunderabad;Itarsi;Jodhpur;Kochi;Guwahati;Surat,1
+COR413,Katpadi-Guwahati Chord,1240,Katpadi;Sealdah;Guwahati,1
+COR414,Jaipur-Trivandrum Route,1176,Jaipur;Vapi;Indore;Agra;Trivandrum,5
+COR415,New Jalpaiguri-Howrah Chord,644,New Jalpaiguri;Nashik;Aurangabad;Ahmedabad;Dehradun;Howrah,3
+COR416,Ranchi-Bengaluru Link Line,1053,Ranchi;Malda;Mumbai CST;Ratlam;Bengaluru,3
+COR417,Madurai-Mughalsarai Route,1505,Madurai;Itarsi;Mughalsarai,2
+COR418,Indore-Mangalore Link Line,987,Indore;Gorakhpur;Patna;Agra;Mangalore,2
+COR419,Itarsi-Agra Route,913,Itarsi;Coimbatore;Kota;Betul;Bareilly;Agra,1
+COR420,Nashik-Alwar Chord,1678,Nashik;Surat;Alwar,2
+COR421,Vadodara-Hyderabad Chord,147,Vadodara;Kolkata;Ratlam;Srinagar;New Jalpaiguri;Hyderabad,4
+COR422,Meerut-Nagpur Link Line,142,Meerut;Ratlam;Vijayawada;Nagpur,2
+COR423,New Jalpaiguri-Dehradun Loop Line,414,New Jalpaiguri;Haridwar;Bangarapet;Gorakhpur;Dehradun,1
+COR424,Bareilly-Bengaluru Chord,1828,Bareilly;Nagpur;Itarsi;Bengaluru,2
+COR425,Coimbatore-Gurgaon Express Line,121,Coimbatore;Ranchi;Gurgaon,2
+COR426,Jodhpur-Mumbai CST Chord,596,Jodhpur;Srinagar;Jabalpur;Gaya;Mumbai CST,4
+COR427,Dehradun-Vapi Loop Line,526,Dehradun;Jabalpur;Guwahati;Visakhapatnam;Katpadi;Vapi,1
+COR428,Srinagar-Trivandrum Loop Line,1481,Srinagar;Ranchi;Trivandrum,1
+COR429,Jabalpur-Madurai Link Line,745,Jabalpur;Bhopal;Bilaspur;Srinagar;Madurai,2
+COR430,Guwahati-Ranchi Main Line,1729,Guwahati;Secunderabad;Amritsar;Haridwar;Dehradun;Ranchi,3
+COR431,Visakhapatnam-Katpadi Branch Line,875,Visakhapatnam;Mangalore;Katpadi,5
+COR432,Ratlam-Jabalpur Link Line,1540,Ratlam;Haridwar;Madurai;Jabalpur,3
+COR433,Mangalore-Amritsar Route,1426,Mangalore;Patna;Bengaluru;Amritsar,2
+COR434,Visakhapatnam-Kota Link Line,1922,Visakhapatnam;Kanpur;Jabalpur;Chennai Central;Kota,3
+COR435,Katpadi-Bilaspur Loop Line,613,Katpadi;Hyderabad;Allahabad;Itarsi;Bilaspur,5
+COR436,Pune-New Jalpaiguri Chord,1104,Pune;Itarsi;New Jalpaiguri,4
+COR437,Mangalore-Gurgaon Main Line,1863,Mangalore;Secunderabad;Jaipur;Gurgaon,4
+COR438,Kota-Ahmedabad Branch Line,761,Kota;Bilaspur;Amritsar;Ahmedabad,1
+COR439,Betul-Madurai Chord,1638,Betul;Bareilly;Kochi;Madurai,4
+COR440,Surat-Bhopal Express Line,968,Surat;Allahabad;Gaya;Agra;Vijayawada;Bhopal,5
+COR441,Vadodara-Srinagar Main Line,1906,Vadodara;Khammam;Coimbatore;Meerut;Srinagar,1
+COR442,Bhubaneswar-Varanasi Link Line,1876,Bhubaneswar;Guwahati;Bengaluru;Secunderabad;Varanasi,2
+COR443,Secunderabad-Chennai Central Loop Line,675,Secunderabad;Madurai;Gorakhpur;Aurangabad;Kota;Chennai Central,3
+COR444,Mughalsarai-Haridwar Route,465,Mughalsarai;Sealdah;Malda;Haridwar,1
+COR445,Allahabad-Varanasi Link Line,348,Allahabad;Mumbai CST;Gorakhpur;Varanasi,1
+COR446,Jammu-Howrah Branch Line,1875,Jammu;Madurai;Aurangabad;Alwar;Howrah,1
+COR447,Mumbai Central-Bengaluru Link Line,317,Mumbai Central;Kochi;Ranchi;Gwalior;Pune;Bengaluru,2
+COR448,Mumbai CST-Mangalore Branch Line,1435,Mumbai CST;Dehradun;Mangalore,5
+COR449,Coimbatore-Indore Branch Line,1781,Coimbatore;Visakhapatnam;Indore,5
+COR450,Vadodara-Visakhapatnam Route,1151,Vadodara;Jodhpur;Srinagar;Visakhapatnam,3
+COR451,Chandigarh-Chennai Central Express Line,1096,Chandigarh;Jammu;Sealdah;Chennai Central,3
+COR452,Ranchi-New Delhi Main Line,1455,Ranchi;New Jalpaiguri;New Delhi,1
+COR453,Gaya-Guwahati Main Line,1676,Gaya;Srinagar;Guwahati,1
+COR454,Vijayawada-Allahabad Branch Line,686,Vijayawada;Kolkata;Bengaluru;Ranchi;Allahabad,3
+COR455,Jammu-Aurangabad Branch Line,1592,Jammu;Bengaluru;Aurangabad,1
+COR456,Mumbai CST-Indore Link Line,1405,Mumbai CST;Kota;Ratlam;Indore,5
+COR457,Coimbatore-Surat Loop Line,1749,Coimbatore;Jaipur;Gwalior;Hyderabad;Surat,3
+COR458,Bareilly-Sealdah Route,943,Bareilly;Secunderabad;Hyderabad;Sealdah,2
+COR459,Lucknow-Katpadi Express Line,1068,Lucknow;Aurangabad;Surat;Meerut;Vadodara;Katpadi,2
+COR460,Sealdah-Mughalsarai Main Line,1897,Sealdah;Mumbai Central;Bhopal;Varanasi;Howrah;Mughalsarai,3
+COR461,Jaipur-Khammam Link Line,1568,Jaipur;Bhubaneswar;Kota;Khammam,2
+COR462,Bengaluru-Mumbai CST Link Line,1993,Bengaluru;Coimbatore;Itarsi;Mumbai CST,4
+COR463,Amritsar-Pune Route,1086,Amritsar;Kota;Patna;Bhopal;Pune,5
+COR464,Gorakhpur-Alwar Route,561,Gorakhpur;Allahabad;Alwar,4
+COR465,Betul-Surat Route,1100,Betul;Vijayawada;Hyderabad;Gorakhpur;Amritsar;Surat,4
+COR466,Howrah-New Delhi Route,266,Howrah;Kochi;Coimbatore;Vapi;New Delhi,3
+COR467,Jammu-Bengaluru Route,536,Jammu;Jodhpur;Trivandrum;Alwar;Aurangabad;Bengaluru,4
+COR468,Kanpur-Jaipur Route,1429,Kanpur;New Delhi;Kota;Jaipur,3
+COR469,Srinagar-Lucknow Main Line,1916,Srinagar;Vijayawada;Secunderabad;Lucknow,1
+COR470,Vijayawada-Vadodara Chord,327,Vijayawada;Lucknow;Gurgaon;Bangarapet;Ranchi;Vadodara,1
+COR471,Katpadi-Chennai Central Link Line,1795,Katpadi;Meerut;Chennai Central,4
+COR472,Vapi-Indore Branch Line,88,Vapi;Trivandrum;Indore,4
+COR473,Sealdah-Jodhpur Link Line,1264,Sealdah;Katpadi;Srinagar;Jodhpur,1
+COR474,Bareilly-Raipur Express Line,1885,Bareilly;Gwalior;New Jalpaiguri;Haridwar;Mangalore;Raipur,3
+COR475,Kochi-Betul Route,353,Kochi;Gwalior;Nashik;Betul,5
+COR476,Aurangabad-Agra Chord,509,Aurangabad;Jodhpur;Haridwar;New Jalpaiguri;Agra,2
+COR477,Raipur-Kanpur Route,801,Raipur;Mangalore;Kochi;Mughalsarai;Dehradun;Kanpur,4
+COR478,Mumbai CST-Lucknow Main Line,860,Mumbai CST;Dehradun;Howrah;Lucknow,2
+COR479,Coimbatore-Chandigarh Loop Line,1479,Coimbatore;Pune;Khammam;Kolkata;Chandigarh,2
+COR480,Howrah-Haridwar Route,1006,Howrah;Aurangabad;Haridwar,5
+COR481,Varanasi-Bareilly Chord,1126,Varanasi;Haridwar;Kolkata;Jabalpur;Bareilly,4
+COR482,Aurangabad-Bengaluru Main Line,1603,Aurangabad;Betul;Lucknow;Raipur;Bengaluru,3
+COR483,Vadodara-Ratlam Loop Line,999,Vadodara;Howrah;Haridwar;Ratlam,2
+COR484,Nagpur-Gorakhpur Main Line,957,Nagpur;Secunderabad;Indore;Trivandrum;Gorakhpur,1
+COR485,Bilaspur-Malda Link Line,1999,Bilaspur;Mumbai Central;Pune;Malda,5
+COR486,Bengaluru-Mangalore Branch Line,1697,Bengaluru;Srinagar;Howrah;Gurgaon;Mangalore,2
+COR487,Secunderabad-Chandigarh Branch Line,1192,Secunderabad;Chennai Central;Vapi;Nagpur;Ratlam;Chandigarh,3
+COR488,Jammu-Kochi Chord,1621,Jammu;Meerut;Bangarapet;Bilaspur;Madurai;Kochi,4
+COR489,Raipur-Gorakhpur Route,312,Raipur;Patna;Coimbatore;Srinagar;Bhopal;Gorakhpur,5
+COR490,Betul-Mughalsarai Main Line,687,Betul;Vijayawada;Chandigarh;Mughalsarai,1
+COR491,Amritsar-New Delhi Link Line,214,Amritsar;Bilaspur;Dehradun;New Delhi,4
+COR492,Lucknow-Gwalior Express Line,1777,Lucknow;Mughalsarai;Howrah;Jabalpur;Bangarapet;Gwalior,3
+COR493,Howrah-Surat Main Line,191,Howrah;Patna;Gurgaon;Surat,5
+COR494,Allahabad-Visakhapatnam Branch Line,874,Allahabad;Agra;Chandigarh;Vadodara;Bilaspur;Visakhapatnam,5
+COR495,New Delhi-Secunderabad Route,1607,New Delhi;Jammu;Secunderabad,1
+COR496,Haridwar-Lucknow Loop Line,1691,Haridwar;Nashik;Guwahati;Chennai Central;Lucknow,4
+COR497,Kolkata-New Jalpaiguri Chord,1172,Kolkata;Pune;Gorakhpur;New Jalpaiguri,5
+COR498,Kochi-Patna Loop Line,1467,Kochi;Mughalsarai;Gaya;New Delhi;Patna,1
+COR499,Chennai Central-New Delhi Express Line,1301,Chennai Central;Hyderabad;Kochi;Trivandrum;Mughalsarai;New Delhi,2
+COR500,Gurgaon-Patna Chord,456,Gurgaon;Aurangabad;Khammam;Patna,2

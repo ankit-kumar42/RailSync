@@ -229,6 +229,7 @@ export default function ConfirmedSchedule() {
        * Log the actual IDs received from the backend.
        * This is especially important for unscheduled tasks.
        */
+
       console.log(
         "UNSCHEDULED TASK IDS:",
         unscheduled.map((task) => ({
@@ -285,6 +286,7 @@ export default function ConfirmedSchedule() {
     /*
      * Only these four values are allowed by the backend.
      */
+
     if (!STATUS_OPTIONS.some((option) => option.value === normalizedStatus)) {
       setError(`Invalid status selected: ${normalizedStatus}`);
       return;
@@ -367,10 +369,15 @@ export default function ConfirmedSchedule() {
       }
 
       // ------------------------------------------------------
-      // UPDATE LOCAL STATE IMMEDIATELY
+      // UPDATE LOCAL STATE
       // ------------------------------------------------------
 
       if (taskType === "scheduled") {
+        /*
+         * Scheduled tasks remain in the scheduled list even
+         * when their status changes.
+         */
+
         setScheduledTasks((previousTasks) =>
           previousTasks.map((item) => {
             const itemId = getTaskId(item);
@@ -387,59 +394,116 @@ export default function ConfirmedSchedule() {
         );
       }
 
+      // ------------------------------------------------------
+      // UNSCHEDULED TASK BEHAVIOR
+      // ------------------------------------------------------
+
       if (taskType === "unscheduled") {
-        setUnscheduledTasks((previousTasks) =>
-          previousTasks.map((item) => {
-            const itemId = getTaskId(item);
+        if (normalizedStatus === "DONE") {
+          /*
+           * IMPORTANT:
+           *
+           * Once an UNSCHEDULED task is marked DONE,
+           * immediately remove it from the unscheduled list.
+           */
 
-            if (String(itemId) !== String(taskId)) {
-              return item;
-            }
+          setUnscheduledTasks((previousTasks) =>
+            previousTasks.filter((item) => {
+              const itemId = getTaskId(item);
 
-            return {
-              ...item,
-              status: normalizedStatus,
-            };
-          }),
-        );
+              return String(itemId) !== String(taskId);
+            }),
+          );
+
+          /*
+           * Close the modal because the task is completed.
+           */
+
+          setSelectedTask(null);
+          setSelectedTaskType(null);
+          setTaskDetailsError("");
+          setTaskDetailsLoading(false);
+        } else {
+          /*
+           * For PENDING, IN_PROGRESS and NOT_DONE,
+           * keep the task in the unscheduled list and
+           * only update its status.
+           */
+
+          setUnscheduledTasks((previousTasks) =>
+            previousTasks.map((item) => {
+              const itemId = getTaskId(item);
+
+              if (String(itemId) !== String(taskId)) {
+                return item;
+              }
+
+              return {
+                ...item,
+                status: normalizedStatus,
+              };
+            }),
+          );
+        }
       }
 
       // ------------------------------------------------------
       // UPDATE MODAL
       // ------------------------------------------------------
 
-      setSelectedTask((previousTask) => {
-        if (!previousTask) {
-          return previousTask;
-        }
+      /*
+       * Only update the modal if the task was NOT just
+       * completed and removed.
+       */
 
-        const previousId = getTaskId(previousTask);
+      if (!(taskType === "unscheduled" && normalizedStatus === "DONE")) {
+        setSelectedTask((previousTask) => {
+          if (!previousTask) {
+            return previousTask;
+          }
 
-        if (String(previousId) !== String(taskId)) {
-          return previousTask;
-        }
+          const previousId = getTaskId(previousTask);
 
-        return {
-          ...previousTask,
-          status: normalizedStatus,
-        };
-      });
+          if (String(previousId) !== String(taskId)) {
+            return previousTask;
+          }
+
+          return {
+            ...previousTask,
+            status: normalizedStatus,
+          };
+        });
+      }
 
       // ------------------------------------------------------
-      // SUCCESS
+      // SUCCESS MESSAGE
       // ------------------------------------------------------
 
-      setSuccess(
-        `Task ${taskId} status updated to ${displayStatus(normalizedStatus)}.`,
-      );
+      if (taskType === "unscheduled" && normalizedStatus === "DONE") {
+        setSuccess(
+          `Task ${taskId} has been completed and removed from unscheduled tasks.`,
+        );
+      } else {
+        setSuccess(
+          `Task ${taskId} status updated to ${displayStatus(
+            normalizedStatus,
+          )}.`,
+        );
+      }
+
+      // ------------------------------------------------------
+      // RELOAD FROM BACKEND
+      // ------------------------------------------------------
 
       /*
-       * IMPORTANT:
-       * Reload from the backend after the successful update.
+       * Reload after the successful update so the UI reflects
+       * the actual database state.
        *
-       * This confirms that the database really contains the
-       * new status, particularly for UNSCHEDULED tasks.
+       * IMPORTANT:
+       * Your backend's confirmed-schedule API should also avoid
+       * returning DONE tasks inside "unscheduled".
        */
+
       await loadConfirmedSchedule(false);
     } catch (err) {
       console.error("STATUS UPDATE ERROR:", err);

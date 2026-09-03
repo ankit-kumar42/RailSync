@@ -1,0 +1,501 @@
+team_id,department,skill_type,available_days,available_hours_per_day
+TEAM001,S&T,Interlocking,Fri;Sun;Mon;Thu;Wed;Sat,7
+TEAM002,S&T,Interlocking,Fri;Mon;Wed;Thu;Sun,4
+TEAM003,S&T,Signal Maintenance,Wed;Fri;Sat;Thu;Mon,7
+TEAM004,S&T,Interlocking,Wed;Fri;Sat;Thu;Tue;Mon,8
+TEAM005,Engineering,Track Fitting,Sat;Thu;Sun;Mon,5
+TEAM006,Engineering,Welding,Mon;Tue;Sun;Fri;Wed;Sat,4
+TEAM007,S&T,Signal Maintenance,Tue;Fri;Sat;Thu,4
+TEAM008,S&T,Interlocking,Sat;Thu;Mon;Sun,7
+TEAM009,S&T,Signal Maintenance,Sun;Mon;Sat;Thu,8
+TEAM010,Engineering,Track Fitting,Sun;Tue;Fri;Sat;Thu,8
+TEAM011,S&T,Interlocking,Wed;Sat;Fri;Thu,6
+TEAM012,S&T,Point Machine Repair,Tue;Sat;Wed;Mon,7
+TEAM013,Electrical,Traction Sub-station,Fri;Sun;Thu;Tue;Mon,6
+TEAM014,Electrical,Insulator Replacement,Mon;Thu;Sat;Tue;Wed,4
+TEAM015,Engineering,Track Fitting,Wed;Sun;Sat;Mon,6
+TEAM016,Electrical,Insulator Replacement,Wed;Tue;Mon;Thu,8
+TEAM017,S&T,Signal Maintenance,Tue;Fri;Wed;Sat;Sun;Mon,6
+TEAM018,Electrical,Insulator Replacement,Tue;Mon;Sat;Wed;Fri;Sun,7
+TEAM019,Engineering,Ballast/Track Renewal,Tue;Sat;Wed;Mon,5
+TEAM020,Electrical,Insulator Replacement,Mon;Wed;Thu;Sun;Sat,4
+TEAM021,S&T,Signal Maintenance,Sun;Thu;Fri;Sat;Wed,4
+TEAM022,Engineering,Track Fitting,Wed;Sat;Sun;Fri;Tue;Thu,6
+TEAM023,Electrical,Traction Sub-station,Sun;Wed;Mon;Tue;Thu;Sat,6
+TEAM024,Engineering,Ballast/Track Renewal,Tue;Sun;Fri;Wed;Sat,5
+TEAM025,Electrical,Insulator Replacement,Tue;Mon;Wed;Thu;Sun;Fri,5
+TEAM026,S&T,Signal Maintenance,Tue;Sat;Thu;Sun;Mon;Fri,8
+TEAM027,S&T,Interlocking,Mon;Tue;Fri;Sun;Sat;Wed,6
+TEAM028,S&T,Interlocking,Tue;Sun;Wed;Mon,7
+TEAM029,S&T,Point Machine Repair,Fri;Wed;Sat;Tue,8
+TEAM030,Electrical,Traction Sub-station,Thu;Tue;Wed;Fri,7
+TEAM031,Electrical,Insulator Replacement,Thu;Tue;Mon;Wed;Sun,8
+TEAM032,Electrical,Insulator Replacement,Sat;Mon;Thu;Wed;Fri,8
+TEAM033,Engineering,Welding,Thu;Mon;Wed;Sat,5
+TEAM034,Engineering,Ballast/Track Renewal,Sat;Mon;Thu;Sun;Wed;Tue,4
+TEAM035,Engineering,Rail Grinding,Sat;Thu;Sun;Mon;Wed,8
+TEAM036,Electrical,Insulator Replacement,Sat;Thu;Sun;Wed,4
+TEAM037,S&T,Interlocking,Sun;Sat;Tue;Thu;Fri;Mon,5
+TEAM038,Engineering,Track Fitting,Sun;Sat;Wed;Mon;Fri,8
+TEAM039,Electrical,Insulator Replacement,Mon;Fri;Tue;Thu,7
+TEAM040,Electrical,Traction Sub-station,Fri;Sat;Thu;Sun,7
+TEAM041,Electrical,OHE Maintenance,Tue;Wed;Thu;Sun,6
+TEAM042,Engineering,Ballast/Track Renewal,Sun;Tue;Sat;Fri,6
+TEAM043,S&T,Signal Maintenance,Mon;Sun;Tue;Thu;Fri;Sat,7
+TEAM044,Electrical,Traction Sub-station,Sat;Mon;Sun;Thu;Tue;Fri,6
+TEAM045,Engineering,Rail Grinding,Sun;Thu;Mon;Wed;Tue,4
+TEAM046,S&T,Interlocking,Tue;Wed;Mon;Thu,6
+TEAM047,Electrical,Traction Sub-station,Wed;Tue;Thu;Mon;Fri,8
+TEAM048,Electrical,OHE Maintenance,Sun;Tue;Thu;Sat;Mon,8
+TEAM049,S&T,Point Machine Repair,Sat;Thu;Fri;Wed;Tue;Mon,5
+TEAM050,Electrical,Insulator Replacement,Thu;Wed;Mon;Sat;Sun,4
+TEAM051,Engineering,Track Fitting,Wed;Mon;Tue;Sun;Fri;Sat,5
+TEAM052,Electrical,Traction Sub-station,Wed;Fri;Thu;Sat;Mon;Sun,8
+TEAM053,S&T,Interlocking,Mon;Wed;Thu;Tue;Sun;Sat,6
+TEAM054,Electrical,Traction Sub-station,Sat;Sun;Mon;Wed;Thu,7
+TEAM055,Electrical,Insulator Replacement,Tue;Wed;Mon;Fri,6
+TEAM056,S&T,Signal Maintenance,Fri;Sun;Thu;Wed;Mon,4
+TEAM057,Engineering,Ballast/Track Renewal,Mon;Fri;Wed;Sat;Sun,7
+TEAM058,Electrical,Insulator Replacement,Thu;Mon;Fri;Tue;Sat,8
+TEAM059,Electrical,Insulator Replacement,Mon;Sun;Fri;Thu,5
+TEAM060,Engineering,Rail Grinding,Fri;Mon;Wed;Sat,4
+TEAM061,Electrical,OHE Maintenance,Thu;Fri;Sun;Tue;Wed,4
+TEAM062,Engineering,Welding,Mon;Fri;Thu;Sun;Sat;Tue,8
+TEAM063,Electrical,Traction Sub-station,Tue;Wed;Thu;Mon;Sun,8
+TEAM064,S&T,Interlocking,Sun;Thu;Fri;Tue,5
+TEAM065,S&T,Interlocking,Wed;Tue;Sat;Mon;Fri,4
+TEAM066,Engineering,Track Fitting,Mon;Tue;Fri;Thu,6
+TEAM067,S&T,Signal Maintenance,Sat;Mon;Wed;Tue;Sun,6
+TEAM068,S&T,Interlocking,Wed;Tue;Mon;Thu,7
+TEAM069,Electrical,OHE Maintenance,Wed;Mon;Sun;Fri,8
+TEAM070,S&T,Interlocking,Mon;Thu;Sat;Tue,5
+TEAM071,S&T,Signal Maintenance,Tue;Sun;Sat;Wed,4
+TEAM072,Engineering,Rail Grinding,Sun;Fri;Tue;Sat,5
+TEAM073,Engineering,Rail Grinding,Tue;Sat;Mon;Fri;Wed,8
+TEAM074,Engineering,Ballast/Track Renewal,Sun;Tue;Wed;Fri,5
+TEAM075,Engineering,Ballast/Track Renewal,Tue;Sat;Sun;Wed,5
+TEAM076,S&T,Point Machine Repair,Sun;Tue;Sat;Fri,8
+TEAM077,Electrical,Traction Sub-station,Sat;Wed;Sun;Tue;Mon,6
+TEAM078,Engineering,Welding,Sun;Wed;Fri;Thu;Tue,4
+TEAM079,Engineering,Rail Grinding,Fri;Thu;Sat;Tue;Sun;Mon,4
+TEAM080,S&T,Signal Maintenance,Tue;Thu;Sat;Fri;Wed,5
+TEAM081,Electrical,Insulator Replacement,Fri;Sat;Wed;Tue;Sun;Thu,5
+TEAM082,Electrical,Traction Sub-station,Wed;Sat;Tue;Thu,7
+TEAM083,Electrical,Traction Sub-station,Sun;Mon;Wed;Thu;Tue;Sat,6
+TEAM084,Engineering,Ballast/Track Renewal,Thu;Sun;Wed;Mon;Tue;Fri,6
+TEAM085,Engineering,Track Fitting,Sun;Fri;Wed;Tue;Thu,7
+TEAM086,Electrical,Traction Sub-station,Sat;Wed;Tue;Sun;Mon,8
+TEAM087,S&T,Signal Maintenance,Sat;Thu;Tue;Wed;Sun;Mon,5
+TEAM088,Electrical,OHE Maintenance,Sun;Thu;Sat;Tue;Fri;Mon,6
+TEAM089,Electrical,OHE Maintenance,Sat;Thu;Sun;Tue,8
+TEAM090,Engineering,Rail Grinding,Tue;Sat;Wed;Thu;Fri,6
+TEAM091,S&T,Signal Maintenance,Tue;Sat;Fri;Mon;Sun,4
+TEAM092,Electrical,Insulator Replacement,Tue;Wed;Fri;Thu;Sat;Mon,8
+TEAM093,S&T,Signal Maintenance,Mon;Thu;Sun;Wed;Fri;Sat,4
+TEAM094,Electrical,Insulator Replacement,Tue;Sat;Thu;Mon;Fri;Wed,4
+TEAM095,Electrical,OHE Maintenance,Tue;Thu;Mon;Sat;Wed,5
+TEAM096,Engineering,Ballast/Track Renewal,Fri;Sun;Thu;Sat;Wed,4
+TEAM097,S&T,Interlocking,Sat;Wed;Fri;Tue;Mon,5
+TEAM098,Engineering,Rail Grinding,Sun;Tue;Fri;Wed;Sat,7
+TEAM099,Engineering,Rail Grinding,Wed;Tue;Fri;Sat;Thu;Sun,6
+TEAM100,Electrical,OHE Maintenance,Fri;Mon;Thu;Tue,8
+TEAM101,S&T,Signal Maintenance,Mon;Tue;Thu;Wed;Fri,4
+TEAM102,S&T,Interlocking,Sat;Thu;Sun;Wed,8
+TEAM103,Electrical,OHE Maintenance,Thu;Sun;Mon;Sat;Wed;Fri,5
+TEAM104,Electrical,OHE Maintenance,Mon;Sun;Sat;Thu;Fri;Wed,6
+TEAM105,S&T,Interlocking,Thu;Sat;Tue;Wed,8
+TEAM106,Engineering,Ballast/Track Renewal,Tue;Sun;Wed;Fri,5
+TEAM107,Electrical,Insulator Replacement,Sun;Thu;Tue;Wed;Sat,4
+TEAM108,Electrical,OHE Maintenance,Fri;Sat;Wed;Mon;Sun;Thu,4
+TEAM109,Electrical,Traction Sub-station,Tue;Mon;Sat;Wed;Thu;Fri,4
+TEAM110,Electrical,OHE Maintenance,Fri;Sat;Sun;Mon;Thu,4
+TEAM111,Electrical,Insulator Replacement,Mon;Tue;Fri;Thu,7
+TEAM112,Engineering,Welding,Mon;Sat;Sun;Fri;Thu;Tue,5
+TEAM113,Engineering,Track Fitting,Fri;Sat;Wed;Sun;Thu,6
+TEAM114,Engineering,Ballast/Track Renewal,Wed;Tue;Mon;Thu,4
+TEAM115,S&T,Point Machine Repair,Sat;Mon;Thu;Sun;Fri;Tue,4
+TEAM116,Engineering,Rail Grinding,Mon;Sat;Sun;Thu;Fri,5
+TEAM117,Engineering,Ballast/Track Renewal,Sat;Wed;Mon;Tue;Thu;Sun,4
+TEAM118,Engineering,Ballast/Track Renewal,Mon;Sun;Tue;Thu;Wed,6
+TEAM119,Electrical,OHE Maintenance,Sat;Mon;Fri;Tue;Thu,7
+TEAM120,S&T,Point Machine Repair,Thu;Wed;Sun;Tue;Sat,4
+TEAM121,Engineering,Ballast/Track Renewal,Sat;Thu;Wed;Mon,7
+TEAM122,Engineering,Rail Grinding,Tue;Sat;Sun;Mon,6
+TEAM123,Electrical,OHE Maintenance,Sat;Tue;Mon;Wed,5
+TEAM124,Electrical,OHE Maintenance,Fri;Sat;Thu;Tue;Sun,4
+TEAM125,Electrical,Insulator Replacement,Sun;Wed;Sat;Tue;Thu,5
+TEAM126,S&T,Point Machine Repair,Wed;Mon;Sat;Tue;Sun;Thu,6
+TEAM127,Electrical,Insulator Replacement,Sat;Thu;Fri;Wed,8
+TEAM128,S&T,Point Machine Repair,Thu;Fri;Wed;Tue;Mon,4
+TEAM129,Electrical,OHE Maintenance,Sat;Sun;Wed;Thu;Tue;Fri,7
+TEAM130,Engineering,Rail Grinding,Sun;Fri;Wed;Tue;Mon,7
+TEAM131,S&T,Signal Maintenance,Thu;Tue;Sun;Fri,5
+TEAM132,S&T,Point Machine Repair,Wed;Mon;Sun;Thu;Sat,7
+TEAM133,Engineering,Ballast/Track Renewal,Wed;Sat;Sun;Mon,5
+TEAM134,Engineering,Welding,Sat;Thu;Tue;Wed;Mon;Fri,4
+TEAM135,Engineering,Ballast/Track Renewal,Sun;Thu;Sat;Mon;Wed;Tue,4
+TEAM136,Electrical,OHE Maintenance,Tue;Mon;Thu;Fri;Sat;Wed,8
+TEAM137,S&T,Interlocking,Wed;Sat;Tue;Fri,5
+TEAM138,Engineering,Track Fitting,Tue;Fri;Sun;Wed,4
+TEAM139,S&T,Point Machine Repair,Wed;Tue;Fri;Sat;Thu,8
+TEAM140,S&T,Signal Maintenance,Mon;Sun;Wed;Sat;Thu,8
+TEAM141,Electrical,Traction Sub-station,Sun;Mon;Tue;Wed;Sat;Thu,5
+TEAM142,Electrical,Insulator Replacement,Sun;Wed;Tue;Sat,7
+TEAM143,Engineering,Track Fitting,Fri;Sun;Tue;Mon;Sat;Wed,4
+TEAM144,S&T,Signal Maintenance,Wed;Thu;Fri;Mon;Sun;Tue,8
+TEAM145,Engineering,Ballast/Track Renewal,Fri;Mon;Sat;Sun,6
+TEAM146,Engineering,Rail Grinding,Wed;Tue;Sun;Mon;Fri;Sat,5
+TEAM147,S&T,Interlocking,Wed;Sun;Thu;Fri;Tue;Sat,5
+TEAM148,S&T,Interlocking,Mon;Sat;Fri;Tue,4
+TEAM149,Electrical,OHE Maintenance,Thu;Fri;Mon;Tue;Sun,8
+TEAM150,S&T,Interlocking,Tue;Mon;Sun;Thu;Fri;Sat,7
+TEAM151,S&T,Signal Maintenance,Wed;Sun;Fri;Sat,6
+TEAM152,Electrical,Traction Sub-station,Fri;Wed;Mon;Sat;Sun;Thu,7
+TEAM153,S&T,Point Machine Repair,Sat;Mon;Wed;Fri;Sun;Tue,4
+TEAM154,Electrical,OHE Maintenance,Mon;Thu;Wed;Sat;Tue;Sun,5
+TEAM155,Electrical,Traction Sub-station,Thu;Mon;Sat;Sun;Tue,5
+TEAM156,Electrical,Traction Sub-station,Tue;Thu;Fri;Mon,6
+TEAM157,S&T,Signal Maintenance,Tue;Wed;Sun;Mon,8
+TEAM158,Electrical,OHE Maintenance,Sat;Thu;Fri;Tue;Wed,8
+TEAM159,Electrical,Traction Sub-station,Wed;Thu;Sat;Tue;Fri,4
+TEAM160,S&T,Point Machine Repair,Tue;Sun;Sat;Wed;Mon;Thu,6
+TEAM161,S&T,Interlocking,Wed;Mon;Thu;Tue,6
+TEAM162,Engineering,Rail Grinding,Tue;Thu;Fri;Mon;Sun,8
+TEAM163,Electrical,Traction Sub-station,Wed;Fri;Mon;Thu;Sat,7
+TEAM164,S&T,Point Machine Repair,Tue;Wed;Sun;Sat,7
+TEAM165,Engineering,Track Fitting,Tue;Sat;Sun;Wed,8
+TEAM166,Electrical,Traction Sub-station,Tue;Mon;Wed;Sun,8
+TEAM167,Electrical,OHE Maintenance,Wed;Mon;Tue;Thu,7
+TEAM168,Engineering,Ballast/Track Renewal,Tue;Mon;Thu;Wed;Sat,8
+TEAM169,Engineering,Track Fitting,Wed;Mon;Thu;Fri,8
+TEAM170,Engineering,Ballast/Track Renewal,Sat;Tue;Fri;Sun;Thu,7
+TEAM171,S&T,Interlocking,Sun;Mon;Thu;Tue;Sat,6
+TEAM172,Engineering,Track Fitting,Sun;Tue;Fri;Sat,8
+TEAM173,Engineering,Rail Grinding,Sun;Wed;Mon;Tue;Fri;Sat,7
+TEAM174,Engineering,Ballast/Track Renewal,Fri;Tue;Sat;Sun,6
+TEAM175,S&T,Interlocking,Fri;Thu;Mon;Sun;Sat,4
+TEAM176,S&T,Interlocking,Sat;Fri;Wed;Thu,4
+TEAM177,Electrical,OHE Maintenance,Sun;Wed;Thu;Sat,7
+TEAM178,Engineering,Rail Grinding,Fri;Wed;Mon;Thu;Sat,8
+TEAM179,Engineering,Track Fitting,Wed;Sun;Tue;Fri,5
+TEAM180,Engineering,Welding,Sat;Thu;Sun;Mon;Tue;Wed,7
+TEAM181,Electrical,Traction Sub-station,Wed;Tue;Thu;Mon;Sun;Fri,8
+TEAM182,Electrical,Traction Sub-station,Sat;Fri;Mon;Sun,7
+TEAM183,Electrical,Traction Sub-station,Sat;Thu;Wed;Mon;Tue,5
+TEAM184,S&T,Point Machine Repair,Sun;Thu;Mon;Tue;Fri;Wed,8
+TEAM185,Engineering,Rail Grinding,Fri;Mon;Thu;Sat;Wed,8
+TEAM186,Engineering,Track Fitting,Tue;Mon;Sat;Thu,7
+TEAM187,S&T,Signal Maintenance,Thu;Mon;Sun;Fri;Wed;Tue,5
+TEAM188,Electrical,OHE Maintenance,Tue;Sun;Thu;Mon,8
+TEAM189,Electrical,Insulator Replacement,Mon;Tue;Thu;Wed,8
+TEAM190,Electrical,Traction Sub-station,Thu;Mon;Sat;Wed,5
+TEAM191,S&T,Point Machine Repair,Mon;Sun;Sat;Tue,7
+TEAM192,Electrical,OHE Maintenance,Sun;Fri;Sat;Tue;Mon;Wed,5
+TEAM193,Engineering,Rail Grinding,Wed;Fri;Sat;Thu;Tue,8
+TEAM194,Engineering,Track Fitting,Sun;Fri;Wed;Mon;Tue,8
+TEAM195,Engineering,Welding,Wed;Fri;Mon;Sun;Sat,8
+TEAM196,Engineering,Ballast/Track Renewal,Mon;Wed;Sun;Thu,6
+TEAM197,Engineering,Welding,Wed;Tue;Thu;Fri;Mon,6
+TEAM198,Engineering,Track Fitting,Tue;Wed;Sat;Fri;Mon,5
+TEAM199,Electrical,Traction Sub-station,Thu;Wed;Sun;Fri;Tue;Sat,8
+TEAM200,Electrical,Insulator Replacement,Fri;Thu;Tue;Sun;Sat,8
+TEAM201,Electrical,Insulator Replacement,Sun;Mon;Sat;Wed;Tue,5
+TEAM202,Electrical,OHE Maintenance,Fri;Tue;Sun;Thu;Sat,7
+TEAM203,S&T,Point Machine Repair,Tue;Sat;Mon;Thu,5
+TEAM204,Electrical,Traction Sub-station,Thu;Tue;Fri;Sat;Wed;Sun,4
+TEAM205,S&T,Point Machine Repair,Sun;Tue;Wed;Fri;Mon;Thu,5
+TEAM206,S&T,Interlocking,Thu;Sat;Wed;Mon;Sun,5
+TEAM207,Engineering,Rail Grinding,Thu;Fri;Mon;Wed;Tue,7
+TEAM208,S&T,Signal Maintenance,Sun;Tue;Wed;Mon;Fri,6
+TEAM209,S&T,Signal Maintenance,Thu;Mon;Tue;Fri,8
+TEAM210,S&T,Interlocking,Wed;Thu;Fri;Tue,5
+TEAM211,Engineering,Welding,Sat;Tue;Mon;Wed;Sun;Fri,7
+TEAM212,Electrical,Traction Sub-station,Thu;Mon;Sun;Tue;Fri;Sat,5
+TEAM213,S&T,Point Machine Repair,Mon;Sun;Sat;Tue,5
+TEAM214,Engineering,Ballast/Track Renewal,Sat;Fri;Wed;Sun;Mon;Tue,6
+TEAM215,S&T,Interlocking,Sun;Tue;Thu;Fri,8
+TEAM216,Electrical,OHE Maintenance,Tue;Sat;Fri;Thu;Sun;Mon,5
+TEAM217,Electrical,OHE Maintenance,Sat;Sun;Wed;Fri;Tue,8
+TEAM218,Engineering,Ballast/Track Renewal,Wed;Thu;Sun;Mon;Sat;Fri,5
+TEAM219,Electrical,Insulator Replacement,Sun;Mon;Fri;Tue;Thu,4
+TEAM220,S&T,Interlocking,Mon;Wed;Sat;Thu,4
+TEAM221,Electrical,Traction Sub-station,Sat;Sun;Mon;Fri;Thu;Wed,6
+TEAM222,Electrical,Insulator Replacement,Mon;Wed;Sun;Sat,5
+TEAM223,Engineering,Rail Grinding,Thu;Fri;Wed;Mon;Sat,5
+TEAM224,Electrical,OHE Maintenance,Sat;Sun;Mon;Wed;Thu;Fri,7
+TEAM225,Electrical,Traction Sub-station,Wed;Fri;Mon;Tue;Sat,8
+TEAM226,S&T,Interlocking,Thu;Fri;Wed;Sun,6
+TEAM227,Electrical,OHE Maintenance,Sun;Thu;Fri;Wed;Mon,4
+TEAM228,S&T,Interlocking,Thu;Sat;Mon;Sun,8
+TEAM229,S&T,Signal Maintenance,Sat;Sun;Tue;Thu;Wed;Mon,7
+TEAM230,Engineering,Ballast/Track Renewal,Fri;Thu;Sat;Sun;Mon,4
+TEAM231,S&T,Signal Maintenance,Sun;Thu;Sat;Wed;Fri,8
+TEAM232,Engineering,Track Fitting,Thu;Mon;Sun;Sat,6
+TEAM233,Engineering,Rail Grinding,Tue;Wed;Sun;Sat;Fri;Mon,8
+TEAM234,Electrical,Traction Sub-station,Thu;Sat;Tue;Wed;Mon,6
+TEAM235,Engineering,Track Fitting,Sat;Fri;Sun;Tue;Thu;Mon,7
+TEAM236,Electrical,Insulator Replacement,Mon;Thu;Sat;Wed,8
+TEAM237,Engineering,Ballast/Track Renewal,Wed;Fri;Sun;Thu;Tue;Sat,8
+TEAM238,Engineering,Ballast/Track Renewal,Mon;Tue;Fri;Wed,5
+TEAM239,Engineering,Welding,Thu;Sun;Sat;Tue,6
+TEAM240,Electrical,OHE Maintenance,Wed;Sat;Mon;Tue;Thu;Fri,8
+TEAM241,Electrical,Traction Sub-station,Mon;Tue;Sun;Thu;Fri,4
+TEAM242,S&T,Signal Maintenance,Tue;Sat;Mon;Thu;Fri,8
+TEAM243,S&T,Interlocking,Sun;Thu;Sat;Fri;Wed,4
+TEAM244,Engineering,Rail Grinding,Wed;Tue;Thu;Fri,5
+TEAM245,Engineering,Ballast/Track Renewal,Thu;Mon;Tue;Sat,4
+TEAM246,Engineering,Rail Grinding,Tue;Wed;Sat;Thu,5
+TEAM247,S&T,Interlocking,Sat;Sun;Thu;Fri;Tue,4
+TEAM248,S&T,Signal Maintenance,Mon;Sat;Fri;Thu;Sun,7
+TEAM249,Electrical,Insulator Replacement,Thu;Wed;Sun;Fri;Tue;Sat,6
+TEAM250,Engineering,Welding,Sun;Tue;Sat;Wed;Fri;Mon,4
+TEAM251,S&T,Signal Maintenance,Tue;Sun;Wed;Sat;Fri,7
+TEAM252,S&T,Signal Maintenance,Tue;Thu;Fri;Sun;Wed,5
+TEAM253,Engineering,Ballast/Track Renewal,Mon;Wed;Tue;Sun;Fri;Thu,6
+TEAM254,S&T,Point Machine Repair,Sat;Tue;Thu;Mon;Fri,6
+TEAM255,Electrical,Insulator Replacement,Mon;Sun;Wed;Sat;Fri;Thu,4
+TEAM256,Engineering,Welding,Sun;Tue;Thu;Mon;Fri;Wed,5
+TEAM257,Electrical,Traction Sub-station,Fri;Sat;Tue;Wed;Sun;Thu,8
+TEAM258,Electrical,Insulator Replacement,Tue;Wed;Sat;Sun,6
+TEAM259,Electrical,OHE Maintenance,Tue;Mon;Wed;Thu;Sun;Sat,6
+TEAM260,Electrical,OHE Maintenance,Fri;Thu;Sat;Wed;Sun;Mon,5
+TEAM261,Engineering,Track Fitting,Thu;Sat;Tue;Sun,7
+TEAM262,Electrical,OHE Maintenance,Tue;Wed;Thu;Sat;Sun;Mon,7
+TEAM263,S&T,Interlocking,Mon;Sun;Sat;Tue;Fri,8
+TEAM264,Electrical,Insulator Replacement,Mon;Wed;Thu;Sun,6
+TEAM265,Engineering,Ballast/Track Renewal,Sun;Wed;Sat;Tue;Mon;Thu,4
+TEAM266,Electrical,Insulator Replacement,Sat;Mon;Tue;Fri,6
+TEAM267,Electrical,Insulator Replacement,Thu;Fri;Tue;Mon,4
+TEAM268,Engineering,Ballast/Track Renewal,Mon;Fri;Sun;Tue;Sat;Thu,8
+TEAM269,Engineering,Ballast/Track Renewal,Sun;Fri;Mon;Tue;Wed,5
+TEAM270,Electrical,Insulator Replacement,Mon;Wed;Fri;Tue;Sat,4
+TEAM271,S&T,Signal Maintenance,Mon;Wed;Tue;Thu,7
+TEAM272,Electrical,OHE Maintenance,Sun;Thu;Sat;Tue,8
+TEAM273,S&T,Interlocking,Sun;Mon;Tue;Fri;Wed;Thu,8
+TEAM274,Engineering,Rail Grinding,Wed;Thu;Sun;Sat;Mon;Tue,5
+TEAM275,Engineering,Ballast/Track Renewal,Wed;Sat;Fri;Tue,5
+TEAM276,Engineering,Welding,Tue;Fri;Thu;Wed;Mon,4
+TEAM277,S&T,Signal Maintenance,Sat;Wed;Tue;Thu,8
+TEAM278,Engineering,Welding,Sat;Wed;Mon;Fri;Tue,7
+TEAM279,Electrical,Traction Sub-station,Sun;Mon;Fri;Thu;Tue;Wed,5
+TEAM280,S&T,Signal Maintenance,Sun;Tue;Thu;Sat;Fri;Wed,4
+TEAM281,Engineering,Welding,Tue;Thu;Sat;Sun;Wed;Mon,5
+TEAM282,Electrical,Traction Sub-station,Thu;Fri;Sat;Mon;Wed,5
+TEAM283,Electrical,Insulator Replacement,Mon;Thu;Wed;Tue;Sun,8
+TEAM284,S&T,Signal Maintenance,Sat;Fri;Sun;Mon;Tue;Wed,8
+TEAM285,S&T,Interlocking,Fri;Sun;Mon;Tue;Thu,6
+TEAM286,S&T,Point Machine Repair,Thu;Tue;Sun;Wed;Fri,7
+TEAM287,Electrical,Traction Sub-station,Fri;Tue;Sun;Wed,8
+TEAM288,Engineering,Rail Grinding,Mon;Sat;Wed;Sun,7
+TEAM289,Engineering,Welding,Thu;Fri;Sat;Tue;Wed,4
+TEAM290,Engineering,Rail Grinding,Wed;Mon;Fri;Thu;Sat,4
+TEAM291,Electrical,Insulator Replacement,Mon;Sun;Wed;Sat;Thu,8
+TEAM292,Engineering,Rail Grinding,Fri;Sat;Tue;Thu;Wed,7
+TEAM293,Electrical,Insulator Replacement,Mon;Sat;Tue;Sun;Thu,8
+TEAM294,Engineering,Ballast/Track Renewal,Mon;Sat;Tue;Wed,4
+TEAM295,Engineering,Welding,Mon;Thu;Wed;Tue;Fri;Sun,7
+TEAM296,S&T,Signal Maintenance,Wed;Tue;Sat;Fri;Mon;Sun,7
+TEAM297,S&T,Interlocking,Sat;Fri;Mon;Thu,5
+TEAM298,Engineering,Ballast/Track Renewal,Sat;Tue;Mon;Sun;Thu,5
+TEAM299,Electrical,Insulator Replacement,Thu;Tue;Wed;Sun;Sat;Mon,7
+TEAM300,S&T,Signal Maintenance,Mon;Sat;Wed;Thu;Fri,4
+TEAM301,S&T,Point Machine Repair,Thu;Sat;Fri;Wed;Tue,7
+TEAM302,Electrical,OHE Maintenance,Thu;Fri;Sun;Tue;Sat;Wed,6
+TEAM303,Electrical,OHE Maintenance,Wed;Sat;Mon;Sun;Tue,7
+TEAM304,S&T,Signal Maintenance,Sun;Thu;Wed;Tue;Fri;Sat,8
+TEAM305,Engineering,Rail Grinding,Sat;Tue;Wed;Thu;Fri;Mon,7
+TEAM306,Electrical,OHE Maintenance,Thu;Wed;Fri;Sat;Mon,5
+TEAM307,Engineering,Welding,Wed;Fri;Thu;Mon;Sun,8
+TEAM308,Electrical,OHE Maintenance,Sun;Sat;Thu;Tue,6
+TEAM309,Electrical,OHE Maintenance,Thu;Fri;Wed;Mon;Tue;Sun,6
+TEAM310,Electrical,OHE Maintenance,Sat;Mon;Fri;Tue;Wed,6
+TEAM311,Electrical,Traction Sub-station,Sat;Mon;Sun;Thu,5
+TEAM312,Electrical,OHE Maintenance,Sun;Tue;Fri;Mon;Wed;Sat,7
+TEAM313,Engineering,Welding,Sun;Fri;Wed;Sat,6
+TEAM314,S&T,Signal Maintenance,Mon;Tue;Fri;Sun;Thu;Sat,5
+TEAM315,Electrical,Insulator Replacement,Mon;Wed;Sun;Tue;Sat,4
+TEAM316,Electrical,Traction Sub-station,Sat;Tue;Fri;Mon,6
+TEAM317,Engineering,Rail Grinding,Mon;Tue;Thu;Wed,5
+TEAM318,Engineering,Welding,Sun;Wed;Tue;Mon;Sat;Thu,4
+TEAM319,Engineering,Track Fitting,Wed;Fri;Mon;Sun;Sat;Tue,6
+TEAM320,Engineering,Welding,Tue;Fri;Thu;Sat;Mon,6
+TEAM321,Engineering,Ballast/Track Renewal,Wed;Thu;Tue;Fri;Sun;Sat,6
+TEAM322,Electrical,Traction Sub-station,Wed;Sat;Thu;Mon,8
+TEAM323,S&T,Interlocking,Tue;Wed;Mon;Fri;Sun;Sat,6
+TEAM324,Electrical,Traction Sub-station,Tue;Sat;Thu;Mon;Sun;Fri,7
+TEAM325,Engineering,Ballast/Track Renewal,Thu;Tue;Sat;Sun;Fri,7
+TEAM326,Engineering,Track Fitting,Sat;Wed;Thu;Sun,7
+TEAM327,S&T,Signal Maintenance,Tue;Thu;Wed;Mon;Sat;Sun,4
+TEAM328,S&T,Point Machine Repair,Mon;Fri;Thu;Sat;Sun;Wed,8
+TEAM329,S&T,Interlocking,Fri;Tue;Mon;Thu;Sun,4
+TEAM330,Engineering,Rail Grinding,Thu;Sat;Sun;Mon,6
+TEAM331,Electrical,OHE Maintenance,Wed;Sat;Fri;Tue;Mon;Thu,7
+TEAM332,Engineering,Ballast/Track Renewal,Sun;Tue;Wed;Sat,8
+TEAM333,S&T,Signal Maintenance,Wed;Fri;Sun;Mon,6
+TEAM334,S&T,Interlocking,Tue;Wed;Fri;Sun,7
+TEAM335,Electrical,Traction Sub-station,Sun;Sat;Tue;Fri,5
+TEAM336,Engineering,Track Fitting,Tue;Thu;Wed;Fri;Sun,7
+TEAM337,Electrical,OHE Maintenance,Fri;Mon;Sat;Wed;Tue;Sun,6
+TEAM338,S&T,Point Machine Repair,Mon;Fri;Tue;Wed,5
+TEAM339,Electrical,Insulator Replacement,Tue;Mon;Sat;Sun;Wed,8
+TEAM340,Electrical,Traction Sub-station,Sat;Sun;Mon;Wed,4
+TEAM341,Electrical,OHE Maintenance,Fri;Mon;Thu;Tue;Sun;Wed,4
+TEAM342,Electrical,OHE Maintenance,Fri;Mon;Thu;Tue,8
+TEAM343,Engineering,Ballast/Track Renewal,Fri;Thu;Tue;Sun;Mon;Wed,8
+TEAM344,S&T,Interlocking,Fri;Mon;Wed;Thu;Sat,7
+TEAM345,Electrical,Traction Sub-station,Sun;Mon;Wed;Tue,8
+TEAM346,S&T,Signal Maintenance,Thu;Mon;Sun;Wed;Tue,8
+TEAM347,S&T,Signal Maintenance,Mon;Wed;Tue;Sun;Fri;Sat,6
+TEAM348,Engineering,Ballast/Track Renewal,Mon;Tue;Thu;Sat,8
+TEAM349,Electrical,Insulator Replacement,Mon;Tue;Wed;Fri;Sun;Thu,8
+TEAM350,Electrical,Insulator Replacement,Thu;Sun;Mon;Tue;Wed,4
+TEAM351,Electrical,OHE Maintenance,Sun;Sat;Tue;Wed;Fri;Thu,6
+TEAM352,Electrical,Insulator Replacement,Fri;Sat;Tue;Sun,7
+TEAM353,S&T,Signal Maintenance,Mon;Sun;Tue;Fri,7
+TEAM354,Engineering,Ballast/Track Renewal,Sun;Wed;Mon;Tue,5
+TEAM355,Electrical,Traction Sub-station,Mon;Fri;Wed;Tue,5
+TEAM356,Engineering,Ballast/Track Renewal,Fri;Sat;Sun;Tue,6
+TEAM357,Engineering,Track Fitting,Sun;Fri;Tue;Mon,7
+TEAM358,S&T,Interlocking,Sun;Sat;Thu;Tue;Fri;Mon,5
+TEAM359,S&T,Signal Maintenance,Sat;Sun;Mon;Thu;Fri;Tue,8
+TEAM360,Engineering,Welding,Fri;Sun;Wed;Thu;Tue;Sat,5
+TEAM361,Engineering,Ballast/Track Renewal,Wed;Tue;Mon;Sun,4
+TEAM362,Engineering,Welding,Thu;Mon;Sun;Tue,6
+TEAM363,S&T,Point Machine Repair,Sun;Sat;Fri;Wed,4
+TEAM364,Engineering,Track Fitting,Mon;Fri;Wed;Sun;Thu,8
+TEAM365,Engineering,Rail Grinding,Wed;Sun;Sat;Fri;Tue;Thu,5
+TEAM366,S&T,Point Machine Repair,Wed;Thu;Mon;Tue;Sat,7
+TEAM367,Electrical,OHE Maintenance,Thu;Sun;Mon;Sat,5
+TEAM368,Electrical,OHE Maintenance,Wed;Thu;Mon;Tue;Sun;Sat,7
+TEAM369,Electrical,Insulator Replacement,Mon;Wed;Sat;Thu,5
+TEAM370,Electrical,OHE Maintenance,Fri;Sun;Thu;Wed,4
+TEAM371,Engineering,Track Fitting,Sat;Sun;Wed;Thu,4
+TEAM372,Electrical,Traction Sub-station,Thu;Tue;Sun;Fri;Mon,5
+TEAM373,Engineering,Rail Grinding,Mon;Sun;Thu;Fri;Sat;Tue,5
+TEAM374,S&T,Signal Maintenance,Wed;Tue;Sun;Sat,4
+TEAM375,S&T,Point Machine Repair,Sat;Thu;Tue;Sun;Fri;Wed,4
+TEAM376,Electrical,Traction Sub-station,Thu;Fri;Sat;Sun;Wed,8
+TEAM377,Electrical,OHE Maintenance,Thu;Fri;Sat;Tue,4
+TEAM378,Engineering,Rail Grinding,Tue;Thu;Fri;Sun;Sat;Mon,4
+TEAM379,Electrical,Insulator Replacement,Sat;Tue;Fri;Mon,5
+TEAM380,Electrical,OHE Maintenance,Wed;Fri;Tue;Sun;Mon,4
+TEAM381,Electrical,OHE Maintenance,Sat;Sun;Tue;Mon;Thu,8
+TEAM382,Electrical,OHE Maintenance,Fri;Tue;Wed;Thu,4
+TEAM383,S&T,Interlocking,Mon;Fri;Sun;Thu,8
+TEAM384,Electrical,Insulator Replacement,Sun;Thu;Wed;Sat,8
+TEAM385,S&T,Signal Maintenance,Fri;Sat;Wed;Thu;Tue;Sun,8
+TEAM386,S&T,Interlocking,Tue;Sun;Mon;Thu;Fri,4
+TEAM387,Electrical,Insulator Replacement,Sun;Wed;Thu;Sat;Fri,4
+TEAM388,S&T,Signal Maintenance,Sat;Mon;Sun;Thu;Fri;Tue,5
+TEAM389,S&T,Signal Maintenance,Wed;Thu;Tue;Mon;Fri;Sat,4
+TEAM390,Engineering,Welding,Sun;Wed;Thu;Tue;Sat,7
+TEAM391,Engineering,Welding,Wed;Fri;Thu;Tue;Sat;Mon,4
+TEAM392,S&T,Interlocking,Sun;Sat;Fri;Mon;Tue;Thu,4
+TEAM393,Engineering,Track Fitting,Sun;Mon;Thu;Sat;Tue;Wed,6
+TEAM394,Engineering,Track Fitting,Thu;Tue;Sat;Sun,4
+TEAM395,Engineering,Ballast/Track Renewal,Fri;Sun;Wed;Sat;Thu,4
+TEAM396,Engineering,Rail Grinding,Fri;Mon;Tue;Thu;Wed;Sat,8
+TEAM397,Electrical,Insulator Replacement,Wed;Fri;Sun;Tue;Thu,7
+TEAM398,Engineering,Ballast/Track Renewal,Thu;Wed;Tue;Fri,5
+TEAM399,Electrical,Traction Sub-station,Thu;Wed;Mon;Tue,6
+TEAM400,S&T,Interlocking,Sat;Wed;Thu;Fri;Mon;Sun,5
+TEAM401,S&T,Interlocking,Sun;Mon;Sat;Thu;Fri,8
+TEAM402,S&T,Point Machine Repair,Wed;Mon;Tue;Sun;Fri,5
+TEAM403,Engineering,Rail Grinding,Tue;Mon;Fri;Sun;Sat,7
+TEAM404,S&T,Point Machine Repair,Sat;Sun;Wed;Mon;Fri;Tue,6
+TEAM405,Electrical,Insulator Replacement,Thu;Tue;Wed;Mon;Fri;Sun,4
+TEAM406,Electrical,Traction Sub-station,Sun;Tue;Wed;Mon;Sat;Fri,8
+TEAM407,Engineering,Ballast/Track Renewal,Tue;Fri;Thu;Sun,7
+TEAM408,Electrical,OHE Maintenance,Sat;Tue;Mon;Thu;Wed,5
+TEAM409,S&T,Point Machine Repair,Sat;Tue;Wed;Sun,5
+TEAM410,S&T,Interlocking,Sun;Wed;Mon;Tue;Fri;Thu,5
+TEAM411,Engineering,Track Fitting,Wed;Sun;Mon;Fri;Sat,4
+TEAM412,S&T,Point Machine Repair,Wed;Tue;Sun;Fri;Mon,4
+TEAM413,Engineering,Rail Grinding,Sun;Wed;Mon;Sat,7
+TEAM414,Electrical,Traction Sub-station,Mon;Sun;Fri;Thu;Wed;Sat,6
+TEAM415,Electrical,Traction Sub-station,Fri;Sun;Wed;Mon,6
+TEAM416,Electrical,Traction Sub-station,Fri;Sun;Sat;Mon,5
+TEAM417,Electrical,OHE Maintenance,Wed;Sat;Tue;Sun;Fri,4
+TEAM418,S&T,Signal Maintenance,Mon;Fri;Tue;Thu;Sun;Wed,4
+TEAM419,S&T,Interlocking,Thu;Wed;Fri;Sat;Mon,8
+TEAM420,S&T,Interlocking,Sat;Tue;Sun;Thu,7
+TEAM421,S&T,Point Machine Repair,Fri;Sat;Thu;Tue;Mon,8
+TEAM422,Electrical,OHE Maintenance,Fri;Thu;Mon;Wed,4
+TEAM423,Engineering,Track Fitting,Sat;Mon;Fri;Tue;Thu;Sun,6
+TEAM424,S&T,Signal Maintenance,Wed;Mon;Thu;Fri,5
+TEAM425,S&T,Signal Maintenance,Wed;Thu;Tue;Fri,6
+TEAM426,S&T,Signal Maintenance,Fri;Tue;Sat;Wed;Mon;Sun,6
+TEAM427,Engineering,Welding,Fri;Wed;Mon;Thu;Tue,6
+TEAM428,Engineering,Rail Grinding,Sat;Fri;Tue;Thu,8
+TEAM429,Engineering,Rail Grinding,Mon;Thu;Wed;Tue;Sat,4
+TEAM430,S&T,Point Machine Repair,Sun;Fri;Sat;Wed,8
+TEAM431,Electrical,Traction Sub-station,Sun;Mon;Tue;Thu;Wed;Fri,6
+TEAM432,Electrical,OHE Maintenance,Fri;Mon;Thu;Sun;Tue,4
+TEAM433,Electrical,Traction Sub-station,Sun;Fri;Sat;Tue,4
+TEAM434,Engineering,Rail Grinding,Tue;Fri;Sat;Thu;Mon,6
+TEAM435,Electrical,Insulator Replacement,Fri;Sat;Thu;Sun;Wed;Tue,7
+TEAM436,Electrical,Insulator Replacement,Fri;Sun;Wed;Thu;Mon;Tue,4
+TEAM437,Electrical,Insulator Replacement,Mon;Thu;Fri;Sun;Sat;Tue,8
+TEAM438,Electrical,OHE Maintenance,Mon;Tue;Fri;Wed,7
+TEAM439,Engineering,Rail Grinding,Thu;Wed;Sun;Fri;Sat,6
+TEAM440,Engineering,Rail Grinding,Fri;Sat;Sun;Thu,4
+TEAM441,S&T,Interlocking,Thu;Sat;Wed;Fri;Sun,5
+TEAM442,Engineering,Rail Grinding,Tue;Wed;Fri;Thu;Sat;Sun,4
+TEAM443,Electrical,Traction Sub-station,Sat;Wed;Thu;Fri,8
+TEAM444,Engineering,Welding,Wed;Mon;Tue;Sun;Sat,8
+TEAM445,Electrical,OHE Maintenance,Sun;Sat;Fri;Tue;Thu,7
+TEAM446,Engineering,Rail Grinding,Sun;Tue;Wed;Mon,5
+TEAM447,S&T,Point Machine Repair,Thu;Sun;Tue;Sat;Fri;Mon,7
+TEAM448,Engineering,Rail Grinding,Tue;Sat;Thu;Mon;Wed;Sun,5
+TEAM449,Electrical,Insulator Replacement,Tue;Mon;Sat;Fri;Thu,5
+TEAM450,Electrical,Insulator Replacement,Thu;Fri;Wed;Mon;Sat;Sun,4
+TEAM451,Electrical,Insulator Replacement,Sun;Wed;Tue;Thu;Fri;Sat,8
+TEAM452,Electrical,Traction Sub-station,Tue;Thu;Wed;Sat,5
+TEAM453,Engineering,Track Fitting,Thu;Tue;Wed;Fri;Sun;Sat,5
+TEAM454,S&T,Signal Maintenance,Thu;Fri;Sat;Sun;Wed,5
+TEAM455,Engineering,Ballast/Track Renewal,Mon;Sat;Tue;Fri;Sun;Thu,7
+TEAM456,S&T,Point Machine Repair,Thu;Sat;Mon;Sun,5
+TEAM457,Engineering,Welding,Wed;Sun;Thu;Fri;Tue,5
+TEAM458,S&T,Point Machine Repair,Thu;Tue;Sun;Fri,8
+TEAM459,Electrical,Insulator Replacement,Fri;Sun;Sat;Thu,7
+TEAM460,Electrical,Traction Sub-station,Fri;Wed;Sat;Tue;Thu,8
+TEAM461,S&T,Point Machine Repair,Fri;Wed;Tue;Thu,7
+TEAM462,Electrical,OHE Maintenance,Thu;Sun;Sat;Fri,8
+TEAM463,Electrical,Traction Sub-station,Wed;Tue;Mon;Thu,7
+TEAM464,Electrical,Traction Sub-station,Wed;Fri;Thu;Sun,5
+TEAM465,Electrical,OHE Maintenance,Wed;Thu;Tue;Fri,4
+TEAM466,S&T,Signal Maintenance,Sun;Mon;Sat;Wed,4
+TEAM467,Electrical,Traction Sub-station,Wed;Sat;Fri;Tue;Mon,6
+TEAM468,S&T,Point Machine Repair,Tue;Fri;Wed;Thu;Sun,5
+TEAM469,Electrical,OHE Maintenance,Sun;Sat;Tue;Thu,7
+TEAM470,Engineering,Ballast/Track Renewal,Wed;Thu;Mon;Fri,4
+TEAM471,Engineering,Track Fitting,Fri;Sat;Wed;Thu;Mon,4
+TEAM472,S&T,Signal Maintenance,Fri;Sun;Sat;Thu;Tue;Mon,4
+TEAM473,S&T,Interlocking,Wed;Fri;Tue;Thu;Sat;Sun,7
+TEAM474,Engineering,Rail Grinding,Wed;Thu;Sat;Fri;Mon;Tue,8
+TEAM475,Electrical,Insulator Replacement,Wed;Sat;Thu;Fri,7
+TEAM476,S&T,Signal Maintenance,Fri;Tue;Sun;Mon;Wed,6
+TEAM477,S&T,Interlocking,Thu;Wed;Fri;Sat;Mon,8
+TEAM478,S&T,Signal Maintenance,Wed;Sat;Tue;Fri,5
+TEAM479,Engineering,Track Fitting,Sat;Tue;Thu;Fri;Sun;Mon,6
+TEAM480,Electrical,Traction Sub-station,Tue;Fri;Sat;Thu;Mon;Wed,4
+TEAM481,Electrical,OHE Maintenance,Mon;Tue;Sun;Thu;Sat,4
+TEAM482,Electrical,Traction Sub-station,Thu;Tue;Sat;Mon;Fri,7
+TEAM483,S&T,Signal Maintenance,Wed;Tue;Sun;Thu;Sat;Fri,5
+TEAM484,Engineering,Track Fitting,Fri;Wed;Sat;Mon;Thu,5
+TEAM485,S&T,Interlocking,Thu;Sat;Tue;Wed;Mon;Fri,7
+TEAM486,Electrical,Traction Sub-station,Wed;Mon;Tue;Sat;Thu,6
+TEAM487,Engineering,Track Fitting,Tue;Wed;Fri;Sat,5
+TEAM488,Electrical,Traction Sub-station,Fri;Mon;Wed;Tue;Sun,8
+TEAM489,S&T,Point Machine Repair,Tue;Sat;Mon;Thu;Wed;Sun,6
+TEAM490,S&T,Signal Maintenance,Sun;Fri;Sat;Wed,4
+TEAM491,Engineering,Welding,Wed;Fri;Mon;Thu;Tue,6
+TEAM492,S&T,Interlocking,Fri;Tue;Mon;Sat,6
+TEAM493,S&T,Signal Maintenance,Fri;Sat;Mon;Sun,5
+TEAM494,S&T,Interlocking,Sun;Thu;Tue;Wed;Mon,8
+TEAM495,Engineering,Rail Grinding,Mon;Sat;Fri;Wed,8
+TEAM496,Electrical,Insulator Replacement,Sun;Mon;Fri;Sat,5
+TEAM497,Engineering,Rail Grinding,Thu;Tue;Wed;Mon,4
+TEAM498,Electrical,Insulator Replacement,Mon;Tue;Sat;Sun;Fri,6
+TEAM499,Electrical,OHE Maintenance,Mon;Wed;Tue;Sun,5
+TEAM500,Engineering,Rail Grinding,Mon;Thu;Sat;Sun;Wed,4

@@ -1,0 +1,501 @@
+task_id,asset_id,corridor_id,location_km,signal_type,defect_type,severity,overdue_days,last_maintenance_date,estimated_duration_hrs
+SITSK00001,AST00304,COR055,50.18,Block Instrument,Point Machine Fault,Low,29,2024-04-03,3.1
+SITSK00002,AST00265,COR306,1036.12,Colour Light Signal,Interlocking Fault,Medium,18,2023-10-11,4.2
+SITSK00003,AST00014,COR218,160.67,Colour Light Signal,Interlocking Fault,Low,3,2026-02-25,2.2
+SITSK00004,AST00364,COR028,219.46,Block Instrument,Axle Counter Error,Medium,8,2025-05-18,4.5
+SITSK00005,AST00432,COR257,144.38,Track Circuit,Cable Fault,Low,17,2024-03-19,5.0
+SITSK00006,AST00172,COR235,452.36,Block Instrument,Interlocking Fault,Low,2,2026-01-25,4.7
+SITSK00007,AST00232,COR221,1385.59,Point Machine,Point Machine Fault,Medium,6,2024-11-17,4.7
+SITSK00008,AST00276,COR155,21.14,Point Machine,Track Circuit Failure,Medium,8,2024-07-13,2.0
+SITSK00009,AST00347,COR475,195.66,Level Crossing Gate,Interlocking Fault,Low,19,2025-12-31,3.2
+SITSK00010,AST00320,COR125,1143.88,Point Machine,Axle Counter Error,Low,28,2025-03-03,3.0
+SITSK00011,AST00307,COR277,518.96,Point Machine,Point Machine Fault,Medium,26,2025-12-31,1.1
+SITSK00012,AST00492,COR490,18.15,Point Machine,Axle Counter Error,Low,19,2024-10-09,3.3
+SITSK00013,AST00317,COR295,214.08,Track Circuit,Signal Lamp Failure,Medium,3,2025-08-13,1.5
+SITSK00014,AST00009,COR277,512.79,Track Circuit,Point Machine Fault,Low,5,2023-09-21,2.1
+SITSK00015,AST00092,COR423,138.06,Block Instrument,Interlocking Fault,Medium,21,2023-10-03,1.5
+SITSK00016,AST00437,COR218,261.73,Block Instrument,Track Circuit Failure,Low,9,2026-07-26,4.0
+SITSK00017,AST00427,COR304,80.2,Colour Light Signal,Interlocking Fault,Medium,0,2026-02-18,3.5
+SITSK00018,AST00180,COR394,86.95,Block Instrument,Cable Fault,Low,6,2024-10-19,1.8
+SITSK00019,AST00410,COR185,29.44,Track Circuit,Point Machine Fault,Medium,3,2024-02-05,2.2
+SITSK00020,AST00421,COR419,897.2,Colour Light Signal,Signal Lamp Failure,Medium,28,2024-02-08,2.7
+SITSK00021,AST00017,COR412,225.28,Colour Light Signal,Cable Fault,Low,30,2026-02-08,2.2
+SITSK00022,AST00085,COR428,1420.41,Point Machine,Interlocking Fault,Medium,25,2025-07-30,3.8
+SITSK00023,AST00092,COR423,192.08,Point Machine,Cable Fault,Low,18,2025-12-23,1.5
+SITSK00024,AST00326,COR179,2.72,Level Crossing Gate,Axle Counter Error,Medium,2,2025-05-27,4.9
+SITSK00025,AST00401,COR115,910.66,Point Machine,Interlocking Fault,Low,10,2025-06-02,3.0
+SITSK00026,AST00432,COR257,45.74,Track Circuit,Point Machine Fault,Low,11,2024-04-06,2.4
+SITSK00027,AST00493,COR204,526.58,Colour Light Signal,Interlocking Fault,Medium,25,2023-10-18,4.7
+SITSK00028,AST00421,COR419,343.77,Point Machine,Signal Lamp Failure,Low,16,2024-02-21,3.8
+SITSK00029,AST00305,COR225,1122.23,Point Machine,Axle Counter Error,Low,1,2024-04-21,1.9
+SITSK00030,AST00092,COR423,206.77,Point Machine,Interlocking Fault,Low,15,2024-01-02,4.6
+SITSK00031,AST00150,COR104,1432.3,Point Machine,Point Machine Fault,Low,3,2024-10-25,1.5
+SITSK00032,AST00073,COR179,109.06,Level Crossing Gate,Signal Lamp Failure,Low,11,2025-03-19,1.4
+SITSK00033,AST00384,COR280,321.74,Track Circuit,Signal Lamp Failure,Low,12,2024-10-30,3.0
+SITSK00034,AST00262,COR399,138.45,Colour Light Signal,Point Machine Fault,Low,5,2023-07-20,3.5
+SITSK00035,AST00084,COR030,214.94,Colour Light Signal,Axle Counter Error,Medium,26,2026-06-24,4.5
+SITSK00036,AST00297,COR252,83.02,Track Circuit,Point Machine Fault,Low,13,2026-01-26,3.0
+SITSK00037,AST00307,COR277,685.27,Track Circuit,Cable Fault,Low,28,2025-10-23,3.5
+SITSK00038,AST00073,COR179,140.58,Colour Light Signal,Signal Lamp Failure,Medium,6,2024-01-28,3.0
+SITSK00039,AST00052,COR234,872.76,Level Crossing Gate,Axle Counter Error,Low,18,2024-10-27,2.6
+SITSK00040,AST00307,COR277,75.29,Colour Light Signal,Interlocking Fault,Low,15,2026-04-26,4.7
+SITSK00041,AST00432,COR257,67.76,Track Circuit,Axle Counter Error,Low,30,2024-11-20,3.6
+SITSK00042,AST00037,COR015,469.21,Level Crossing Gate,Cable Fault,Medium,3,2024-03-12,1.8
+SITSK00043,AST00294,COR367,1194.03,Block Instrument,Cable Fault,Medium,4,2023-08-12,2.4
+SITSK00044,AST00073,COR179,234.63,Track Circuit,Track Circuit Failure,Low,30,2024-02-21,2.1
+SITSK00045,AST00041,COR274,124.77,Point Machine,Signal Lamp Failure,Low,22,2025-10-31,2.9
+SITSK00046,AST00202,COR017,12.29,Block Instrument,Axle Counter Error,Low,24,2023-07-08,3.2
+SITSK00047,AST00052,COR234,561.72,Point Machine,Track Circuit Failure,Low,27,2025-10-22,3.2
+SITSK00048,AST00097,COR049,670.51,Track Circuit,Interlocking Fault,Medium,12,2025-05-03,2.7
+SITSK00049,AST00055,COR225,457.29,Block Instrument,Signal Lamp Failure,Low,14,2025-09-23,4.0
+SITSK00050,AST00466,COR121,469.78,Block Instrument,Track Circuit Failure,Low,3,2023-11-04,1.2
+SITSK00051,AST00368,COR045,353.96,Block Instrument,Interlocking Fault,Medium,15,2025-01-19,1.5
+SITSK00052,AST00331,COR023,885.12,Block Instrument,Track Circuit Failure,Low,4,2024-10-25,4.8
+SITSK00053,AST00181,COR035,884.44,Level Crossing Gate,Cable Fault,Medium,19,2025-06-21,4.1
+SITSK00054,AST00265,COR306,1443.36,Colour Light Signal,Signal Lamp Failure,Medium,20,2026-06-13,3.0
+SITSK00055,AST00052,COR234,502.97,Point Machine,Track Circuit Failure,Medium,17,2023-11-08,1.8
+SITSK00056,AST00122,COR356,944.08,Track Circuit,Cable Fault,Medium,13,2024-02-07,2.5
+SITSK00057,AST00124,COR405,22.31,Colour Light Signal,Track Circuit Failure,Medium,29,2024-01-20,1.1
+SITSK00058,AST00037,COR015,375.17,Track Circuit,Point Machine Fault,Medium,5,2023-10-01,2.1
+SITSK00059,AST00324,COR231,607.8,Point Machine,Point Machine Fault,Medium,2,2024-09-02,1.8
+SITSK00060,AST00159,COR156,195.34,Track Circuit,Axle Counter Error,Medium,2,2026-06-14,4.1
+SITSK00061,AST00023,COR415,586.07,Level Crossing Gate,Interlocking Fault,Low,1,2025-04-29,3.9
+SITSK00062,AST00365,COR270,895.18,Block Instrument,Axle Counter Error,Medium,18,2026-05-31,2.9
+SITSK00063,AST00497,COR200,1313.3,Track Circuit,Interlocking Fault,Low,24,2026-01-13,4.0
+SITSK00064,AST00215,COR264,201.63,Block Instrument,Interlocking Fault,Medium,5,2024-10-24,4.1
+SITSK00065,AST00266,COR032,430.35,Point Machine,Axle Counter Error,Medium,23,2024-12-02,3.6
+SITSK00066,AST00014,COR218,44.0,Track Circuit,Track Circuit Failure,Medium,16,2024-06-01,2.8
+SITSK00067,AST00016,COR295,739.93,Point Machine,Axle Counter Error,Medium,30,2026-07-14,1.9
+SITSK00068,AST00055,COR225,1112.78,Block Instrument,Interlocking Fault,Medium,4,2025-11-19,1.7
+SITSK00069,AST00257,COR058,302.88,Point Machine,Cable Fault,Low,11,2024-03-27,4.5
+SITSK00070,AST00049,COR321,72.83,Block Instrument,Cable Fault,Medium,20,2023-08-25,3.2
+SITSK00071,AST00202,COR017,34.85,Level Crossing Gate,Interlocking Fault,Low,22,2026-06-11,3.9
+SITSK00072,AST00215,COR264,534.74,Block Instrument,Signal Lamp Failure,Medium,7,2026-04-12,1.3
+SITSK00073,AST00181,COR035,582.19,Level Crossing Gate,Track Circuit Failure,Medium,4,2025-10-21,4.5
+SITSK00074,AST00124,COR405,15.36,Track Circuit,Interlocking Fault,Medium,26,2025-07-07,2.9
+SITSK00075,AST00266,COR032,792.94,Colour Light Signal,Interlocking Fault,Low,18,2024-04-03,4.6
+SITSK00076,AST00023,COR415,68.41,Colour Light Signal,Interlocking Fault,Medium,13,2025-07-15,4.3
+SITSK00077,AST00037,COR015,912.0,Colour Light Signal,Point Machine Fault,Low,4,2024-09-02,3.3
+SITSK00078,AST00484,COR076,1338.73,Track Circuit,Track Circuit Failure,Low,3,2026-01-23,3.6
+SITSK00079,AST00444,COR252,197.58,Level Crossing Gate,Cable Fault,Medium,15,2025-04-04,2.0
+SITSK00080,AST00310,COR120,375.66,Level Crossing Gate,Track Circuit Failure,Low,15,2025-11-28,3.9
+SITSK00081,AST00335,COR102,195.42,Level Crossing Gate,Signal Lamp Failure,Low,23,2026-02-16,3.4
+SITSK00082,AST00378,COR499,1022.98,Colour Light Signal,Signal Lamp Failure,Low,15,2025-09-12,3.7
+SITSK00083,AST00122,COR356,679.42,Level Crossing Gate,Interlocking Fault,Medium,7,2023-11-14,2.6
+SITSK00084,AST00433,COR051,888.86,Track Circuit,Point Machine Fault,Low,11,2025-12-16,1.1
+SITSK00085,AST00101,COR296,561.8,Track Circuit,Track Circuit Failure,Medium,6,2024-02-14,4.5
+SITSK00086,AST00364,COR028,14.91,Colour Light Signal,Axle Counter Error,Low,24,2025-10-12,2.4
+SITSK00087,AST00333,COR474,1313.71,Colour Light Signal,Track Circuit Failure,Medium,7,2025-04-20,4.6
+SITSK00088,AST00296,COR078,385.64,Track Circuit,Axle Counter Error,Low,4,2025-05-27,4.8
+SITSK00089,AST00335,COR102,340.65,Point Machine,Interlocking Fault,Medium,8,2024-06-10,3.9
+SITSK00090,AST00437,COR218,29.66,Block Instrument,Signal Lamp Failure,Medium,29,2025-07-16,2.3
+SITSK00091,AST00154,COR293,979.18,Track Circuit,Interlocking Fault,Low,14,2025-01-29,3.0
+SITSK00092,AST00049,COR321,176.57,Track Circuit,Signal Lamp Failure,Medium,18,2025-03-23,2.5
+SITSK00093,AST00154,COR293,1835.51,Block Instrument,Track Circuit Failure,Low,27,2026-04-29,2.1
+SITSK00094,AST00277,COR200,181.63,Level Crossing Gate,Cable Fault,Low,18,2024-12-12,2.9
+SITSK00095,AST00198,COR285,1411.25,Level Crossing Gate,Interlocking Fault,Low,14,2024-12-22,1.6
+SITSK00096,AST00181,COR035,986.72,Track Circuit,Cable Fault,Low,2,2026-06-10,3.2
+SITSK00097,AST00170,COR493,1.27,Block Instrument,Interlocking Fault,Low,18,2025-10-21,3.9
+SITSK00098,AST00444,COR252,56.53,Point Machine,Interlocking Fault,Low,7,2025-11-27,4.6
+SITSK00099,AST00427,COR304,154.68,Colour Light Signal,Interlocking Fault,Low,22,2023-11-09,4.0
+SITSK00100,AST00194,COR316,232.03,Level Crossing Gate,Cable Fault,Medium,17,2025-12-15,3.5
+SITSK00101,AST00441,COR377,112.24,Block Instrument,Track Circuit Failure,Medium,2,2025-11-04,1.4
+SITSK00102,AST00444,COR252,142.25,Track Circuit,Track Circuit Failure,Low,0,2024-10-16,1.5
+SITSK00103,AST00320,COR125,1275.03,Colour Light Signal,Track Circuit Failure,Low,16,2026-01-18,1.6
+SITSK00104,AST00159,COR156,217.13,Level Crossing Gate,Cable Fault,Low,5,2026-04-23,4.4
+SITSK00105,AST00190,COR212,3.42,Block Instrument,Point Machine Fault,Low,11,2023-08-19,2.7
+SITSK00106,AST00249,COR344,1176.46,Track Circuit,Cable Fault,Medium,30,2026-05-22,3.6
+SITSK00107,AST00157,COR377,146.61,Colour Light Signal,Interlocking Fault,Medium,31,2025-08-12,3.4
+SITSK00108,AST00479,COR340,384.29,Block Instrument,Cable Fault,Low,18,2025-10-07,4.9
+SITSK00109,AST00286,COR305,69.52,Point Machine,Axle Counter Error,Low,29,2025-03-15,3.6
+SITSK00110,AST00304,COR055,121.27,Colour Light Signal,Point Machine Fault,Medium,26,2024-09-23,1.1
+SITSK00111,AST00250,COR074,566.36,Point Machine,Axle Counter Error,Medium,16,2025-03-12,2.6
+SITSK00112,AST00369,COR255,363.97,Level Crossing Gate,Axle Counter Error,Medium,31,2024-08-22,2.4
+SITSK00113,AST00045,COR473,389.96,Point Machine,Cable Fault,Low,13,2024-01-12,4.8
+SITSK00114,AST00294,COR367,166.95,Track Circuit,Axle Counter Error,Low,24,2023-12-02,4.1
+SITSK00115,AST00295,COR010,662.28,Track Circuit,Axle Counter Error,Low,13,2025-06-11,3.1
+SITSK00116,AST00131,COR178,840.66,Point Machine,Track Circuit Failure,Low,18,2024-04-26,4.6
+SITSK00117,AST00294,COR367,534.11,Track Circuit,Track Circuit Failure,Low,0,2023-08-13,4.4
+SITSK00118,AST00451,COR233,181.97,Point Machine,Point Machine Fault,Low,10,2024-12-31,2.2
+SITSK00119,AST00202,COR017,361.88,Colour Light Signal,Axle Counter Error,Medium,7,2025-07-13,3.6
+SITSK00120,AST00119,COR057,999.14,Level Crossing Gate,Axle Counter Error,Low,4,2026-03-30,3.9
+SITSK00121,AST00347,COR475,7.11,Track Circuit,Signal Lamp Failure,Low,6,2025-08-10,1.8
+SITSK00122,AST00276,COR155,95.74,Point Machine,Signal Lamp Failure,Low,19,2024-12-13,2.8
+SITSK00123,AST00085,COR428,391.38,Track Circuit,Point Machine Fault,Medium,18,2025-10-27,1.4
+SITSK00124,AST00335,COR102,302.94,Point Machine,Interlocking Fault,Low,24,2023-07-06,5.0
+SITSK00125,AST00328,COR277,1054.21,Track Circuit,Track Circuit Failure,Low,28,2024-09-01,3.3
+SITSK00126,AST00023,COR415,255.89,Colour Light Signal,Point Machine Fault,Medium,30,2024-01-10,3.6
+SITSK00127,AST00295,COR010,104.38,Block Instrument,Axle Counter Error,Low,13,2026-02-28,3.4
+SITSK00128,AST00081,COR251,28.69,Track Circuit,Point Machine Fault,Low,3,2026-03-07,2.0
+SITSK00129,AST00276,COR155,90.34,Colour Light Signal,Axle Counter Error,Medium,26,2023-06-12,2.1
+SITSK00130,AST00185,COR479,1116.7,Point Machine,Signal Lamp Failure,Medium,20,2024-09-25,2.3
+SITSK00131,AST00421,COR419,469.68,Block Instrument,Axle Counter Error,Medium,4,2025-07-09,1.5
+SITSK00132,AST00014,COR218,57.38,Block Instrument,Cable Fault,Low,28,2024-01-19,1.2
+SITSK00133,AST00360,COR288,728.91,Track Circuit,Point Machine Fault,Low,26,2025-08-26,1.0
+SITSK00134,AST00101,COR296,584.41,Level Crossing Gate,Track Circuit Failure,Medium,20,2025-07-01,3.3
+SITSK00135,AST00138,COR104,278.37,Track Circuit,Track Circuit Failure,Low,23,2026-04-29,3.4
+SITSK00136,AST00404,COR126,817.91,Level Crossing Gate,Track Circuit Failure,Low,10,2026-05-09,3.9
+SITSK00137,AST00410,COR185,11.73,Point Machine,Cable Fault,Low,30,2023-10-16,5.0
+SITSK00138,AST00009,COR277,345.52,Colour Light Signal,Cable Fault,Low,29,2025-04-08,1.4
+SITSK00139,AST00401,COR115,613.48,Block Instrument,Interlocking Fault,Low,22,2023-06-29,4.7
+SITSK00140,AST00257,COR058,331.65,Point Machine,Signal Lamp Failure,Medium,23,2025-09-03,4.7
+SITSK00141,AST00492,COR490,371.68,Colour Light Signal,Axle Counter Error,Low,6,2024-08-17,2.1
+SITSK00142,AST00249,COR344,1081.1,Colour Light Signal,Signal Lamp Failure,Medium,21,2024-12-19,4.9
+SITSK00143,AST00410,COR185,249.91,Block Instrument,Cable Fault,Low,5,2024-03-27,1.6
+SITSK00144,AST00410,COR185,1044.29,Level Crossing Gate,Axle Counter Error,Low,8,2026-04-13,4.2
+SITSK00145,AST00360,COR288,978.65,Level Crossing Gate,Interlocking Fault,Low,15,2026-07-22,2.6
+SITSK00146,AST00324,COR231,866.56,Level Crossing Gate,Interlocking Fault,Medium,5,2024-08-12,4.8
+SITSK00147,AST00258,COR440,688.58,Point Machine,Signal Lamp Failure,Medium,31,2024-10-26,3.7
+SITSK00148,AST00491,COR437,1676.26,Level Crossing Gate,Cable Fault,Low,23,2026-01-10,4.1
+SITSK00149,AST00304,COR055,126.76,Colour Light Signal,Signal Lamp Failure,Low,24,2025-07-06,1.7
+SITSK00150,AST00010,COR398,207.78,Level Crossing Gate,Signal Lamp Failure,Low,0,2025-02-25,2.3
+SITSK00151,AST00313,COR421,134.62,Track Circuit,Axle Counter Error,Medium,2,2024-12-15,3.6
+SITSK00152,AST00331,COR023,81.2,Level Crossing Gate,Interlocking Fault,Low,1,2026-01-20,5.0
+SITSK00153,AST00385,COR459,523.64,Point Machine,Track Circuit Failure,Low,2,2025-06-26,1.1
+SITSK00154,AST00130,COR157,504.53,Colour Light Signal,Cable Fault,Low,26,2024-01-31,1.2
+SITSK00155,AST00059,COR431,274.96,Track Circuit,Interlocking Fault,Low,1,2025-04-12,4.3
+SITSK00156,AST00284,COR351,1190.4,Colour Light Signal,Signal Lamp Failure,Medium,0,2025-09-03,2.7
+SITSK00157,AST00059,COR431,56.84,Track Circuit,Cable Fault,Medium,5,2024-05-19,2.8
+SITSK00158,AST00257,COR058,710.15,Track Circuit,Point Machine Fault,Low,0,2025-02-27,2.1
+SITSK00159,AST00305,COR225,226.01,Point Machine,Signal Lamp Failure,Low,29,2023-11-28,1.5
+SITSK00160,AST00083,COR185,217.91,Block Instrument,Cable Fault,Medium,1,2024-05-12,4.2
+SITSK00161,AST00192,COR035,1140.01,Point Machine,Axle Counter Error,Low,19,2024-06-26,4.0
+SITSK00162,AST00119,COR057,379.1,Point Machine,Track Circuit Failure,Medium,11,2024-12-23,1.6
+SITSK00163,AST00277,COR200,755.93,Colour Light Signal,Interlocking Fault,Low,11,2025-01-25,2.0
+SITSK00164,AST00368,COR045,518.51,Point Machine,Interlocking Fault,Medium,22,2026-05-07,2.8
+SITSK00165,AST00145,COR137,5.25,Track Circuit,Point Machine Fault,Low,13,2025-11-05,2.4
+SITSK00166,AST00262,COR399,127.37,Track Circuit,Signal Lamp Failure,Medium,5,2026-04-17,4.1
+SITSK00167,AST00247,COR109,81.85,Level Crossing Gate,Axle Counter Error,Low,11,2026-01-29,1.6
+SITSK00168,AST00285,COR099,71.11,Point Machine,Track Circuit Failure,Low,20,2024-01-01,3.5
+SITSK00169,AST00010,COR398,168.43,Point Machine,Interlocking Fault,Medium,6,2024-06-18,4.7
+SITSK00170,AST00274,COR108,209.62,Track Circuit,Cable Fault,Low,28,2025-12-21,3.4
+SITSK00171,AST00365,COR270,755.81,Point Machine,Cable Fault,Medium,23,2025-04-22,2.9
+SITSK00172,AST00333,COR474,565.83,Colour Light Signal,Signal Lamp Failure,Low,26,2025-10-20,4.1
+SITSK00173,AST00333,COR474,1117.95,Colour Light Signal,Signal Lamp Failure,Low,19,2026-05-09,1.8
+SITSK00174,AST00495,COR397,654.11,Colour Light Signal,Track Circuit Failure,Medium,3,2023-12-03,2.2
+SITSK00175,AST00124,COR405,498.53,Point Machine,Point Machine Fault,Low,29,2023-06-02,3.6
+SITSK00176,AST00180,COR394,669.28,Level Crossing Gate,Interlocking Fault,Low,11,2024-09-26,4.4
+SITSK00177,AST00365,COR270,93.23,Colour Light Signal,Cable Fault,Medium,0,2026-02-02,1.6
+SITSK00178,AST00085,COR428,697.26,Point Machine,Track Circuit Failure,Low,30,2025-07-10,4.3
+SITSK00179,AST00230,COR123,1420.81,Block Instrument,Point Machine Fault,Low,20,2024-02-29,2.6
+SITSK00180,AST00286,COR305,252.34,Point Machine,Signal Lamp Failure,Medium,4,2025-05-11,3.0
+SITSK00181,AST00023,COR415,142.77,Track Circuit,Cable Fault,Low,23,2025-06-11,2.4
+SITSK00182,AST00004,COR472,53.73,Point Machine,Axle Counter Error,Low,8,2026-03-20,1.8
+SITSK00183,AST00190,COR212,323.38,Block Instrument,Interlocking Fault,Medium,11,2025-10-19,1.6
+SITSK00184,AST00276,COR155,47.19,Point Machine,Axle Counter Error,Medium,26,2024-06-02,1.7
+SITSK00185,AST00442,COR438,634.85,Point Machine,Axle Counter Error,Medium,6,2025-09-06,4.2
+SITSK00186,AST00014,COR218,56.95,Colour Light Signal,Signal Lamp Failure,Medium,29,2023-06-24,2.9
+SITSK00187,AST00333,COR474,796.33,Block Instrument,Interlocking Fault,Medium,16,2024-01-24,3.4
+SITSK00188,AST00384,COR280,427.76,Point Machine,Track Circuit Failure,Medium,23,2024-01-15,4.1
+SITSK00189,AST00360,COR288,782.68,Point Machine,Track Circuit Failure,Low,9,2023-06-15,2.3
+SITSK00190,AST00247,COR109,74.1,Track Circuit,Track Circuit Failure,Medium,27,2023-09-08,2.9
+SITSK00191,AST00041,COR274,145.74,Point Machine,Point Machine Fault,Medium,3,2025-06-26,2.0
+SITSK00192,AST00296,COR078,440.1,Block Instrument,Signal Lamp Failure,Medium,11,2025-01-21,2.4
+SITSK00193,AST00016,COR295,751.47,Level Crossing Gate,Track Circuit Failure,Low,7,2025-06-01,3.9
+SITSK00194,AST00457,COR280,629.36,Colour Light Signal,Cable Fault,Low,6,2024-02-14,3.9
+SITSK00195,AST00427,COR304,253.49,Level Crossing Gate,Interlocking Fault,Medium,15,2026-05-08,3.3
+SITSK00196,AST00041,COR274,91.77,Level Crossing Gate,Axle Counter Error,Low,6,2025-07-22,3.1
+SITSK00197,AST00080,COR057,412.42,Level Crossing Gate,Point Machine Fault,Medium,1,2024-06-11,4.8
+SITSK00198,AST00242,COR156,213.59,Block Instrument,Point Machine Fault,Low,12,2024-11-16,5.0
+SITSK00199,AST00441,COR377,90.04,Colour Light Signal,Track Circuit Failure,Low,23,2026-01-24,1.9
+SITSK00200,AST00365,COR270,284.13,Colour Light Signal,Interlocking Fault,Low,25,2024-06-06,3.7
+SITSK00201,AST00252,COR234,7.33,Colour Light Signal,Axle Counter Error,Medium,8,2024-12-14,2.1
+SITSK00202,AST00284,COR351,128.82,Colour Light Signal,Axle Counter Error,Medium,14,2023-10-09,3.4
+SITSK00203,AST00386,COR374,169.32,Track Circuit,Interlocking Fault,Medium,30,2026-07-17,1.1
+SITSK00204,AST00297,COR252,143.2,Point Machine,Cable Fault,Medium,31,2024-08-05,3.1
+SITSK00205,AST00145,COR137,96.24,Level Crossing Gate,Point Machine Fault,Low,5,2026-02-21,3.2
+SITSK00206,AST00304,COR055,14.46,Track Circuit,Interlocking Fault,Medium,18,2025-03-07,2.8
+SITSK00207,AST00401,COR115,30.51,Track Circuit,Signal Lamp Failure,Low,22,2025-10-31,2.7
+SITSK00208,AST00017,COR412,915.94,Level Crossing Gate,Signal Lamp Failure,Medium,15,2025-07-08,4.7
+SITSK00209,AST00119,COR057,462.06,Block Instrument,Axle Counter Error,Medium,13,2024-08-06,5.0
+SITSK00210,AST00497,COR200,528.35,Colour Light Signal,Track Circuit Failure,Medium,26,2025-05-21,4.0
+SITSK00211,AST00357,COR404,386.3,Level Crossing Gate,Interlocking Fault,Medium,6,2025-03-12,3.0
+SITSK00212,AST00457,COR280,334.13,Point Machine,Point Machine Fault,Medium,18,2025-12-07,1.6
+SITSK00213,AST00154,COR293,770.1,Block Instrument,Signal Lamp Failure,Medium,29,2024-05-18,3.7
+SITSK00214,AST00085,COR428,567.75,Point Machine,Point Machine Fault,Medium,12,2023-07-30,3.5
+SITSK00215,AST00122,COR356,684.09,Track Circuit,Axle Counter Error,Medium,1,2025-03-27,3.4
+SITSK00216,AST00138,COR104,1119.83,Point Machine,Track Circuit Failure,Low,23,2023-07-17,4.0
+SITSK00217,AST00326,COR179,136.36,Colour Light Signal,Cable Fault,Medium,23,2024-10-03,1.7
+SITSK00218,AST00180,COR394,244.62,Level Crossing Gate,Axle Counter Error,Low,13,2025-12-31,2.8
+SITSK00219,AST00369,COR255,847.19,Colour Light Signal,Point Machine Fault,Low,21,2024-04-22,2.0
+SITSK00220,AST00064,COR167,13.48,Block Instrument,Track Circuit Failure,Medium,30,2025-07-29,1.3
+SITSK00221,AST00347,COR475,338.02,Track Circuit,Axle Counter Error,Low,28,2026-02-09,4.3
+SITSK00222,AST00059,COR431,256.34,Point Machine,Track Circuit Failure,Low,23,2025-08-27,3.9
+SITSK00223,AST00437,COR218,222.76,Point Machine,Point Machine Fault,Low,6,2024-03-25,4.4
+SITSK00224,AST00096,COR483,721.27,Level Crossing Gate,Point Machine Fault,Medium,9,2024-10-10,4.2
+SITSK00225,AST00185,COR479,391.21,Level Crossing Gate,Track Circuit Failure,Low,29,2026-03-03,4.0
+SITSK00226,AST00247,COR109,128.42,Point Machine,Interlocking Fault,Medium,16,2024-12-15,3.4
+SITSK00227,AST00122,COR356,166.08,Level Crossing Gate,Axle Counter Error,Low,23,2025-06-12,3.9
+SITSK00228,AST00274,COR108,1216.89,Colour Light Signal,Signal Lamp Failure,Medium,30,2025-11-17,3.7
+SITSK00229,AST00130,COR157,531.77,Colour Light Signal,Cable Fault,Medium,24,2024-11-08,3.5
+SITSK00230,AST00030,COR203,1033.02,Track Circuit,Interlocking Fault,Low,0,2024-11-13,2.5
+SITSK00231,AST00437,COR218,263.89,Track Circuit,Point Machine Fault,Medium,10,2025-05-05,3.6
+SITSK00232,AST00432,COR257,68.2,Level Crossing Gate,Point Machine Fault,Medium,10,2026-05-11,2.9
+SITSK00233,AST00421,COR419,819.08,Block Instrument,Track Circuit Failure,Low,21,2024-09-03,2.2
+SITSK00234,AST00198,COR285,239.24,Track Circuit,Track Circuit Failure,Low,12,2025-05-31,3.0
+SITSK00235,AST00495,COR397,794.05,Block Instrument,Track Circuit Failure,Low,12,2025-06-14,3.7
+SITSK00236,AST00333,COR474,1180.77,Level Crossing Gate,Signal Lamp Failure,Low,17,2026-07-08,4.8
+SITSK00237,AST00466,COR121,721.65,Block Instrument,Point Machine Fault,Low,15,2024-11-06,4.2
+SITSK00238,AST00157,COR377,115.18,Colour Light Signal,Cable Fault,Medium,11,2023-08-22,4.9
+SITSK00239,AST00250,COR074,616.0,Block Instrument,Track Circuit Failure,Low,4,2024-02-27,3.1
+SITSK00240,AST00059,COR431,181.77,Colour Light Signal,Signal Lamp Failure,Medium,29,2023-12-19,3.1
+SITSK00241,AST00052,COR234,462.66,Block Instrument,Cable Fault,Medium,7,2025-11-22,1.3
+SITSK00242,AST00172,COR235,104.57,Track Circuit,Cable Fault,Medium,19,2023-06-20,3.3
+SITSK00243,AST00096,COR483,719.26,Point Machine,Track Circuit Failure,Low,29,2023-06-02,2.0
+SITSK00244,AST00335,COR102,324.73,Point Machine,Track Circuit Failure,Low,21,2026-04-04,2.9
+SITSK00245,AST00261,COR297,1715.44,Level Crossing Gate,Interlocking Fault,Low,21,2024-12-15,3.7
+SITSK00246,AST00432,COR257,67.01,Point Machine,Axle Counter Error,Low,31,2023-06-14,2.3
+SITSK00247,AST00437,COR218,166.56,Colour Light Signal,Cable Fault,Low,27,2025-02-13,1.4
+SITSK00248,AST00369,COR255,293.12,Track Circuit,Cable Fault,Low,6,2024-09-17,1.9
+SITSK00249,AST00432,COR257,66.27,Track Circuit,Point Machine Fault,Low,19,2024-08-04,3.3
+SITSK00250,AST00130,COR157,231.49,Colour Light Signal,Point Machine Fault,Low,10,2024-04-17,2.3
+SITSK00251,AST00442,COR438,746.66,Track Circuit,Point Machine Fault,Medium,14,2024-11-20,2.9
+SITSK00252,AST00273,COR429,276.24,Level Crossing Gate,Interlocking Fault,Medium,20,2025-12-08,2.2
+SITSK00253,AST00493,COR204,610.78,Point Machine,Axle Counter Error,Medium,3,2025-09-15,2.4
+SITSK00254,AST00122,COR356,1093.93,Level Crossing Gate,Axle Counter Error,Low,13,2024-11-06,2.2
+SITSK00255,AST00317,COR295,39.83,Point Machine,Point Machine Fault,Medium,12,2024-08-14,3.5
+SITSK00256,AST00368,COR045,1678.55,Block Instrument,Axle Counter Error,Low,10,2025-03-28,3.9
+SITSK00257,AST00404,COR126,1682.26,Block Instrument,Track Circuit Failure,Medium,31,2024-10-24,2.1
+SITSK00258,AST00320,COR125,86.72,Block Instrument,Track Circuit Failure,Medium,17,2026-06-06,2.5
+SITSK00259,AST00261,COR297,200.19,Colour Light Signal,Track Circuit Failure,Low,20,2025-09-25,4.3
+SITSK00260,AST00126,COR437,1098.81,Track Circuit,Cable Fault,Low,28,2024-10-15,2.3
+SITSK00261,AST00479,COR340,609.47,Level Crossing Gate,Signal Lamp Failure,Medium,1,2024-03-14,4.1
+SITSK00262,AST00064,COR167,1705.75,Level Crossing Gate,Interlocking Fault,Medium,13,2024-06-12,2.3
+SITSK00263,AST00202,COR017,264.04,Level Crossing Gate,Cable Fault,Medium,16,2023-07-18,1.6
+SITSK00264,AST00342,COR239,431.6,Point Machine,Axle Counter Error,Low,23,2023-07-04,3.3
+SITSK00265,AST00037,COR015,1332.19,Level Crossing Gate,Signal Lamp Failure,Medium,18,2025-04-14,3.5
+SITSK00266,AST00076,COR095,91.58,Track Circuit,Axle Counter Error,Low,5,2026-01-15,3.4
+SITSK00267,AST00160,COR314,663.93,Point Machine,Interlocking Fault,Medium,28,2024-04-07,3.6
+SITSK00268,AST00073,COR179,44.87,Track Circuit,Interlocking Fault,Medium,27,2023-07-14,2.6
+SITSK00269,AST00266,COR032,8.1,Point Machine,Axle Counter Error,Low,14,2025-03-22,2.7
+SITSK00270,AST00247,COR109,320.84,Track Circuit,Track Circuit Failure,Medium,29,2024-07-15,4.1
+SITSK00271,AST00306,COR369,207.23,Track Circuit,Cable Fault,Low,9,2024-07-27,2.2
+SITSK00272,AST00085,COR428,38.84,Track Circuit,Axle Counter Error,Low,22,2023-10-20,2.3
+SITSK00273,AST00277,COR200,1695.38,Colour Light Signal,Cable Fault,Medium,10,2025-10-16,5.0
+SITSK00274,AST00206,COR079,1528.05,Colour Light Signal,Interlocking Fault,Low,8,2025-11-17,1.5
+SITSK00275,AST00320,COR125,37.17,Colour Light Signal,Point Machine Fault,Low,28,2025-11-15,2.6
+SITSK00276,AST00181,COR035,1377.75,Track Circuit,Axle Counter Error,Low,11,2026-04-03,4.7
+SITSK00277,AST00442,COR438,92.62,Colour Light Signal,Axle Counter Error,Medium,22,2025-03-10,2.7
+SITSK00278,AST00185,COR479,1457.04,Track Circuit,Interlocking Fault,Medium,16,2026-04-07,1.4
+SITSK00279,AST00385,COR459,17.24,Point Machine,Point Machine Fault,Medium,6,2025-05-27,2.4
+SITSK00280,AST00276,COR155,102.06,Point Machine,Track Circuit Failure,Medium,14,2023-11-20,3.6
+SITSK00281,AST00326,COR179,216.36,Block Instrument,Interlocking Fault,Medium,2,2024-03-15,4.4
+SITSK00282,AST00154,COR293,1086.82,Colour Light Signal,Signal Lamp Failure,Low,8,2026-01-18,4.0
+SITSK00283,AST00059,COR431,521.68,Colour Light Signal,Track Circuit Failure,Medium,23,2025-09-27,4.3
+SITSK00284,AST00357,COR404,73.97,Track Circuit,Cable Fault,Low,23,2024-01-11,4.1
+SITSK00285,AST00030,COR203,604.03,Level Crossing Gate,Point Machine Fault,Medium,16,2025-03-19,1.1
+SITSK00286,AST00023,COR415,213.54,Point Machine,Axle Counter Error,Low,26,2023-09-04,3.2
+SITSK00287,AST00451,COR233,301.29,Block Instrument,Axle Counter Error,Medium,14,2023-12-06,2.7
+SITSK00288,AST00063,COR102,60.7,Point Machine,Point Machine Fault,Medium,28,2024-03-02,4.4
+SITSK00289,AST00004,COR472,27.41,Point Machine,Interlocking Fault,Low,20,2026-06-10,2.5
+SITSK00290,AST00084,COR030,504.55,Track Circuit,Cable Fault,Low,14,2026-04-20,1.5
+SITSK00291,AST00124,COR405,140.29,Block Instrument,Track Circuit Failure,Low,25,2024-12-30,4.5
+SITSK00292,AST00089,COR341,478.58,Level Crossing Gate,Cable Fault,Medium,21,2026-01-02,3.7
+SITSK00293,AST00444,COR252,231.57,Level Crossing Gate,Cable Fault,Medium,27,2025-07-07,3.6
+SITSK00294,AST00037,COR015,1038.14,Point Machine,Track Circuit Failure,Low,12,2024-06-08,1.1
+SITSK00295,AST00037,COR015,1159.51,Colour Light Signal,Cable Fault,Medium,20,2023-06-24,3.3
+SITSK00296,AST00421,COR419,783.06,Colour Light Signal,Track Circuit Failure,Medium,28,2024-08-13,2.8
+SITSK00297,AST00249,COR344,1047.0,Block Instrument,Track Circuit Failure,Medium,21,2025-04-21,5.0
+SITSK00298,AST00159,COR156,75.56,Point Machine,Signal Lamp Failure,Medium,6,2025-05-02,4.1
+SITSK00299,AST00249,COR344,121.06,Level Crossing Gate,Point Machine Fault,Low,8,2023-12-11,1.9
+SITSK00300,AST00386,COR374,239.06,Block Instrument,Signal Lamp Failure,Medium,8,2025-05-12,2.2
+SITSK00301,AST00365,COR270,572.11,Block Instrument,Signal Lamp Failure,Low,25,2026-04-12,1.8
+SITSK00302,AST00194,COR316,247.52,Colour Light Signal,Track Circuit Failure,Medium,9,2026-07-27,4.4
+SITSK00303,AST00451,COR233,83.42,Track Circuit,Interlocking Fault,Low,10,2025-07-06,1.6
+SITSK00304,AST00138,COR104,1248.86,Track Circuit,Cable Fault,Low,27,2024-07-19,2.1
+SITSK00305,AST00333,COR474,558.9,Track Circuit,Point Machine Fault,Medium,29,2025-03-21,1.5
+SITSK00306,AST00269,COR440,0.34,Level Crossing Gate,Track Circuit Failure,Medium,13,2023-10-15,1.2
+SITSK00307,AST00342,COR239,141.71,Point Machine,Cable Fault,Low,25,2024-04-22,3.6
+SITSK00308,AST00328,COR277,655.29,Colour Light Signal,Interlocking Fault,Low,14,2024-12-17,1.6
+SITSK00309,AST00333,COR474,232.74,Track Circuit,Track Circuit Failure,Low,13,2025-11-25,1.6
+SITSK00310,AST00257,COR058,887.6,Block Instrument,Track Circuit Failure,Low,19,2026-05-09,1.4
+SITSK00311,AST00404,COR126,410.26,Point Machine,Interlocking Fault,Low,29,2024-04-10,1.3
+SITSK00312,AST00297,COR252,392.11,Block Instrument,Point Machine Fault,Medium,7,2026-01-11,2.7
+SITSK00313,AST00145,COR137,125.3,Point Machine,Interlocking Fault,Low,6,2023-11-29,5.0
+SITSK00314,AST00310,COR120,392.58,Point Machine,Track Circuit Failure,Medium,26,2023-09-25,3.6
+SITSK00315,AST00258,COR440,815.37,Level Crossing Gate,Interlocking Fault,Medium,26,2024-10-27,4.9
+SITSK00316,AST00081,COR251,2.62,Point Machine,Cable Fault,Medium,14,2025-11-05,3.7
+SITSK00317,AST00089,COR341,1910.83,Point Machine,Signal Lamp Failure,Medium,24,2023-08-26,3.4
+SITSK00318,AST00085,COR428,852.5,Block Instrument,Cable Fault,Medium,26,2025-08-15,3.9
+SITSK00319,AST00041,COR274,416.42,Point Machine,Point Machine Fault,Low,25,2025-11-01,3.7
+SITSK00320,AST00023,COR415,139.13,Colour Light Signal,Axle Counter Error,Medium,6,2025-01-19,4.7
+SITSK00321,AST00030,COR203,885.08,Level Crossing Gate,Interlocking Fault,Medium,22,2024-10-22,2.1
+SITSK00322,AST00049,COR321,101.57,Level Crossing Gate,Cable Fault,Low,20,2025-08-30,4.0
+SITSK00323,AST00150,COR104,1661.56,Block Instrument,Interlocking Fault,Medium,14,2025-03-10,4.3
+SITSK00324,AST00085,COR428,1353.89,Block Instrument,Track Circuit Failure,Medium,20,2026-03-15,3.6
+SITSK00325,AST00322,COR092,77.83,Point Machine,Interlocking Fault,Medium,28,2025-06-10,4.0
+SITSK00326,AST00145,COR137,46.15,Block Instrument,Cable Fault,Medium,18,2026-07-21,3.2
+SITSK00327,AST00331,COR023,1143.55,Block Instrument,Cable Fault,Low,5,2025-09-06,4.4
+SITSK00328,AST00125,COR484,685.1,Track Circuit,Interlocking Fault,Medium,8,2025-07-28,1.4
+SITSK00329,AST00266,COR032,782.11,Block Instrument,Interlocking Fault,Low,28,2023-08-23,2.0
+SITSK00330,AST00130,COR157,477.28,Level Crossing Gate,Axle Counter Error,Medium,14,2024-08-22,2.0
+SITSK00331,AST00198,COR285,701.93,Colour Light Signal,Cable Fault,Low,18,2024-10-12,4.9
+SITSK00332,AST00421,COR419,765.03,Point Machine,Signal Lamp Failure,Low,26,2024-06-16,4.4
+SITSK00333,AST00333,COR474,1182.38,Point Machine,Track Circuit Failure,Medium,23,2024-11-21,2.7
+SITSK00334,AST00312,COR067,461.73,Colour Light Signal,Interlocking Fault,Medium,4,2024-03-02,2.3
+SITSK00335,AST00232,COR221,1358.02,Track Circuit,Cable Fault,Low,30,2026-06-01,2.3
+SITSK00336,AST00202,COR017,412.62,Track Circuit,Cable Fault,Medium,17,2023-09-17,2.8
+SITSK00337,AST00368,COR045,974.38,Point Machine,Axle Counter Error,Low,1,2026-07-21,2.8
+SITSK00338,AST00055,COR225,1720.02,Point Machine,Track Circuit Failure,Low,4,2025-05-26,1.3
+SITSK00339,AST00257,COR058,664.9,Block Instrument,Track Circuit Failure,Medium,27,2024-02-29,4.9
+SITSK00340,AST00192,COR035,1182.64,Level Crossing Gate,Signal Lamp Failure,Medium,21,2024-09-19,3.3
+SITSK00341,AST00437,COR218,334.98,Colour Light Signal,Signal Lamp Failure,Medium,0,2023-09-17,3.8
+SITSK00342,AST00307,COR277,650.89,Block Instrument,Signal Lamp Failure,Low,26,2024-04-26,3.9
+SITSK00343,AST00232,COR221,1672.49,Colour Light Signal,Cable Fault,Low,31,2024-01-31,2.3
+SITSK00344,AST00084,COR030,999.13,Track Circuit,Track Circuit Failure,Medium,26,2025-07-20,3.8
+SITSK00345,AST00122,COR356,950.63,Colour Light Signal,Axle Counter Error,Medium,22,2024-05-29,3.8
+SITSK00346,AST00237,COR420,838.47,Colour Light Signal,Interlocking Fault,Medium,12,2024-09-07,2.4
+SITSK00347,AST00080,COR057,414.8,Block Instrument,Signal Lamp Failure,Medium,1,2023-10-03,4.9
+SITSK00348,AST00059,COR431,597.37,Block Instrument,Cable Fault,Low,0,2023-06-10,2.3
+SITSK00349,AST00274,COR108,35.62,Track Circuit,Signal Lamp Failure,Medium,4,2024-05-19,1.8
+SITSK00350,AST00430,COR344,348.67,Colour Light Signal,Interlocking Fault,Low,9,2025-07-06,3.3
+SITSK00351,AST00368,COR045,1384.48,Colour Light Signal,Signal Lamp Failure,Low,28,2023-08-02,3.5
+SITSK00352,AST00466,COR121,734.57,Block Instrument,Interlocking Fault,Medium,6,2025-05-15,3.7
+SITSK00353,AST00442,COR438,127.38,Block Instrument,Point Machine Fault,Low,9,2025-04-21,4.8
+SITSK00354,AST00484,COR076,1517.15,Point Machine,Axle Counter Error,Low,21,2024-10-17,2.5
+SITSK00355,AST00225,COR404,412.01,Point Machine,Cable Fault,Medium,2,2025-06-03,1.2
+SITSK00356,AST00413,COR447,257.06,Track Circuit,Axle Counter Error,Low,20,2026-05-15,3.3
+SITSK00357,AST00457,COR280,444.47,Track Circuit,Track Circuit Failure,Low,18,2025-03-18,1.5
+SITSK00358,AST00172,COR235,306.73,Point Machine,Point Machine Fault,Medium,24,2023-11-16,3.0
+SITSK00359,AST00426,COR022,175.88,Track Circuit,Point Machine Fault,Medium,19,2026-03-16,5.0
+SITSK00360,AST00262,COR399,473.3,Block Instrument,Signal Lamp Failure,Low,12,2023-11-30,2.2
+SITSK00361,AST00497,COR200,991.13,Level Crossing Gate,Track Circuit Failure,Low,1,2023-09-05,4.9
+SITSK00362,AST00324,COR231,230.97,Track Circuit,Axle Counter Error,Medium,11,2026-04-07,2.5
+SITSK00363,AST00045,COR473,1151.08,Block Instrument,Point Machine Fault,Low,14,2025-03-17,1.3
+SITSK00364,AST00181,COR035,885.06,Track Circuit,Track Circuit Failure,Low,2,2025-07-21,1.8
+SITSK00365,AST00097,COR049,1415.12,Block Instrument,Cable Fault,Medium,11,2025-08-07,4.3
+SITSK00366,AST00317,COR295,1543.38,Point Machine,Axle Counter Error,Low,9,2024-10-17,3.5
+SITSK00367,AST00247,COR109,330.73,Point Machine,Track Circuit Failure,Medium,13,2024-12-10,2.6
+SITSK00368,AST00010,COR398,441.26,Point Machine,Point Machine Fault,Medium,12,2026-02-24,2.0
+SITSK00369,AST00010,COR398,664.76,Point Machine,Axle Counter Error,Medium,8,2024-08-30,1.3
+SITSK00370,AST00097,COR049,176.49,Point Machine,Axle Counter Error,Low,20,2024-05-08,4.8
+SITSK00371,AST00242,COR156,282.77,Point Machine,Interlocking Fault,Medium,18,2024-11-17,1.4
+SITSK00372,AST00101,COR296,529.96,Colour Light Signal,Axle Counter Error,Medium,12,2024-02-16,3.1
+SITSK00373,AST00038,COR277,519.6,Block Instrument,Axle Counter Error,Low,2,2025-08-03,1.7
+SITSK00374,AST00064,COR167,473.59,Track Circuit,Interlocking Fault,Medium,9,2025-11-22,3.4
+SITSK00375,AST00041,COR274,794.79,Track Circuit,Cable Fault,Low,20,2023-08-29,3.3
+SITSK00376,AST00130,COR157,244.06,Level Crossing Gate,Cable Fault,Medium,29,2024-07-15,4.6
+SITSK00377,AST00055,COR225,751.32,Colour Light Signal,Interlocking Fault,Low,14,2024-06-11,3.5
+SITSK00378,AST00295,COR010,477.72,Point Machine,Axle Counter Error,Medium,4,2024-10-16,3.4
+SITSK00379,AST00262,COR399,341.91,Colour Light Signal,Signal Lamp Failure,Medium,3,2024-01-15,3.7
+SITSK00380,AST00335,COR102,279.75,Block Instrument,Signal Lamp Failure,Low,20,2025-06-28,1.2
+SITSK00381,AST00089,COR341,1311.15,Block Instrument,Point Machine Fault,Low,3,2025-08-02,4.1
+SITSK00382,AST00101,COR296,1150.1,Block Instrument,Signal Lamp Failure,Low,1,2026-01-31,4.7
+SITSK00383,AST00324,COR231,346.59,Track Circuit,Point Machine Fault,Medium,15,2026-03-01,3.5
+SITSK00384,AST00304,COR055,170.54,Point Machine,Point Machine Fault,Low,29,2026-06-03,4.5
+SITSK00385,AST00198,COR285,230.19,Colour Light Signal,Point Machine Fault,Medium,10,2025-06-23,4.0
+SITSK00386,AST00364,COR028,501.8,Colour Light Signal,Axle Counter Error,Medium,26,2026-06-13,4.4
+SITSK00387,AST00333,COR474,235.67,Level Crossing Gate,Cable Fault,Medium,26,2025-10-03,2.8
+SITSK00388,AST00384,COR280,378.2,Point Machine,Point Machine Fault,Medium,21,2025-03-29,3.7
+SITSK00389,AST00121,COR133,271.96,Colour Light Signal,Cable Fault,Low,12,2024-07-03,4.8
+SITSK00390,AST00312,COR067,461.88,Track Circuit,Point Machine Fault,Medium,19,2024-08-11,2.6
+SITSK00391,AST00404,COR126,191.98,Point Machine,Interlocking Fault,Medium,3,2024-07-13,1.9
+SITSK00392,AST00487,COR352,321.26,Point Machine,Signal Lamp Failure,Medium,11,2025-11-24,1.1
+SITSK00393,AST00181,COR035,689.73,Colour Light Signal,Interlocking Fault,Low,25,2024-07-10,1.6
+SITSK00394,AST00284,COR351,621.34,Colour Light Signal,Point Machine Fault,Medium,2,2023-12-16,4.1
+SITSK00395,AST00081,COR251,4.36,Block Instrument,Interlocking Fault,Low,20,2025-05-31,1.8
+SITSK00396,AST00126,COR437,1784.67,Level Crossing Gate,Axle Counter Error,Medium,20,2025-12-01,2.9
+SITSK00397,AST00150,COR104,569.92,Block Instrument,Signal Lamp Failure,Low,9,2024-04-30,2.7
+SITSK00398,AST00457,COR280,775.52,Point Machine,Cable Fault,Medium,17,2024-10-23,4.9
+SITSK00399,AST00125,COR484,870.09,Block Instrument,Axle Counter Error,Low,24,2026-01-24,2.5
+SITSK00400,AST00145,COR137,109.7,Track Circuit,Track Circuit Failure,Medium,28,2024-06-07,2.8
+SITSK00401,AST00017,COR412,1182.79,Track Circuit,Interlocking Fault,Medium,5,2025-06-27,1.3
+SITSK00402,AST00121,COR133,234.64,Point Machine,Cable Fault,Low,12,2025-03-18,2.2
+SITSK00403,AST00081,COR251,72.01,Point Machine,Axle Counter Error,Medium,10,2025-06-17,4.4
+SITSK00404,AST00170,COR493,98.06,Track Circuit,Axle Counter Error,Medium,20,2024-05-07,1.2
+SITSK00405,AST00225,COR404,300.52,Level Crossing Gate,Point Machine Fault,Medium,21,2023-08-22,2.1
+SITSK00406,AST00386,COR374,189.91,Level Crossing Gate,Signal Lamp Failure,Low,8,2023-06-22,3.9
+SITSK00407,AST00016,COR295,509.16,Colour Light Signal,Point Machine Fault,Medium,24,2023-08-13,3.8
+SITSK00408,AST00252,COR234,1011.14,Level Crossing Gate,Interlocking Fault,Medium,26,2025-05-01,1.5
+SITSK00409,AST00304,COR055,125.13,Track Circuit,Cable Fault,Medium,18,2024-11-28,1.3
+SITSK00410,AST00384,COR280,782.8,Block Instrument,Track Circuit Failure,Medium,7,2023-07-18,4.2
+SITSK00411,AST00092,COR423,100.59,Colour Light Signal,Interlocking Fault,Low,9,2024-09-28,4.1
+SITSK00412,AST00076,COR095,1.56,Block Instrument,Track Circuit Failure,Medium,4,2024-04-15,3.3
+SITSK00413,AST00386,COR374,181.73,Level Crossing Gate,Track Circuit Failure,Low,7,2023-09-24,3.8
+SITSK00414,AST00180,COR394,695.85,Block Instrument,Cable Fault,Low,5,2023-06-08,2.7
+SITSK00415,AST00206,COR079,343.08,Block Instrument,Point Machine Fault,Medium,12,2026-01-30,4.3
+SITSK00416,AST00427,COR304,356.01,Colour Light Signal,Point Machine Fault,Medium,3,2025-11-23,1.7
+SITSK00417,AST00009,COR277,88.15,Colour Light Signal,Interlocking Fault,Low,12,2024-02-09,3.8
+SITSK00418,AST00076,COR095,30.49,Level Crossing Gate,Cable Fault,Low,25,2025-01-28,3.4
+SITSK00419,AST00433,COR051,579.1,Colour Light Signal,Point Machine Fault,Medium,22,2024-10-06,3.1
+SITSK00420,AST00237,COR420,472.27,Colour Light Signal,Axle Counter Error,Low,4,2026-03-08,2.4
+SITSK00421,AST00059,COR431,542.36,Point Machine,Axle Counter Error,Medium,0,2023-11-28,2.3
+SITSK00422,AST00310,COR120,1135.77,Track Circuit,Track Circuit Failure,Low,16,2025-03-15,2.8
+SITSK00423,AST00413,COR447,117.43,Level Crossing Gate,Point Machine Fault,Medium,12,2024-09-10,3.3
+SITSK00424,AST00041,COR274,828.35,Point Machine,Point Machine Fault,Medium,20,2025-09-03,2.9
+SITSK00425,AST00397,COR269,680.07,Colour Light Signal,Track Circuit Failure,Medium,26,2023-07-21,4.5
+SITSK00426,AST00284,COR351,505.81,Colour Light Signal,Point Machine Fault,Medium,0,2025-11-06,4.2
+SITSK00427,AST00150,COR104,297.09,Colour Light Signal,Cable Fault,Low,1,2025-08-10,2.9
+SITSK00428,AST00252,COR234,489.44,Block Instrument,Point Machine Fault,Medium,10,2025-02-11,4.3
+SITSK00429,AST00484,COR076,506.47,Colour Light Signal,Point Machine Fault,Medium,27,2025-11-08,4.8
+SITSK00430,AST00131,COR178,488.8,Block Instrument,Interlocking Fault,Low,4,2025-03-24,3.8
+SITSK00431,AST00265,COR306,234.99,Track Circuit,Point Machine Fault,Low,26,2026-03-01,1.1
+SITSK00432,AST00274,COR108,813.38,Level Crossing Gate,Track Circuit Failure,Medium,27,2024-02-05,3.4
+SITSK00433,AST00453,COR498,413.54,Level Crossing Gate,Track Circuit Failure,Low,23,2026-01-25,1.3
+SITSK00434,AST00378,COR499,481.38,Colour Light Signal,Cable Fault,Medium,14,2025-03-02,3.5
+SITSK00435,AST00410,COR185,939.45,Track Circuit,Interlocking Fault,Medium,12,2024-02-16,4.9
+SITSK00436,AST00497,COR200,1773.29,Colour Light Signal,Track Circuit Failure,Low,15,2026-02-25,3.3
+SITSK00437,AST00016,COR295,527.24,Block Instrument,Point Machine Fault,Low,20,2023-11-14,3.1
+SITSK00438,AST00397,COR269,906.31,Level Crossing Gate,Axle Counter Error,Medium,24,2024-06-30,4.2
+SITSK00439,AST00257,COR058,830.8,Level Crossing Gate,Axle Counter Error,Medium,15,2024-08-31,3.5
+SITSK00440,AST00286,COR305,100.08,Track Circuit,Point Machine Fault,Low,17,2025-03-17,2.9
+SITSK00441,AST00277,COR200,1104.31,Track Circuit,Cable Fault,Low,7,2025-01-26,3.9
+SITSK00442,AST00170,COR493,99.99,Track Circuit,Interlocking Fault,Low,24,2025-10-14,3.8
+SITSK00443,AST00010,COR398,316.37,Colour Light Signal,Cable Fault,Medium,1,2023-07-30,3.6
+SITSK00444,AST00357,COR404,33.77,Point Machine,Cable Fault,Medium,24,2026-07-12,1.6
+SITSK00445,AST00369,COR255,649.24,Block Instrument,Interlocking Fault,Medium,17,2024-07-10,3.8
+SITSK00446,AST00385,COR459,304.13,Track Circuit,Cable Fault,Medium,1,2024-02-09,1.2
+SITSK00447,AST00286,COR305,155.27,Level Crossing Gate,Cable Fault,Medium,24,2026-07-01,1.1
+SITSK00448,AST00365,COR270,668.3,Point Machine,Cable Fault,Medium,2,2024-12-31,2.3
+SITSK00449,AST00495,COR397,34.26,Track Circuit,Axle Counter Error,Low,31,2023-10-09,4.7
+SITSK00450,AST00122,COR356,170.06,Track Circuit,Cable Fault,Low,5,2025-06-07,4.9
+SITSK00451,AST00296,COR078,52.92,Level Crossing Gate,Axle Counter Error,Medium,25,2026-06-21,1.2
+SITSK00452,AST00347,COR475,226.56,Point Machine,Track Circuit Failure,Low,5,2024-07-29,2.8
+SITSK00453,AST00097,COR049,1167.79,Level Crossing Gate,Cable Fault,Low,3,2026-07-17,1.1
+SITSK00454,AST00198,COR285,763.04,Block Instrument,Cable Fault,Low,9,2024-03-08,3.0
+SITSK00455,AST00285,COR099,74.02,Point Machine,Axle Counter Error,Medium,31,2023-07-19,3.7
+SITSK00456,AST00347,COR475,194.16,Block Instrument,Cable Fault,Low,13,2024-09-13,3.3
+SITSK00457,AST00009,COR277,387.11,Block Instrument,Signal Lamp Failure,Medium,10,2025-08-22,1.9
+SITSK00458,AST00466,COR121,6.08,Track Circuit,Interlocking Fault,Medium,23,2026-04-12,2.6
+SITSK00459,AST00180,COR394,571.66,Level Crossing Gate,Interlocking Fault,Low,20,2024-11-15,2.6
+SITSK00460,AST00262,COR399,277.31,Point Machine,Signal Lamp Failure,Medium,13,2024-06-13,1.5
+SITSK00461,AST00326,COR179,198.75,Colour Light Signal,Cable Fault,Medium,13,2025-02-11,2.4
+SITSK00462,AST00052,COR234,940.0,Colour Light Signal,Signal Lamp Failure,Medium,13,2026-04-12,1.1
+SITSK00463,AST00014,COR218,76.61,Colour Light Signal,Interlocking Fault,Low,31,2025-08-04,3.9
+SITSK00464,AST00386,COR374,283.46,Track Circuit,Cable Fault,Medium,30,2026-07-23,3.4
+SITSK00465,AST00232,COR221,132.59,Block Instrument,Axle Counter Error,Low,3,2023-06-23,4.8
+SITSK00466,AST00004,COR472,26.7,Point Machine,Track Circuit Failure,Low,6,2023-09-18,2.5
+SITSK00467,AST00160,COR314,857.34,Level Crossing Gate,Axle Counter Error,Medium,26,2023-07-16,2.2
+SITSK00468,AST00037,COR015,1247.15,Level Crossing Gate,Cable Fault,Medium,29,2024-07-24,1.5
+SITSK00469,AST00030,COR203,1068.67,Point Machine,Cable Fault,Low,7,2023-11-24,3.9
+SITSK00470,AST00385,COR459,928.94,Track Circuit,Track Circuit Failure,Medium,17,2023-07-17,3.8
+SITSK00471,AST00413,COR447,20.06,Colour Light Signal,Cable Fault,Low,25,2025-07-12,1.1
+SITSK00472,AST00430,COR344,829.51,Point Machine,Point Machine Fault,Low,0,2023-08-30,3.6
+SITSK00473,AST00258,COR440,687.18,Point Machine,Cable Fault,Medium,1,2024-12-08,4.9
+SITSK00474,AST00160,COR314,207.34,Point Machine,Axle Counter Error,Low,27,2026-07-19,4.8
+SITSK00475,AST00426,COR022,1335.25,Block Instrument,Interlocking Fault,Medium,5,2025-06-22,2.8
+SITSK00476,AST00404,COR126,962.29,Level Crossing Gate,Track Circuit Failure,Medium,9,2025-03-18,3.9
+SITSK00477,AST00304,COR055,70.82,Track Circuit,Point Machine Fault,Medium,29,2025-05-12,4.1
+SITSK00478,AST00125,COR484,779.22,Point Machine,Track Circuit Failure,Medium,23,2025-11-01,1.3
+SITSK00479,AST00237,COR420,1484.65,Level Crossing Gate,Interlocking Fault,Medium,28,2026-06-09,4.4
+SITSK00480,AST00138,COR104,1750.12,Level Crossing Gate,Signal Lamp Failure,Low,21,2026-06-11,3.5
+SITSK00481,AST00131,COR178,853.65,Track Circuit,Cable Fault,Low,25,2023-11-15,4.3
+SITSK00482,AST00096,COR483,989.51,Track Circuit,Axle Counter Error,Low,0,2024-11-03,4.7
+SITSK00483,AST00138,COR104,1455.01,Level Crossing Gate,Point Machine Fault,Low,20,2025-07-04,3.2
+SITSK00484,AST00331,COR023,967.25,Point Machine,Cable Fault,Medium,26,2024-01-04,1.9
+SITSK00485,AST00385,COR459,166.29,Colour Light Signal,Track Circuit Failure,Low,6,2026-03-11,1.6
+SITSK00486,AST00073,COR179,171.65,Level Crossing Gate,Cable Fault,Medium,19,2024-08-02,3.2
+SITSK00487,AST00084,COR030,1004.84,Colour Light Signal,Axle Counter Error,Low,1,2025-01-26,1.5
+SITSK00488,AST00159,COR156,244.99,Block Instrument,Axle Counter Error,Medium,28,2024-01-30,2.7
+SITSK00489,AST00307,COR277,733.04,Block Instrument,Track Circuit Failure,Medium,21,2025-08-03,2.5
+SITSK00490,AST00273,COR429,319.25,Track Circuit,Point Machine Fault,Low,31,2023-08-04,3.0
+SITSK00491,AST00305,COR225,59.6,Point Machine,Point Machine Fault,Low,27,2025-05-19,4.8
+SITSK00492,AST00426,COR022,1676.96,Point Machine,Axle Counter Error,Medium,5,2026-01-28,2.0
+SITSK00493,AST00083,COR185,99.06,Block Instrument,Point Machine Fault,Medium,21,2024-10-07,3.4
+SITSK00494,AST00404,COR126,60.68,Level Crossing Gate,Signal Lamp Failure,Medium,13,2025-09-18,1.4
+SITSK00495,AST00110,COR205,675.92,Block Instrument,Signal Lamp Failure,Medium,4,2026-03-25,1.7
+SITSK00496,AST00257,COR058,813.55,Point Machine,Signal Lamp Failure,Low,16,2024-01-27,3.8
+SITSK00497,AST00426,COR022,293.23,Point Machine,Interlocking Fault,Low,2,2025-01-15,3.4
+SITSK00498,AST00363,COR165,115.6,Colour Light Signal,Axle Counter Error,Low,30,2026-02-20,2.0
+SITSK00499,AST00326,COR179,191.61,Colour Light Signal,Point Machine Fault,Low,19,2024-06-09,1.9
+SITSK00500,AST00427,COR304,134.49,Point Machine,Track Circuit Failure,Low,6,2024-05-02,1.6

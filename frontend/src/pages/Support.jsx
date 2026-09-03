@@ -17,7 +17,7 @@ import {
 const supportTopics = [
   {
     title: "Backend / API Connection",
-    description: "Problems connecting OptimTrack to the FastAPI backend.",
+    description: "Problems connecting RailSync to the FastAPI backend.",
     icon: Server,
   },
   {
@@ -108,96 +108,11 @@ export default function Support() {
               </h1>
 
               <p className="mt-1 text-sm text-slate-500">
-                Get help with OptimTrack and railway maintenance operations.
+                Get help with RailSync and railway maintenance operations.
               </p>
             </div>
           </div>
         </div>
-       
-        {/* =====================================================
-            SUPPORT TOPICS
-        ====================================================== */}
-{/* 
-        <section className="mb-10">
-          <div className="mb-5">
-            <h2 className="text-xl font-bold text-slate-900">
-              How can we help?
-            </h2>
-
-            <p className="mt-1 text-sm text-slate-500">
-              Select a topic to find help with a specific part of OptimTrack.
-            </p>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {supportTopics.map((topic) => {
-              const Icon = topic.icon;
-
-              return (
-                <button
-                  key={topic.title}
-                  type="button"
-                  onClick={() =>
-                    setForm((previous) => ({
-                      ...previous,
-                      topic: topic.title,
-                    }))
-                  }
-                  className="
-                    group
-                    rounded-2xl
-                    border border-slate-200
-                    bg-white
-                    p-5
-                    text-left
-                    shadow-sm
-                    transition-all
-                    duration-300
-                    hover:-translate-y-1
-                    hover:border-blue-200
-                    hover:shadow-lg
-                  "
-                >
-                  <div
-                    className="
-                      mb-4
-                      flex h-11 w-11
-                      items-center justify-center
-                      rounded-xl
-                      bg-blue-50
-                      text-blue-600
-                      transition
-                      group-hover:bg-blue-600
-                      group-hover:text-white
-                    "
-                  >
-                    <Icon size={22} />
-                  </div>
-
-                  <h3
-                    className="
-                      font-semibold
-                      text-slate-800
-                    "
-                  >
-                    {topic.title}
-                  </h3>
-
-                  <p
-                    className="
-                      mt-2
-                      text-sm
-                      leading-6
-                      text-slate-500
-                    "
-                  >
-                    {topic.description}
-                  </p>
-                </button>
-              );
-            })}
-          </div>
-        </section> */}
 
         {/* =====================================================
             MAIN SUPPORT AREA
@@ -249,7 +164,7 @@ export default function Support() {
                   <h3 className="font-semibold text-slate-800">FAQs</h3>
 
                   <p className="mt-1 text-sm leading-6 text-slate-500">
-                    Find answers to common OptimTrack questions.
+                    Find answers to common RailSync questions.
                   </p>
 
                   <a
@@ -301,11 +216,11 @@ export default function Support() {
                   </h3>
 
                   <p className="mt-1 text-sm leading-6 text-slate-500">
-                    Contact the OptimTrack support team.
+                    Contact the RailSync support team.
                   </p>
 
                   <a
-                    href="mailto:support@optimtrack.com"
+                    href="mailto:support@RailSync.com"
                     className="
                       mt-3
                       inline-block
@@ -315,48 +230,8 @@ export default function Support() {
                       hover:text-blue-700
                     "
                   >
-                    support@optimtrack.com
+                    support@RailSync.com
                   </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Status */}
-
-            <div
-              className="
-                rounded-2xl
-                border border-slate-200
-                bg-white
-                p-5
-                shadow-sm
-              "
-            >
-              <div className="flex items-start gap-4">
-                <div
-                  className="
-                    flex h-11 w-11 shrink-0
-                    items-center justify-center
-                    rounded-xl
-                    bg-emerald-50
-                    text-emerald-600
-                  "
-                >
-                  <CheckCircle2 size={22} />
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-slate-800">
-                    Backend Health
-                  </h3>
-
-                  <p className="mt-1 text-sm leading-6 text-slate-500">
-                    Check whether the FastAPI backend is available.
-                  </p>
-
-                  <p className="mt-3 text-sm font-semibold text-emerald-600">
-                    ● Backend Ready
-                  </p>
                 </div>
               </div>
             </div>
@@ -633,7 +508,7 @@ export default function Support() {
 
         <div className="mt-10 text-center">
           <p className="text-xs text-slate-400">
-            OptimTrack • Intelligent Block Planning
+            RailSync • Intelligent Block Planning
           </p>
         </div>
       </div>

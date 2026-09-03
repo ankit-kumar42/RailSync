@@ -620,7 +620,6 @@ export default function MaintenanceTasks() {
 
                   <th className="px-6 py-4">Severity</th>
 
-                  <th className="px-6 py-4">Overdue</th>
 
                   <th className="px-6 py-4">Duration</th>
 
