@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { LockKeyhole, User, LogIn, TrainFront } from "lucide-react";
 import logo from "../components/layout/logo/logo.png"
+import train from "../components/layout/logo/train.jpeg"
 export default function Login() {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
@@ -79,6 +80,7 @@ export default function Login() {
       <header className="bg-slate-950 px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+            
             <img src={logo} alt="" />
           </div>
 
@@ -152,11 +154,12 @@ export default function Login() {
               {/* Login Icon */}
 
               <div className="text-center">
-                <div >
+                <div style={{display:"flex"}}>
+                  <img src={train} alt="" style={{width:"70%"}} />
                   <img
                     src={logo}
                     alt=""
-                    style={{ height: "5rem", width: "5rem" }}
+                    style={{ height: "5rem", width: "5rem", marginLeft:"3rem" , marginTop:"0.5rem"}}
                   />
                 </div>
 
