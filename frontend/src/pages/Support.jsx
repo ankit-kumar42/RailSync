@@ -113,67 +113,11 @@ export default function Support() {
             </div>
           </div>
         </div>
-
-        {/* =====================================================
-            SYSTEM STATUS
-        ====================================================== */}
-
-        <div
-          className="
-            mb-8
-            flex flex-col gap-4
-            rounded-3xl
-            border border-emerald-100
-            bg-white
-            p-6
-            shadow-sm
-            md:flex-row
-            md:items-center
-            md:justify-between
-          "
-        >
-          <div className="flex items-center gap-4">
-            <div
-              className="
-                flex h-12 w-12 items-center justify-center
-                rounded-xl
-                bg-emerald-50
-                text-emerald-600
-              "
-            >
-              <Activity size={24} />
-            </div>
-
-            <div>
-              <h2 className="font-semibold text-slate-900">System Status</h2>
-
-              <p className="text-sm text-slate-500">
-                OptimTrack services are ready.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span
-              className="
-                h-2.5
-                w-2.5
-                animate-pulse
-                rounded-full
-                bg-emerald-500
-              "
-            />
-
-            <span className="text-sm font-semibold text-emerald-600">
-              System Online
-            </span>
-          </div>
-        </div>
-
+       
         {/* =====================================================
             SUPPORT TOPICS
         ====================================================== */}
-
+{/* 
         <section className="mb-10">
           <div className="mb-5">
             <h2 className="text-xl font-bold text-slate-900">
@@ -253,7 +197,7 @@ export default function Support() {
               );
             })}
           </div>
-        </section>
+        </section> */}
 
         {/* =====================================================
             MAIN SUPPORT AREA

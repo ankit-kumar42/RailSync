@@ -11,7 +11,6 @@ import ConfirmedSchedule from "./pages/ConfirmedSchedule";
 import FAQs from "./pages/FAQs";
 import Support from "./pages/Support";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
 function App() {
   return (
     <div className="min-h-screen bg-[#f4f7fb]">
@@ -25,7 +24,6 @@ function App() {
             {/* HOME */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
 
             {/* Risk Prediction */}
             <Route path="/risk-prediction" element={<RiskPrediction />} />

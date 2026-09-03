@@ -730,171 +730,108 @@ export default function ScheduleConfirmation() {
                         key={String(taskId)}
                         className="transition hover:bg-slate-50"
                       >
-
                         {/* TASK ID */}
 
                         <td className="px-6 py-4">
-
                           <span className="font-bold text-blue-600">
-                            {displayValue(
-                              task?.task_id ??
-                                task?.id,
-                            )}
+                            {displayValue(task?.task_id ?? task?.id)}
                           </span>
-
                         </td>
 
                         {/* ASSET */}
 
                         <td className="px-6 py-4">
-
                           <div className="flex items-center gap-2 text-sm text-slate-700">
+                            <Train size={16} className="text-slate-400" />
 
-                            <Train
-                              size={16}
-                              className="text-slate-400"
-                            />
-
-                            {displayValue(
-                              task?.asset_id,
-                            )}
-
+                            {displayValue(task?.asset_id)}
                           </div>
-
                         </td>
 
                         {/* CORRIDOR */}
 
                         <td className="px-6 py-4">
-
                           <div className="flex items-center gap-2 text-sm text-slate-700">
+                            <MapPin size={16} className="text-slate-400" />
 
-                            <MapPin
-                              size={16}
-                              className="text-slate-400"
-                            />
-
-                            {displayValue(
-                              task?.corridor_id,
-                            )}
-
+                            {displayValue(task?.corridor_id)}
                           </div>
-
                         </td>
 
                         {/* BLOCK WINDOW */}
 
                         <td className="px-6 py-4 text-sm text-slate-600">
-                          {displayValue(
-                            task?.block_window_id,
-                          )}
+                          {displayValue(task?.block_window_id)}
                         </td>
 
                         {/* DATE */}
 
                         <td className="px-6 py-4 text-sm text-slate-700">
-                          {displayValue(
-                            task?.date,
-                          )}
+                          {displayValue(task?.date)}
                         </td>
 
                         {/* TIME */}
 
                         <td className="px-6 py-4">
-
                           <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                            <Clock3 size={16} className="text-blue-500" />
 
-                            <Clock3
-                              size={16}
-                              className="text-blue-500"
-                            />
-
-                            {displayValue(
-                              task?.start_time,
-                            )}
+                            {displayValue(task?.start_time)}
 
                             {" - "}
 
-                            {displayValue(
-                              task?.end_time,
-                            )}
-
+                            {displayValue(task?.end_time)}
                           </div>
-
                         </td>
 
                         {/* DURATION */}
 
                         <td className="px-6 py-4 text-sm text-slate-600">
-                          {displayValue(
-                            task?.estimated_duration_hrs,
-                          )}{" "}
-                          hrs
+                          {displayValue(task?.estimated_duration_hrs)} hrs
                         </td>
 
                         {/* PRIORITY */}
 
                         <td className="px-6 py-4">
-
                           <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-700">
-                            {displayValue(
-                              task?.priority_score,
-                            )}
+                            {task?.priority_score != null
+                              ? `${(task.priority_score * 100).toFixed(1)}%`
+                              : "N/A"}
                           </span>
-
                         </td>
 
                         {/* RISK */}
 
                         <td className="px-6 py-4">
-
                           <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-700">
-                            {displayValue(
-                              task?.failure_risk,
-                            )}
+                            {task?.failure_risk != null
+                              ? `${(task.failure_risk * 100).toFixed(1)}%`
+                              : "N/A"}
                           </span>
-
                         </td>
 
                         {/* TRAFFIC */}
 
                         <td className="px-6 py-4">
-
                           <span className="text-sm text-slate-600">
-                            {displayValue(
-                              task?.traffic_load,
-                            )}
+                            {task?.traffic_load != null
+                              ? `${(task.traffic_load * 100).toFixed(1)}%`
+                              : "N/A"}
                           </span>
-
                         </td>
 
                         {/* STATUS */}
 
                         <td className="px-6 py-4">
-
                           <StatusSelect
-                            value={
-                              normalizeScheduledStatus(
-                                task?.status,
-                              )
-                            }
-                            options={
-                              SCHEDULED_STATUS_OPTIONS
-                            }
-                            disabled={
-                              confirming ||
-                              loading
-                            }
+                            value={normalizeScheduledStatus(task?.status)}
+                            options={SCHEDULED_STATUS_OPTIONS}
+                            disabled={confirming || loading}
                             onChange={(value) =>
-                              handleScheduledStatusChange(
-                                taskId,
-                                value,
-                              )
+                              handleScheduledStatusChange(taskId, value)
                             }
                           />
-
                         </td>
-
                       </tr>
                     );
                   },
